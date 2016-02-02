@@ -1,0 +1,140 @@
+﻿{% extends "person_base.html" %} 
+<meta charset="utf-8">
+
+{% block title %}数据服务平台-财务中心{% endblock %}
+
+{% block extend_js_css %}
+<script type="text/javascript" src="/static_resource/js/layer.min.js"></script>
+<link href="/static_resource/css/person_layer.css" type="text/css" rel="stylesheet" />
+{% endblock %}
+
+{% block content_right %}
+    <!--中间右边开始-->
+		<div class="u-main-right">
+            <div class="linestyle">
+            	<table width="98%" border="0" cellspacing="0" cellpadding="0" class="wotable" id="bank_tb1">
+              		<tr class="title">
+              			<td colspan="3" class="tab_tit">&nbsp;我的账户余额</td>
+              		</tr>
+                    <tr>
+                    	<td width="40">&nbsp;</td>
+                    	<td width="80">&nbsp;账户余额：</td>
+                        <td>&nbsp;<font color="#666666">￥</font><span class="coins" style="font-size:18px; font-weight:normal; font-family:Tahoma, Geneva, sans-serif">{{account.money}}</span>元</td>
+                    </tr>
+                    <tr>
+                        <td width="40">&nbsp;</td>
+                        <td colspan="2">&nbsp;余额预警：(预警阈值为￥{{account_alarm.alarm_line}}，状态：<a href="javascript:void(0)" class="accountwarn">{{account_alarm.get_alarm_status_display}}</a>)</td>
+                    </tr>
+                    <tr><td colspan="3">&nbsp;</td></tr>
+             	</table>
+             </div>
+
+            <div class="linestyle">
+            <form name="payForm" id="payForm" action="/person/bank/charge/" method="post" >
+            	{% csrf_token %}
+                <table width="98%" border="0" cellspacing="0" cellpadding="0" class="wotable" id="bank_tb2">
+              		<tr class="title">
+              			<td colspan="3" class="tab_tit">&nbsp;在线支付宝充值</td>
+              		</tr>
+                    <tr>
+                    	<td width="40">&nbsp;</td>
+                    	<td width="80">&nbsp;充值金额：</td>
+                    	<!-- onafterpaste事件处理粘贴过来的内容，很谨慎 -->
+                        <td>&nbsp;<input type="text" id="charge_price" name="charge_price" size="14" value="0.0"  maxlength="5" 
+                        		onkeyup="this.value=this.value.replace(/\D/g,'');$('#charge_amount').text($('#charge_price').val());"  
+                        		onafterpaste="this.value=this.value.replace(/\D/g,'');$('#charge_amount').text($('#charge_price').val());" style="height:25px; line-height:25px;">&nbsp;元&nbsp;</td>
+                    </tr>
+                    <tr>
+                    	<td >&nbsp;</td>
+                    	<td>&nbsp;支付金额：</td>
+                        <td>&nbsp;<span class="coins" id="charge_amount" style="font-size:18px;">0.0</span>&nbsp;元</td>
+                    </tr>
+                    <tr>
+                    	<td >&nbsp;</td>
+                    	<td >&nbsp;充值方式：</td>
+                        <td>&nbsp;支付宝</td>
+                    </tr>
+                    <tr>
+                        <td >&nbsp;</td>
+                        <td colspan="2">&nbsp;<input type="button" value="在线充值" class="alibtn" id="payBtn"></td>
+                    </tr>
+                  </form>
+                    <tr>
+                        <td >&nbsp;</td>
+                        <td colspan="2">&nbsp;<span style="color:red;font-size:12px;">*注意：2015年09月01日起通过支付宝在线充值的金额如果用于话费、流量等充值类接口，将收取1%的手续费，银行转账或支付宝转账0手续费，如有疑问请联系在线客服</font></td></tr>
+                    <tr><td colspan="3">&nbsp;</td></tr>
+                    <tr class="title">
+                        <td colspan="3">&nbsp;线下银行转账:</td>
+                    </tr>
+                    {% load TagUtils %}
+                    {% for bank_info in bank_infos %}
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td colspan="2">
+                            &nbsp;开户银行 ： {{bank_info.bank_name}}<br/>
+                            &nbsp;公司名称 ：{{bank_info.company_name}}<br/>
+                            &nbsp;反馈速度 ：［{% for i in bank_info.score|range %}★{% endfor %}{% for i in bank_info.score|add:-5|abs|range %}☆{% endfor %}］<br/>
+                            &nbsp;银行账号： <span style="font-weight:bold; color:red">{{bank_info.account}}</span><br/>
+                            &nbsp;{{bank_info.comment}}
+                        </td>
+                    </tr>
+					{% endfor %}
+				
+					{% for alipay_info in alipay_infos %}
+                    <tr class="title">
+                        <td colspan="3">&nbsp;支付宝转账：</td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td colspan="2">
+                            &nbsp;公司名称 ： {{alipay_info.company_name}}<br/>
+                            &nbsp;反馈速度 ： ［{% for i in alipay_info.score|range %}★{% endfor %}{% for i in alipay_info.score|add:-5|abs|range %}☆{% endfor %}］<br/>
+                            &nbsp;支付宝账号： <span style="font-weight:bold; color:red">{{alipay_info.account}}</span><br/>
+                            &nbsp;{{alipay_info.comment}}
+                        </td>
+                    </tr>
+					{% endfor %}
+                </table>
+            </div>
+            <div class="clearfix"></div>
+	</div>
+<!--中间右边结束-->
+{% endblock %}
+
+{% block extend_java_script %}
+<script type="text/javascript">
+	$(document).ready(function(){
+		
+		$('#charge_amount').text($('#charge_price').val());
+				
+		$("#payBtn").click(function(){
+			var chargeprice=$("#charge_price").val();
+			
+			$("#payBtn").val('支付中...').attr("disabled","disabled");
+
+			if(chargeprice == '' || chargeprice == 0){ 
+				showtips('支付金额无效!',$("#charge_price"));
+				$("#payBtn").removeAttr("disbaled").val("在线支付");
+				return false;
+			}else{
+				$("#payForm").ajaxSubmit(function(data){
+					alert(data.result);
+					$("#payBtn").val('在线支付').removeAttr('disabled');
+					location.href = "/person/bank/"
+				});
+			}
+		})
+	})
+	
+function showtips(msg,o){
+	layer.tips(msg, o, {
+        guide: 1,
+        time: 0,
+        style: ['background-color:#F26C4F; color:#fff', '#F26C4F'],
+        maxWidth:240
+    });
+	o.focus();
+}
+</script>
+{% endblock %}
+

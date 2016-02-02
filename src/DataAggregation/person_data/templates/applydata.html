@@ -1,0 +1,92 @@
+﻿{% extends "person_base.html" %} 
+<meta charset="utf-8">
+
+{% block title %}数据服务平台-数据中心{% endblock %}
+
+{% block extend_js_css %}
+<link href="/static_resource/css/person_myinfo.css" type="text/css"	rel="stylesheet">
+{% endblock %}
+
+{% block content_right %}
+<!--中间右边开始-->
+<div class="u-main-right">
+	<form name="applyForm" id="applyForm" action="/my/doapply"
+		method="post" />
+	<div class="ur-title">
+		<a class="appTitlea">我的数据>>申请数据</a>
+	</div>
+	<div class="clear"></div>
+	<div class="linestyle-tips" id="apply-data-tips">请选择需要申请的数据</div>
+	<div class="linestyle">
+		<div class="linesty_title">选择数据：</div>
+		<ul id="datatype" class="datatype">
+			<li id="2">SDK中心</li>
+			<li id="1">生活常用</li>
+			<li id="11">天气预报</li>
+			<li id="10">车辆服务</li>
+			<li id="3">位置信息服务</li>
+			<li id="4">金融基金</li>
+			<li id="14">充值缴费</li>
+			<li id="6">影视娱乐</li>
+			<li id="13">即时通讯</li>
+			<li id="9">旅游出行</li>
+			<li id="16">医药健康</li>
+			<li id="8">站长工具</li>
+			<li id="5">全网数据</li>
+			<li id="12">问答知识</li>
+			<li id="15">应用开发</li>
+			<li id="7">其他数据</li>
+		</ul>
+		<div class="clearfix"></div>
+
+		<ul id="datalist" class="datatype mt20">
+
+		</ul>
+		<div class="clearfix"></div>
+		<div class="nowdata">
+			当前选择的数据：<span id="seldatatype"></span>>><span id="seldata"></span>
+		</div>
+		<input type="hidden" value="" name="did" id="did">
+	</div>
+
+	<div class="linestyle-tips" id="apply-mobile-tips"></div>
+	<div class="linestyle">
+		手机号码：<input type="text" value="" name="mobile"
+			placeholder="首次申请数据需要验证手机号码" class="editmyinput w350" id="mobile">*
+	</div>
+	<div class="linestyle" style="background: #fafafa">
+		短信验证：<input type="text" value="" placeholder="输入6位短信验证码"
+			name="mobilecode" class="editmyinput w150" id="mobilecode"
+			maxlength="6">*<input type="button" value="获取验证码"
+			class="btn smsbtn ml15">
+	</div>
+	<div class="linestyle-tips" id="apply-result-tips"></div>
+	<div class="linestyle" style="text-align: center;">
+		<input type="button" value="申请" class="applyBtn btn">
+	</div>
+
+	<div class="appdata_tip">
+		<div>
+			*数据API在成功申请日起，需要在<strong>2</strong>个月内提交认证审核，否则将不能正常请求数据，直到审核通过！
+		</div>
+		<div>*如需要延长审核期限，请于工作日于我们的在线客服联系！</div>
+	</div>
+	<!--中间右边结束-->
+{% endblock %} 
+
+{% block extend_java_script %}
+	<script>
+		$("#datatype li").click(
+				function() {
+					$("#seldatatype").html($(this).html());
+					$(this).addClass("datatype_act").siblings().removeClass(
+							"datatype_act");
+				})
+		$("#datalist li").click(
+				function() {
+					$("#seldata").html($(this).html());
+					$(this).addClass("datatype_act").siblings().removeClass(
+							"datatype_act");
+				})
+	</script>
+{% endblock %}

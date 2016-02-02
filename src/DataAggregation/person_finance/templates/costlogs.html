@@ -1,0 +1,135 @@
+﻿{% extends "person_base.html" %} 
+<meta charset="utf-8">
+
+{% block title %}数据服务平台-财务中心{% endblock %}
+
+{% block extend_js_css %}
+<link type="text/css" href="/static_resource/js/timepicker/jquery-ui.css" rel="stylesheet" />  
+<script type="text/javascript" src="/static_resource/js/timepicker/jquery-ui.min.js"></script>
+<script src="/static_resource/js/timepicker/jquery-ui-timepicker-addon.js" type="text/javascript"></script>
+<!--中文-->
+<script src="/static_resource/js/timepicker/jquery.ui.datepicker-zh-CN.js.js" type="text/javascript" charset="gb2312"></script>
+<script src="/static_resource/js/timepicker/jquery-ui-timepicker-zh-CN.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+        jQuery(function () {
+            // 时间设置
+            jQuery('#basic_example_1').datetimepicker({
+                timeFormat: "HH:mm:ss",
+                dateFormat: "yy-mm-dd"
+            });
+		jQuery('#basic_example_2').datetimepicker({
+                timeFormat: "HH:mm:ss",
+                dateFormat: "yy-mm-dd"
+            });
+        });
+    </script>
+<body>
+{% endblock %}
+
+{% block content_right %}
+        <!--中间右边开始-->
+		<div class="u-main-right">
+
+      <div class="linestyle">
+        <table width="98%" border="0" cellspacing="0" cellpadding="0" class="wotable" style="margin-bottom:30px;" id="telcz_tb1">
+              <tr  class="title">
+                <td colspan="6" class="telcz_tb_tit">记录导出CSV</td>
+              </tr>
+             <tr >
+                <td class="td_bottom_line" colspan="8" height="55">
+                <form name="exportForm" id="exportForm" action="#" target="_blank" method="post">
+                  &nbsp;类型：<select name="ordertype">
+                <option value="0" selected="selected">【0】所有类型</option>
+                 {% for cost_type in cost_types %}
+                <option value="{{cost_type.id}}" >【{{cost_type.id}}】{{cost_type.type_name}}</option>
+                 {% endfor %}
+                </select>
+                订单时间：
+                <input type="text" name="starttime" value=" " id="basic_example_1" readonly>
+                至
+                <input type="text" name="endtime" value="" id="basic_example_2" readonly>
+                <input type="submit" class="btn" value="导出CSV" id="exportBtn">
+                </form>
+                </td>
+              </tr>
+          </table>
+            <table width="98%" border="0" cellspacing="0" cellpadding="0" class="wotable" id="telcz_tb2">
+              
+              <tr  class="title">
+                <td colspan="6" class="telcz_tb_tit">订单检索</td>
+              </tr>
+              <tr >
+                <td class="td_bottom_line" colspan="8" height="55">
+                <form name="exportForm" id="exportForm" action="#" method="post">
+                类型：<select name="ordertype">
+         		<option value="0" selected="selected">【0】所有类型</option>
+                 {% for cost_type in cost_types %}
+                <option value="{{cost_type.id}}" >【{{cost_type.id}}】{{cost_type.type_name}}</option>
+                 {% endfor %}
+                </select>
+                用户自定订单号：
+                <input type="text" name="uorderid" value="">充值账号：
+                <input type="text" name="game_userid" value="">
+                <input type="submit" class="btn" value="检索订单" id="searchBtn">
+                </form>
+                </td>
+              </tr>
+              <tr class="title">
+                <td>订单号</td>
+                <td>充值名称</td>
+                <td>充值号码</td>
+                <td>订单时间</td>
+                <td>状态</td>
+                <td></td>
+              </tr>
+              
+              <tr>
+                <td colspan="8">&nbsp;</td>
+              </tr>
+              <tr>
+                <td colspan="8" class="appPages" id="appPages" height="45"><a>首页</a><a>上一页</a><a>下一页</a><a>尾页</a></td>
+              </tr>
+             </table>
+        </div>
+		<div class="clearfix"></div>
+        <!--中间右边结束-->
+{% endblock %}
+
+{% block extend_java_script %}
+<script>
+function CurentTime()
+    { 
+        var now = new Date();
+       
+        var year = now.getFullYear();       //年
+        var month = now.getMonth() + 1;     //月
+        var day = now.getDate();            //日
+       
+        var hh = now.getHours();            //时
+        var mm = now.getMinutes();          //分
+       
+        var clock = year + "-";
+       
+        if(month < 10)
+            clock += "0";
+       
+        clock += month + "-";
+       
+        if(day < 10)
+            clock += "0";
+           
+        clock += day + " ";
+       
+        if(hh < 10)
+            clock += "0";
+           
+        clock += hh + ":";
+        if (mm < 10) clock += '0'; 
+        clock += mm; 
+        return(clock); 
+    } 
+	$("#basic_example_1").val(CurentTime());
+	$("#basic_example_2").val(CurentTime());
+</script>
+{% endblock %}

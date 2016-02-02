@@ -1,0 +1,58 @@
+﻿{% extends "person_base.html" %} 
+<meta charset="utf-8">
+
+{% block title %}数据服务平台-财务中心{% endblock %}
+
+{% block content_right %}
+        <!--中间右边开始-->
+	 <div class="u-main-right">
+        <div class="ur-title">
+             <a class="appTitlea">财务中心>>我的优惠卷中心&nbsp;</a>
+        </div>
+        <div class="clearfix"></div>
+
+        <div class="linestyle">
+            <table width="98%" border="0" cellspacing="0" cellpadding="0" class="wotable">
+              <tr class="title">
+                <td class="td_bottom_line">&nbsp;序号</td>
+                <td class="td_bottom_line">&nbsp;优惠券名称</td>
+                <td class="td_bottom_line">&nbsp;描述</td>
+                <td class="td_bottom_line">&nbsp;折扣</td>
+                <td class="td_bottom_line">&nbsp;时间</td>
+                <td class="td_bottom_line">&nbsp;限用次数</td>
+                <td class="td_bottom_line">&nbsp;是否使用</td>
+              </tr>
+              {% for coupon in coupon_list %}
+              <tr>
+                <td class="td_bottom_line">&nbsp;{{coupon.id}}</td>
+                <td class="td_bottom_line">&nbsp;{{coupon.name}}</td>
+                <td class="td_bottom_line">&nbsp;{{coupon.description}}</td>
+                <td class="td_bottom_line">&nbsp;{{coupon.discount}}</td>
+                <td class="td_bottom_line">&nbsp;{{coupon.limit_date}}</td>
+                <td class="td_bottom_line">&nbsp;{{coupon.limit_times}}</td>
+                <td class="td_bottom_line">&nbsp;{{coupon.get_used_display}}</td>
+              </tr>
+              {% endfor %}
+           </table>
+        </div>
+        <div class="clearfix"></div>
+
+        <div class="ur-title">
+             <a class="appTitlea">财务中心>>新增优惠券&nbsp;</a>
+        </div>
+        <div class="clearfix"></div>
+
+        <div class="linestyle">
+        <form name="form1" id="form1" action="/coins/addcardno" method="post">
+          <div class="rptitle">新增优惠券</div>
+          <div class="wod">
+               <label for="wotitle" class="lb">优惠券代码&nbsp;*：</label>
+               <input id="taitou" type="text" class="woinput" name="cardno" placeholder="请填写优惠券背面的代码" value=""/>
+          </div>
+          <div class="wod">
+               <input type="button" value="提交信息" class="subBtn" id="subBtn">
+          </div>
+          </form>
+        </div>
+        <!--中间右边结束-->
+{% endblock %}

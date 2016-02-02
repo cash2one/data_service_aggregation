@@ -1,0 +1,24 @@
+<meta charset="utf-8">
+<div ng-controller="apiDetailUpgradeController">
+<input type="hidden" id="serve_id" value="{{serve_id}}" />
+	<ul>
+		<div class="line">更新动态：</div>
+		<table style="width: 98%; margin-left: 2%;">
+			<tr>
+				<th width="40px"></th>
+				<th width="400px">内容</th>
+				<th width="140px">时间</th>
+			</tr>
+			<tr ng-if="upgrade_logs==null || upgrade_logs=='undefined'">
+				<td></td>
+				<td>暂无该数据的更新记录！</td>
+				<td></td>
+			</tr>
+			<tr ng-repeat="upgradelog in upgrade_logs">
+				<td></td>
+				<td>{[{upgradelog.upgrade_contents}]}</td>
+				<td>{[{upgradelog.upgrade_time | date : 'yyyy-MM-dd HH:mm:ss' }]}</td>
+			</tr>
+		</table>
+	</ul>
+</div>

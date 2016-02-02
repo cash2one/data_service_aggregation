@@ -1,0 +1,37 @@
+﻿{% extends "person_base.html" %} 
+<meta charset="utf-8">
+
+{% block title %}数据服务平台-我的工单{% endblock %}
+
+{% block content_right %}
+        <!--中间右边开始-->
+		<div class="u-main-right">
+			<div class="ur-title">
+       			<a class="appTitlea">会员中心&nbsp;>>&nbsp;</a>我的工单
+                <a class="applyBtn" href="/person/wksubmit/">+提交一个工单</a>
+        	</div>
+        	<div class="linestyle" >
+            	<table width="100%" border="0" cellspacing="0" cellpadding="0" class="wotable">
+                  <tr>
+                    <td colspan="6" class="wotabs">
+                    	<a href="#">全部(0)</a><a href="#">待受理(0)</a><a href="#">待回复(0)</a><a href="#">已解决(0)</a><a href="#">已关闭(0)</a>
+                    </td>
+                  </tr>
+                  <tr class="title">
+                    <td>编号</td>
+                    <td>标题</td>
+                    <td>状态</td>
+                    <td>受理客服组</td>
+                    <td>工单受理客服</td>
+                    <td>创建日期</td>
+                  </tr>
+                                    
+                                    
+                </table>
+
+	        </div>
+         </div>   
+		<div class="clearfix"></div>
+        <!--中间右边结束-->
+{% endblock %}
+

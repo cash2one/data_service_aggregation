@@ -1,0 +1,53 @@
+<meta charset="utf-8">
+<div ng-controller="apiDetailDemoController">
+<input type="hidden" id="serve_id" value="{{serve_id}}" />
+<ul>
+	<div class="line">完整教学代码示例：</div>
+	<table style="width: 98%; margin-left: 2%;">
+		<tr>
+			<th width="40px"></th>
+			<th width="100px">语言</th>
+			<th width="240px">标题</th>
+			<th width="100px">提供者</th>
+			<th width="200px">时间</th>
+		</tr>
+		<tr ng-repeat="invoke_demo in invoke_demos">
+			<td></td>
+			<td>{[{invoke_demo.language}]}</td>
+			<td><a href="{[{invoke_demo.hyperlink}]}" style="color: #39C;">{[{invoke_demo.title}]}</a></td>
+			<td>{[{invoke_demo.provider}]}</td>
+			<td>{[{invoke_demo.create_time}]}</td>
+		</tr>
+	</table>
+	<div class="line">通用HTTP请求代码示例：</div>
+	<table style="width: 98%; margin-left: 2%;">
+		<tr>
+			<th width="40px"></th>
+			<th width="100px">语言</th>
+			<th width="140px">标题</th>
+			<th width="400px">详细</th>
+		</tr>
+		<tr ng-repeat="http_demo in http_demos">
+			<td></td>
+			<td>{[{http_demo.language}]}</td>
+			<td>{[{http_demo.title}]}</td>
+			<td><a href="{[{http_demo.hyperlink}]}" style="color: #39C;">{[{http_demo.hyperlink}]}</a></td>
+		</tr>
+	</table>
+	<div class="line">常见问题：</div>
+	<table style="width: 98%; margin-left: 2%;">
+		<tr>
+			<th width="40px"></th>
+			<th width="240px">内容</th>
+			<th width="400px">详细</th>
+		</tr>
+		<tbody>
+			<tr>
+				<td></td>
+				<td>服务帮助:</td>
+				<td><a href="/question/quest/" style="color: #39C;">点击这里，找寻您需要的信息。</a></td>
+			</tr>
+		</tbody>
+	</table>
+</ul>
+</div>

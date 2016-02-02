@@ -1,0 +1,26 @@
+{% extends "base_index.html" %}
+<meta charset="utf-8">
+
+{% block extend_js_css %}
+<link href="/static_resource/css/api.css" type="text/css" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<div class="cb" style="height:1px; background-color:#ddd; margin-top:5px"></div>
+<!--中间开始-->
+<div id="apisearchcent">
+	<div id="searchdv">检索结果</div>
+    <ul>
+    	{% for serve in searchlist %}
+    	<li>
+        	<div class="searchdv_img"><a href="/API/detail/id/{{serve.id}}/"><img src="{{serve.serve_logo}}"></a></div>
+            <div>
+            <p class="color_gray">{{serve.serve_name}}</p>
+            <p class="color_gray2">已连接APP：<span>{{serve.base_statistics.app_counts|default:"0"}}</span></p>
+            </div>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+<!--中间结束	-->
+{% endblock %}

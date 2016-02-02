@@ -1,0 +1,10 @@
+<meta charset="utf-8">
+
+<div class="rdv3">
+        	<div class="dv1">热门标签</div>
+            <ul>
+            {% for qs_tag in qs_tags %}
+            	<li><a href="/question/tag/id/{{qs_tag.id}}/">{{qs_tag.tag_name}}</a></li>
+             {% endfor %}
+            </ul>
+        </div>

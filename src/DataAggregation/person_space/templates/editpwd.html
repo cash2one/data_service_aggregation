@@ -1,0 +1,90 @@
+﻿{% extends "person_base.html" %} 
+<meta charset="utf-8">
+
+{% block title %}数据服务平台-个人中心{% endblock %}
+
+{% block content_right %}
+<!--中间右边开始-->
+	<div class="u-main-right">
+			<div class="ur-title">
+       			<a class="appTitlea">会员中心>>密码修改</a>
+            	
+        	</div>
+        <div class="linestyle" >
+        <form name="infoForm" id="infoForm" action="/person/editpwd/" method="post">
+        {% csrf_token %}
+        <input type="hidden" value="0" name="isopu">
+	        <table width="98%" border="0" cellspacing="0" cellpadding="0" class="api_tb">
+	          <tr >
+	            <td width="120" >&nbsp;用&nbsp;户&nbsp;帐&nbsp;号：</td>
+	            <td >&nbsp;{{user.username}}<input type="hidden" value="{{user.username}}" name="username">
+	            </td>
+	          </tr>
+              <tr>
+	            <td >&nbsp;原&nbsp;始&nbsp;密&nbsp;码：</td>
+	            <td >&nbsp;<input type="password" value="" id="oldPassword" name="oldPassword" class="userinfo-input">
+	            <span id="info-oldpwd-tips" class="normal-tips">请输入原始密码</span>
+	            </td>
+	          </tr>
+              	          <tr >
+	            <td >&nbsp;新&nbsp;建&nbsp;密&nbsp;码：</td>
+	            <td >&nbsp;<input type="password" value="" id="newPassword" name="newPassword" class="userinfo-input">
+	            <span id="info-newpwd-tips" class="normal-tips">请输入新密码</span>
+	            </td>
+	          </tr>
+	           <tr >
+	            <td >&nbsp;确&nbsp;认&nbsp;密&nbsp;码：</td>
+	            <td >&nbsp;<input type="password" value="" id="newPassword2" name="newPassword2" class="userinfo-input">
+	            <span id="info-newpwd2-tips" class="normal-tips">请再次输新密码</span>
+	            </td>
+	          </tr>	          
+	           <tr >
+	            <td >&nbsp;</td>
+	            <td >&nbsp;</td>
+	          </tr>
+	          <tr >
+	            <td >&nbsp;</td>
+	            <td >&nbsp;<input type="button" value="修改密码" class="btn" id="infoBtn"></td>
+	          </tr>
+	        </table>
+	        </form>
+	      </div>
+        <!--中间右边结束-->
+{% endblock %}
+
+{% block extend_java_script %}
+<script type="text/javascript">
+	$(document).ready(function(){
+		$("#infoBtn").click(function(){
+			var oldPassword=$("#oldPassword").val();
+			var newPassword=$("#newPassword").val();
+			var newPassword2=$("#newPassword2").val();
+			
+			$("#infoBtn").val('修改中...').attr("disabled","disabled");
+
+			$("#info-oldpwd-tips,#info-newpwd-tips,#info-newpwd2-tips").fadeOut();
+			if(oldPassword == ''){
+				$("#info-oldpwd-tips").html('请输入原始密码!').fadeIn();
+				$("#oldPassword").focus();
+				$("#infoBtn").val('修改密码').removeAttr('disabled');
+				return false;
+			}else if(newPassword.length < 8 ){
+				$("#info-newpwd-tips").html('新密码不能少于8位!').fadeIn();
+				$("#newPassword").focus();
+				$("#infoBtn").val('修改密码').removeAttr('disabled');	
+				return false;
+			}else if(newPassword != newPassword2){
+				$("#info-newpwd2-tips").html('新密码两次输入的不一致!').fadeIn();
+				$("#newPassword2").focus();
+				$("#infoBtn").val('修改密码').removeAttr('disabled');	
+				return false;
+			}else{
+				$("#infoForm").ajaxSubmit(function(data){
+					alert(data.result);
+					$("#infoBtn").val('修改密码').removeAttr('disabled');
+				});
+			}
+		})
+	})
+</script>
+{% endblock %}

@@ -1,0 +1,48 @@
+<meta charset="utf-8">
+<div ng-controller="apiDetailContactController">
+	<input type="hidden" id="serve_id" value="{{serve_id}}" />
+	<ul>
+		<div class="line">其他相关内容：</div>
+		<table style="width: 98%; margin-left: 2%;">
+			<tr>
+				<th width="30px"></th>
+				<th width="100px">内容</th>
+				<th width="400px">详细</th>
+			</tr>
+			<tbody>
+				<tr>
+					<td></td>
+					<td>接口测试:</td>
+					<td><a href="#" style="color: #39C;">API测试工具</a></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>技术支持:</td>
+					<td><a href="javascript:void(0);" style="color: #39C;">{[{contact.support_team}]}</a></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>QQ交流群:</td>
+					<td><a href="#" style="color: #39C;">{[{contact.groupQQ}]}</a></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>联系电话:</td>
+					<td>{[{contact.support_telno}]}</a></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>在线客服QQ:</td>
+					<td>{[{contact.contactQQ}]}</a></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>商务合作QQ:</td>
+					<td>{[{contact.partnerQQ}]}</a></td>
+				</tr>
+			</tbody>
+			
+	    
+		</table>
+	</ul>
+</div>

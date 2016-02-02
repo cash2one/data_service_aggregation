@@ -1,0 +1,298 @@
+﻿{% extends "person_base.html" %} 
+<meta charset="utf-8">
+
+{% block title %}数据服务平台-开具发票{% endblock %}
+
+{% block extend_js_css %}
+<script type="text/javascript" src="/static_resource/js/layer.min.js"></script>
+<link href="/static_resource/css/person_layer.css" type="text/css" rel="stylesheet" />
+{% endblock %}
+
+{% block content_right %}
+  <!--中间右边开始-->
+	<div class="u-main-right">
+			<div class="ur-title">
+       			<a class="appTitlea">会员中心&nbsp;>>&nbsp;<a href="invoice.html">我的发票</a>&nbsp;>>&nbsp;</a><a id="tipyx">开票信息管理</a>
+                <a class="applyBtn" href="/person/invoice/applyit/">+索取发票</a>
+        	</div>
+        	<div class="linestyle" >
+            <form name="form1" id="form1" enctype="multipart/form-data" action="#" method="POST">
+           		<div class="rptitle">发票信息</div>
+            	<div class="wod">
+                	<label for="wotitle" class="lb">发票类型：</label>
+                    <select id="fplx" class="woselect" name="fplx">
+                        <option value="0"  >增值税普通发票</option>
+                        <option value="1"  >增值专用通发票</option>
+                    </select>&nbsp;<img src="/static_resource/images/person/questionico.gif" border="0" align="absmiddle" width="16" height="16" id="itTips"/>
+                </div>
+        		<div class="wod">
+                	<label for="wotitle" class="lb">发票抬头&nbsp;*：</label>
+                    <input id="taitou" type="text" class="woinput" name="taitou" placeholder="请填写公司名称" value=""/>
+                </div>
+                
+                <div class="zzzyfp" style="display:none">
+                    <div class="wod">
+                        <label for="wotitle" class="lb">税务登记号&nbsp;*：</label>
+                        <input id="swdjh" type="text" class="woinput" name="swdjh" placeholder="请填写税务登记号" value=""/>
+                    </div>
+                    <div class="wod">
+                        <label for="wotitle" class="lb">开户行：</label>
+                        <select id="khh"  class="woselect" name="khh">
+                            <option value="0">请选择开户银行</option>
+                            <option value="1" >中国工商银行</option>
+                            <option value="2" >中国银行</option>
+                            <option value="3" >招商银行</option>
+                            <option value="4" >中国建设银行</option>
+                            <option value="5" >中国农业银行</option>
+                            <option value="6" >中信银行</option>
+                            <option value="7" >中国民生银行</option>
+                            <option value="8" >交通银行</option>
+                            <option value="9" >中国光大银行</option>
+                            <option value="10" >深圳发展银行</option>
+                            <option value="11" >平安银行</option>
+                            <option value="12" >农村信用合作社</option>
+                            <option value="13" >中国邮政储蓄银行</option>
+                            <option value="14" >农业银行</option>
+                            <option value="15" >广东发展银行</option>
+                            <option value="16" >广发银行</option>
+                            <option value="17" >上海浦东发展银行</option>
+                            <option value="18" >上海银行</option>
+                            <option value="19" >北京银行</option>
+                            <option value="20" >兴业银行</option>
+                            <option value="21" >北京农村商业银行</option>
+                            <option value="22" >城市信用合作社</option>
+                            <option value="23" >福建兴业银行</option>
+                            <option value="24" >广东南粤银行</option>
+                            <option value="25" >广州农村商业银行</option>
+                            <option value="26" >广州银行</option>
+                            <option value="27" >桂林银行</option>
+                            <option value="28" >杭州联合银行</option>
+                            <option value="29" >杭州银行</option>
+                            <option value="30" >恒丰银行</option>
+                            <option value="31" >华夏银行</option>
+                            <option value="32" >徽商银行</option>
+                            <option value="33" >宁波银行</option>
+                            <option value="34" >农村合作银行</option>
+                            <option value="35" >农村商业银行</option>
+                            <option value="36" >上海农村商业银行</option>
+                            <option value="37" >新韩银行</option>
+                            <option value="38" >渣打银行</option>
+                            <option value="39" >浙商银行</option>
+                            <option value="40" >中国进出口银行</option>
+                            <option value="41" >中国农业发展银行</option>
+                            <option value="42" >重庆三峡银行</option>
+                            <option value="43" >城市商业银行</option>
+                            <option value="44" >村镇银行</option>
+                            <option value="45" >富滇银行</option>
+                            <option value="46" >汉口银行</option>
+                            <option value="47" >国家开发银行</option>
+                            <option value="48" >东亚银行</option>
+                            <option value="49" >渤海银行</option>
+                            <option value="50" >三井住友银行</option>
+                            <option value="100" >其他</option>
+                        </select>
+                    </div>
+                    <div class="wod">
+                        <label for="wotitle" class="lb">开户支行名称&nbsp;*：</label>
+                        <input id="khzhmc" type="text" class="woinput" name="khzhmc" placeholder="请填写开户支行名称，如：深圳市南油支行" value=""/>
+                    </div>
+                    <div class="wod">
+                        <label for="wotitle" class="lb">银行账号&nbsp;*：</label>
+                        <input id="yhzh" type="text" class="woinput" name="yhzh" placeholder="请填写银行账号" value=""/>
+                    </div>
+                    <div class="wod">
+                        <label for="wotitle" class="lb">注册场所地址&nbsp;*：</label>
+                        <input id="zccsdz" type="text" class="woinput" name="zccsdz" placeholder="请填写税务登记证上的地址" value=""/>
+                    </div>
+                    <div class="wod">
+                        <label for="wotitle" class="lb">注册固定电话&nbsp;*：</label>
+                        <input id="zcgddh" type="text" class="woinput" name="zcgddh" placeholder="请填写与税控机上记录一致的电话以便认证" value=""/>
+                    </div>
+                    <div class="wod">
+                        <label for="wotitle" class="lb">税务登记扫描件&nbsp;*：</label>
+                        <div class="fileInputContainer">
+                            <input class="fileInput" type="file" name="swdjsmj" id="swdjsmj" />
+                        </div>
+                     </div>
+                     <div class="wod">
+                        <label for="wotitle" class="lb">一般纳税人资格扫描件&nbsp;*：</label>
+                        <div class="fileInputContainer">
+                            <input class="fileInput" type="file" name="ybswdjsmj" id="ybswdjsmj" />
+                        </div>
+                   </div>
+                </div>
+                
+                <div class="rptitle" style="margin-top:20px;">邮寄信息</div>
+                
+                <div class="wod">
+                	<label for="wotitle"  class="lb">收件人姓名：</label>
+                    <input  type="text" class="woinput" value="" name="sjrsm" id="sjrsm" placeholder="请填写与有效身份证上一致的姓名"/>
+                </div>
+                
+                <div class="wod">
+                	<label for="wotitle"  class="lb">手机号码：</label>
+                    <input type="text" class="woinput" value="" name="sjrhm" id="sjrhm" placeholder="请填写可以联系到您的联系方式"/>
+                </div>
+                
+                <div class="wod">
+                	<label for="wotitle"  class="lb">发票邮寄地址：</label>
+                    <input type="text" class="woinput" value="" name="fpyjdz" id="fpyjdz" placeholder="请填写有效地址"/>
+                </div>
+                
+                
+                <div class="wod">
+                	<input type="button" value="提交信息" class="subBtn" id="subBtn">
+                </div>
+                </form>
+	        </div>
+         </div>   
+		<div class="clearfix"></div>
+        <!--中间右边结束-->
+{% endblock %}
+
+{% block extend_java_script %}
+<script type="text/javascript">
+$(document).ready(function(e) {
+    $(".subBtn").click(function(){
+		$(this).attr("disbaled","disabled").val("提交中...");
+		layer.closeAll();
+		var taitou = $("#taitou").val();
+		var sjrsm = $("#sjrsm").val();
+		var sjrhm = $("#sjrhm").val();
+		var fpyjdz = $("#fpyjdz").val();
+		var fplx = $("#fplx").val();
+		
+		//增值专用必填字段
+		var swdjh = $("#swdjh").val();
+		var khh = $("#khh").val();
+		var khzhmc = $("#khzhmc").val();
+		var yhzh = $("#yhzh").val();
+		var zccsdz = $("#zccsdz").val();
+		var zcgddh = $("#zcgddh").val();
+		
+		var swdjsmj = $("#swdjsmj").val();
+		var ybswdjsmj = $("#ybswdjsmj").val();
+		
+		var allowExt =['JPG','PNG'];
+		
+		var swdjsmjExt = getFiletype(swdjsmj);
+		var ybswdjsmjExt = getFiletype(ybswdjsmj);
+		
+		if (fplx=='1' && swdjsmj && $.inArray(swdjsmjExt,allowExt) == -1){
+			layer.msg("选择的税务登记扫描件格式不正确(格式：jpg/png,大小2M以内)", 2, 0);
+			$(this).removeAttr("disbaled").val("提交");
+			return false;
+		}
+		if (fplx=='1' && ybswdjsmj && $.inArray(ybswdjsmjExt,allowExt) == -1){
+			layer.msg("选择的一般纳税人资格证扫描件格式不正确(格式：jpg/png,大小2M以内)", 2, 0);
+			$(this).removeAttr("disbaled").val("提交");
+			return false;
+		}
+
+		if(taitou == ''){
+			showtips('发票抬头不能为空!',$("#taitou"));
+			$(this).removeAttr("disbaled").val("提交");
+			return false;
+		}else if(sjrsm == ''){
+			showtips('收件人姓名不能为空!',$("#sjrsm"));
+			$(this).removeAttr("disbaled").val("提交");
+			return false;
+		}else if(sjrhm == ''){
+			showtips('收件人手机号码不能为空!',$("#sjrhm"));
+			$(this).removeAttr("disbaled").val("提交");
+			return false;
+		}else if(fpyjdz == ''){
+			showtips('发票邮寄地址不能为空!',$("#fpyjdz"));
+			$(this).removeAttr("disbaled").val("提交");
+			return false;
+		}else if(fplx=='1' && swdjh==''){
+			showtips('税务登记号不能为空!',$("#swdjh"));
+			$(this).removeAttr("disbaled").val("提交");
+			return false;
+		}else if(fplx=='1' && khh=='0'){
+			showtips('请选择开户行!',$("#khh"));
+			$(this).removeAttr("disbaled").val("提交");
+			return false;
+		}else if(fplx=='1' && khzhmc=='0'){
+			showtips('请填写开户支行名称',$("#khzhmc"));
+			$(this).removeAttr("disbaled").val("提交");
+			return false;
+		}else if(fplx=='1' && yhzh==''){
+			showtips('请填写银行账号',$("#yhzh"));
+			$(this).removeAttr("disbaled").val("提交");
+			return false;
+		}else if(fplx=='1' && zccsdz==''){
+			showtips('请填写注册场所地址',$("#zccsdz"));
+			$(this).removeAttr("disbaled").val("提交");
+			return false;
+		}else if(fplx=='1' && zcgddh==''){
+			showtips('请填写注册固定电话',$("#zcgddh"));
+			$(this).removeAttr("disbaled").val("提交");
+			return false;
+		}else if(fplx=='1' && swdjsmj==''){
+			showtips('请上传税务登记扫描件',$("#swdjsmj"));
+			$(this).removeAttr("disbaled").val("提交");
+			return false;
+		}else if(fplx=='1' && ybswdjsmj==''){
+			showtips('请上传一般纳税人税务登记扫描件',$("#ybswdjsmj"));
+			$(this).removeAttr("disbaled").val("提交");
+			return false;
+		}else{
+			
+			$("#form1").ajaxSubmit(function(e){
+				var obj = json_parse(e);
+				var code = obj.code;
+				showtips(obj.msg,$(".subBtn"));
+				if(code == '1'){
+					layer.closeAll();
+					layer.msg(obj.msg, 2, 1);
+					setTimeout(function(){window.location.reload()},"1000");
+					//window.location.href='/workorder';
+					$(".subBtn").removeAttr("disbaled").val("提交");
+				}else{
+					$(".subBtn").removeAttr("disbaled").val("提交");
+				}
+			})
+		}
+	})
+	
+	$("#itTips").mouseover(function(){
+		layer.tips('增值税普通发票不能进行进项税抵扣，如果具备一般纳税人资质，需要进行进项税抵扣的，请选择“增值税专用发票”。如有其他疑问，请联系贵司财务了解后提交发票信息。', this, {
+			guide: 1,
+			time: 0,
+			style: ['background-color:#78BA32; color:#fff', '#78BA32'],
+			maxWidth:400,
+			offset:['15px','']
+		});
+	}).mouseout(function(){
+		layer.closeTips();
+	})
+	
+	$("#fplx").change(function(){
+		var itid = $(this).val();
+		if(itid == '1'){
+			$(".zzzyfp").css({display:"block"});
+		}else{
+			$(".zzzyfp").css({display:"none"});
+		}	
+	
+	});
+	
+});
+function showtips(msg,o){
+	layer.tips(msg, o, {
+        guide: 1,
+        time: 0,
+        style: ['background-color:#F26C4F; color:#fff', '#F26C4F'],
+        maxWidth:240
+    });
+	o.focus();
+}
+function getFiletype(filename)
+	{
+		var extStart  = filename.lastIndexOf(".")+1;
+		return filename.substring(extStart,filename.length).toUpperCase();
+	}
+
+</script>
+{% endblock %}

@@ -1,0 +1,77 @@
+<meta charset="utf-8">
+<!--中间中间部分开始-->
+    <div class="centerdv">
+    	<div ng-controller="apilisttitleController" >
+    	<h1 id="centxt">{[{serve_cate.category_name}]}<span>({[{serve_cate.serve_counts}]}个)</span></h1>
+    	</div>
+    	 
+    	 <input type="hidden" id="cateid" value="{{cateid}}">
+    	 <input type="hidden" id="sortid" value="{{sortid}}">
+    	 <input type="hidden" id="pageno" value="{{pageno}}">
+    	
+        <ul class="u1">
+        	<li {% ifequal sortid 0 %}class="active"{% endifequal %}><a href="javascript:flush_api_list('/API/cate/{{cateid}}/sort/0/')">默认排序</a></li>
+            <li {% ifequal sortid 1 %}class="active"{% endifequal %}><a href="javascript:flush_api_list('/API/cate/{{cateid}}/sort/1/')">最新上线</a></li>
+            <li {% ifequal sortid 2 %}class="active"{% endifequal %}><a href="javascript:flush_api_list('/API/cate/{{cateid}}/sort/2/')">连接APP数</a></li>
+            <li {% ifequal sortid 3 %}class="active"{% endifequal %}><a href="javascript:flush_api_list('/API/cate/{{cateid}}/sort/3/')">服务评分</a></li>
+        </ul>
+        <div class="cb" style="height:1px; background-color:#EEEEEE; width:700px; margin:0 auto"></div>
+        
+        <div ng-controller="apilistController">
+        <!--服务介绍开始-->
+        <ul class="u2">
+        	<div ng-repeat ="serve in serves_list">
+        	<li>
+            	<a href="/API/detail/id/{[{serve.id}]}/" class="ser_left"><img src="{[{serve.serve_logo}]}" width="80" height="80"></a>
+                <div class="ser_right">
+                	<h2>
+                    	<a href="/API/detail/id/{[{serve.id}]}/">{[{serve.serve_name}]}</a>
+                    	<div ng-repeat ="tag in serve.serve_tags" style="display:inline-block"> <!-- or use span as below -->
+                    		<span class="colsty{[{tag.tag_color}]}">{[{tag.tag_name}]}</span>
+                    	</div>
+                    </h2>
+                    <p class="p1">{[{serve.serve_desc | substr:50}]}</p>
+                    <p class="p2">
+                    	<span style="background-position: 0px -{[{serve.base_statistics.scores | calculate_starpos}]}px;">{[{serve.base_statistics.scores|default:"1.0"}]}</span>
+                    	<em>
+                        	已连接APP数：<strong>{[{serve.base_statistics.app_counts|default:"0"}]}</strong>
+                        </em>
+                    </p>
+                   		<div ng-repeat ="active_pack in serve.base_activepack">
+                    	<p class="p3">套餐({[{active_pack.pack_name}]})：<strong>{[{active_pack.pack_price}]}元 = </strong>{[{active_pack.pack_counts}]}次</p>
+                    	</div>
+                    <a href="javascript:apply_service({[{serve.id}]})" class="freeapply">{[{serve.id | serve_applied:"{{ userserve_id_list }}" }]}</a>
+                    <a href="#" class="heart">收藏(0)</a>
+                </div>
+            </li>
+            </div>
+        </ul>
+        <!--服务介绍结束-->
+        <!--分页开始-->
+        <div class="pages">
+        <if true="previous_page!=null">
+        		<a href="javascript:flush_api_list('/API/cate/{{cateid}}/sort/{{sortid}}/page/{[{current_page|previouspage}]}')" class="pre">上一页</a>
+      		<else>
+        		<a href="#" class="pre">上一页</a>
+      		</else>
+    	</if>
+       	<span ng-repeat ="page_no in page_no_range">
+		    <span ng-if="page_no==current_page"><!-- 自定义if else标签在ng-repeat中嵌套会有问题 -->
+		    		<a href="javascript:flush_api_list('/API/cate/{{cateid}}/sort/{{sortid}}/page/{[{page_no}]}')" class="cur" >{[{page_no}]}</a>
+		    </span>
+		    <span ng-if="page_no!=current_page">
+		    		<a href="javascript:flush_api_list('/API/cate/{{cateid}}/sort/{{sortid}}/page/{[{page_no}]}')" >{[{page_no}]}</a>
+		    </span>
+	    </span>
+        <if true="next_page!=null">
+        		<a href="javascript:flush_api_list('/API/cate/{{cateid}}/sort/{{sortid}}/page/{[{current_page|nextpage}]}')" class='pre'>下一页</a>
+      		<else>
+        		<a href="#" class='pre'>下一页</a>
+      		</else>
+    	</if>
+        </div>
+        <!--分页结束-->
+        </div>
+    </div>
+    <!--中间中间部分结束-->
+    

@@ -1,0 +1,50 @@
+{% extends "base_index.html" %}
+<meta charset="utf-8">
+
+{% block extend_js_css %}
+	<link href="/static_resource/css/trends.css" type="text/css" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<!--中间开始-->
+<div class="cb" style="height:1px; background-color:#ddd; margin-top:20px"></div>
+<div class="center">
+	<ul>
+    	<li>&nbsp;</li>
+        <h2 class="first"><a href="javascript:void(0)">数据动态</a></h2>
+        {% load TagUtils %}
+        {% for info in info_list %}
+	       	<li class="h100">
+	        	<h3>{{info.info_time| date:"F j" }}<span>{{info.info_time|date:"Y"}}</span></h3>
+	            <dl><dt><a href="#">{{info.title}}</a><span>{{info.content| substr:"50" }}</span></dt></dl>
+	        </li>
+        {% endfor %}
+ 	</ul>
+</div>
+<div class="cb"></div>
+		<!--分页开始-->
+        <div class="pages">
+        {% if info_list.has_previous %}
+        	<a href="/trends/page/{{ info_list.previous_page_number }}/" class="pre">上一页</a>
+        {% else %}
+        	<a href="#" class="pre">上一页</a>
+        {% endif %}
+        
+       	{% for page in info_list.paginator.page_range_ext %}
+	    {% if page = info_list.number %}
+	    	<a href="/trends/page/{{ page }}/" class="cur" >{{ page }}</a>
+	    {% else %}
+	    	<a href="/trends/page/{{ page }}/" >{{ page }}</a>
+	    {% endif %}
+	 	{% endfor %}
+        
+        {% if info_list.has_next %}
+        	<a href='/trends/page/{{ info_list.next_page_number }}/' class="pre">下一页</a>
+        {% else %}
+        	<a href="#" class="pre">下一页</a>
+        {% endif %}
+        </div>
+        <!--分页结束-->   
+<!--中间结束-->
+<div class="cb" style="height:1px; background-color:#ddd"></div>
+{% endblock %}

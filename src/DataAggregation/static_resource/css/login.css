@@ -1,0 +1,33 @@
+@charset "utf-8";
+/*header*/
+#header,#menu{width:100%; min-width:1200px; background:#fff;}
+.header{width:1100px; margin:0 auto; height:100px; padding-top:15px; position:relative;}
+.header h1{width:200px; height:80px; background: url(../images/footerlogo.png) 0 0 no-repeat; position:absolute; left:0; top:40px; text-indent:-999em; }
+.header a{ float:right; background:url(../images/ico/index.ico) no-repeat; padding-left:20px; margin-top:60px}
+
+#login_cont{width: 100%; min-width: 1200px; height: 500px; position:relative; overflow: hidden; background-color:#497892}
+#login_cont .contentleft{ height:400px; margin-left:150px; margin-top:40px;}
+
+#login_form{width:300px; padding:30px 50px; height: 320px; box-shadow: 0 0 2px rgba(0,0,0,0.3); border-radius: 4px; background: #fff; position:absolute; top:60px; right:50px;z-index: 9;}
+#login_form h2{padding-left:46px; color:#555; font:bold 14px/16px "microsoft yahei"; height:20px; line-height:20px; margin-bottom:24px; background:url(../images/ico/smalllogo.png) no-repeat;background-size:25px 20px;}
+.username, .pw{width:250px; padding:10px 5px 10px 45px; border:0 none; border-bottom:1px solid #ddd; height:30px; line-height:30px; }
+.div_user, .div_pw{position:relative;}
+.div_user span{position:absolute; left:15px; top:16px; width:16px; height:18px; z-index:1; background-image:url(../images/ico/user.ico)}
+.div_pw span{position:absolute; left:15px; top:16px; width:16px; height:18px; z-index:1;background-image:url(../images/ico/password.ico)}
+.forget_a{position: absolute; right: 0; top: 17px; color: #009fe3;}
+.forget_a:hover,.login_reg:hover{text-decoration: underline;}
+.login_btn{display:block; width:300px;height:50px; line-height: 50px; border-radius:3px; box-shadow:0 4px 0 #0388c5; margin-top: 15px; margin-bottom: 5px;}
+#login_form h4{height:30px; line-height:30px; position:relative; color:#999;}
+.login_reg{font-weight:bold;position:absolute; right:5px; top:0; color:#009fe3;}
+.form .button{position:absolute; left:135px; top:242px; width:190px; height:40px;text-align:center; line-height:40px; font-size:16px; color:#009fe3; font-weight:bold;}
+.login_btn{text-align:center; font:bold 16px/60px '宋体'; border:0 none; border-radius:4px; color:#fff; cursor:pointer; background:#009fe3;letter-spacing:6px;}
+.login_btn:hover{background:#0697d5;}
+
+
+.footer{ width:1200px; height:auto; margin:10px auto; overflow:hidden;}
+.footer .footer_left{ margin-left:40px; float:left; color:#8A8A8C; width:300px}
+.footer .footer_left p{ line-height:20px}
+.footer .footer_left .kefu{ margin-top:30px}
+.footer .footer_center{ width:650px;float:left;color:#8A8A8C; margin-top:30px}
+.footer .footer_center ul li{ width:60px;float:left; line-height:20px}
+.footer .footer_center .foter_ul2 li{ width:100px;float:left; line-height:20px}

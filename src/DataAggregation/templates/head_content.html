@@ -1,0 +1,48 @@
+<meta charset="utf-8">
+<div class="top">
+  <div class="leftdv">Hi~,欢迎来到数据服务网</div>
+  <div class="tinqi">
+   <iframe width="280" scrolling="no" height="25" frameborder="0" allowtransparency="true" src="http://www.tianqi.com/index.php?c=code&id=34&icon=1&num=3"></iframe>
+  </div>
+  <div class="rightdv">
+  	<span class="top_collect">收藏本站</span>
+    <span class="top_share" onMouseOver="$('.sharedv').attr('style','display:block')" onMouseOut="$('.sharedv').attr('style','display:none')">分享</span>		
+        	<table class="sharedv" onMouseOver="$('.sharedv').attr('style','display:block')" onMouseOut="$('.sharedv').attr('style','display:none')">
+            	<tr><td class="shareqq">QQ群</td></tr>
+                <tr><td class="sharebdtie">百度贴吧</td></tr>
+                <tr><td class="shareweibo">微博</td></tr>
+                <tr><td class="shareweixin">微信</td></tr>
+                <tr><td class="sharerenren">人人网</td></tr>
+            </table>
+    <span class="top_phone">手机版</span>
+  </div>
+</div>
+<div class="cb"></div>
+<div class="banner">
+	<div class="fl"><img src="/static_resource/images/logo.png"></div>
+      <div class="fr rightdv">
+      	{% ifequal user.username "" %}
+    	 <a href="/login/"  class="logina">登陆</a>
+    	{% else %}
+    	 <span href="#" class="logina1">
+            <span>{{user.username}}</span><br>
+            <a href="/person/index/" style="color:#03C5FF">个人中心<a>
+         </span>
+    	{% endifequal %}
+        <a href="/register/" class="registera">注册</a>
+    </div>
+    <div class="fl searchdv">
+    	<form id="searchForm" action="/index/search/" method="post">
+    		{% csrf_token %}
+	    	<div><input id="servename" name="servename" type="text" class="inp" placeholder="输入你需要的服务">
+	    	<a href="javascript:$('#searchForm').submit();">
+	    	<img src="/static_resource/images/search.png" class="searchimg"></a></div>
+	  	  	<div class="cb"></div>
+  	  	</form>
+        <div><span>热门搜索：</span>
+        {% for vw in visitwords%}
+        	<a href="/index/search/{{vw.word}}/">{{vw.word}}&nbsp;</a>
+        {% endfor %}
+        </div>
+    </div>
+ </div> 

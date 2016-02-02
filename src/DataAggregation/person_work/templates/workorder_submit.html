@@ -1,0 +1,102 @@
+﻿{% extends "person_base.html" %} 
+<meta charset="utf-8">
+
+{% block title %}数据服务平台-我的工单{% endblock %}
+
+{% block extend_js_css %}
+<script type="text/javascript" src="/static_resource/js/layer.min.js"></script>
+<link href="/static_resource/css/person_layer.css" type="text/css" rel="stylesheet"/>
+{% endblock %}
+
+{% block content_right %}
+        <!--中间右边开始-->
+		<div class="u-main-right">
+			<div class="ur-title">
+       			<a class="appTitlea">会员中心&nbsp;>>&nbsp;<a href="/workorder">我的工单</a>&nbsp;>>&nbsp;</a><a id="tipyx">提交新工单</a>
+                
+        	</div>
+        	<div class="linestyle" >
+            <form name="wkform" id="wkform" action="#" method="POST">
+        		<div class="wod">
+                	<label for="wotitle" class="lb" id="worksub_lb1">标题&nbsp;*：</label>
+                    <input id="wotitle" type="text" class="woinput" name="wotitle"/>
+                </div>
+                <div class="wod">
+                	<label for="wotitle"  class="lb" id="worksub_lb2">请填写您的联系手机，我们将尽快答复您！：</label>
+                    <input id="wotitle" type="text" class="woinput" value="" name="womobilephone"/>
+                </div>
+                <div class="wod">
+                	<label for="wotitle" class="lb" id="worksub_lb3">请选择咨询模块：</label>
+                    <select class="woselect" name="wotypeid">
+                    	                        	<option value="1">API使用</option>
+                                                	<option value="2">SDK问题</option>
+                                                	<option value="3">充值付费</option>
+                                                	<option value="4">账户设置</option>
+                                            </select>
+                </div>
+                <div class="wod">
+                	<label for="wotitle"  class="lb" id="worksub_lb4">问题描述：</label>
+                    <textarea class="wotextarea" placeholder="请输入问题描述，最多不超过2048个字符" name="wodes" id="wodes"></textarea>
+                </div>
+                
+                <div class="wod">
+                	<input type="button" value="提交" class="subBtn">
+                </div>
+                </form>
+	        </div>
+         </div>   
+		<div class="clearfix"></div>
+        <!--中间右边结束-->
+{% endblock %}
+
+{% block extend_java_script %}
+<script type="text/javascript">
+$(document).ready(function(e) {
+    $(".subBtn").click(function(){
+		$(this).attr("disbaled","disabled").val("提交中...");
+		layer.closeAll();
+		var title = $("#wotitle").val();
+		var des = $("#wodes").val();
+		
+		if(title == ''){
+			showtips('标题不能为空哦!',$("#wotitle"));
+			$(this).removeAttr("disbaled").val("提交");
+			return false;
+		}else if(des ==''){
+			showtips('问题描述不能为空哦!',$("#wodes"));
+			$(this).removeAttr("disbaled").val("提交");
+			return false;
+		}else{
+			$("#wkform").ajaxSubmit(function(e){
+				var obj = json_parse(e);
+				var code = obj.code;
+				showtips(obj.msg,$(".subBtn"));
+				if(code == '1'){
+					window.location.href='/workorder';
+				}else{
+					$(".subBtn").removeAttr("disbaled").val("提交");
+				}
+			})
+		}
+	})
+	
+	layer.tips('工单受理优先：企业实名用户&nbsp;>&nbsp;个人实名用户&nbsp;>&nbsp;企业用户&nbsp;>&nbsp;个人用户', $("#tipyx"), {
+        guide: 2,
+        time: 0,
+        style: ['background-color:#78BA32; color:#fff', '#78BA32'],
+        maxWidth:400
+    });
+});
+
+function showtips(msg,o){
+	layer.tips(msg, o, {
+        guide: 1,
+        time: 0,
+        style: ['background-color:#F26C4F; color:#fff', '#F26C4F'],
+        maxWidth:240
+    });
+	o.focus();
+}
+</script>
+{% endblock %}
+

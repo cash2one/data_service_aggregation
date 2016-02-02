@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+<meta charset="utf-8">
+
+{% block extend_js_css %}
+<link href="/static_resource/css/register.css" type="text/css" rel="stylesheet">
+{% endblock %} {% block content %}
+<div class="cb"></div>
+<!--注册开始-->
+<div class="register_line"></div>
+
+<div class="register_content">
+     <ul class="step_ul step1">
+            <li class="li2">1、填写资料</li>
+            <li class="li1">2、激活邮件</li>
+            <li class="li2">3、完成注册</li>
+       </ul>
+</div>
+
+<!--邮箱验证开始-->
+<div id="reg_cont2" class="none">
+	<p class="f clor_blue2 bold">恭喜您，注册成功！请点击邮箱({{ user_email }})中的链接完成账号激活！</p>
+</div>
+<!--邮箱验证结束-->
+<!--注册结束-->
+<div class="register_line cb"></div>
+{% endblock %}
+
+{% block extend_java_script %}
+<script type="text/javascript">
+$("#reg_cont2").show();
+</script>
+{% endblock %}

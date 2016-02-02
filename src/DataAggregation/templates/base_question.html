@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+<meta charset="utf-8">
+
+{% block header %}
+<!--头部开始-->
+  <div id="headcontent" ></div>
+  <div class="cb"></div> 
+  <div class="menu">
+  	<ul id="question_ul" class="fl">
+    	<li><a href="/index/">首页</a></li>
+        <li><a href="/question/recent/">最新更新</a></li>
+        <li><a href="/question/quest/">问题</a></li>
+        <li><a href="/question/tag/">标签</a></li>
+        <li><a href="/question/mine/">我的问题</a></li>
+        <li style="float:right"><a href="/question/ask/" style=" color:#03C5FF">找不到答案？通过这里提交问题</a></li>
+    </ul>
+  </div>
+<!--头部结束-->
+{% endblock %}
+
+{% block main_begin %}
+<!--中间开始-->
+<div class="main">
+{% endblock %}
+
+{% block content_right %}
+    <div class="right">
+    	<div class="rdv1">如果这里无法解决您的问题，您也可以加入官方QQ讨论群：568901700进行交流。</div>
+    	<div id="right_qs_type"></div>
+        <div id="right_qs_tag"></div>
+    </div>
+{% endblock %}
+
+{% block main_end %}
+</div>
+<!--中间结束-->
+{% endblock %}
+
+{% block base_java_script %}
+<script>
+	$(function(){
+	    $("#question_ul li").each(function(index){
+	    	var url = window.location.href;
+	    	var href = $(this).children("a").attr("href");
+	    	var urlpath = url.substring(url.indexOf("/question"));
+	    	if(urlpath.indexOf(href) > -1 
+	    			|| (urlpath.indexOf("/question/show/") > -1 && href == "/question/quest/" )){
+	    		$(this).addClass("current");
+	    	}
+	    })
+	  });
+
+	$.ajax({ 
+		data : {},
+		type : 'GET',
+		async : true,
+		url : '/question/module/qs_type/' ,
+		dataType: 'html',
+		success: function(data){
+			$("#right_qs_type").html(data);
+		} 
+	})
+
+	$.ajax({ 
+		data : {},
+		type : 'GET',
+		async : true,
+		url : '/question/module/qs_tag/' ,
+		dataType: 'html',
+		success: function(data){
+			$("#right_qs_tag").html(data);
+		} 
+	})
+	
+	$.ajax({ 
+		data : {},
+		type : 'GET',
+		async : true,
+		url : '/head/content/' ,
+		dataType: 'html',
+		success: function(data){
+			$("#headcontent").html(data);
+		} 
+	})
+
+</script>
+{% endblock %}
+

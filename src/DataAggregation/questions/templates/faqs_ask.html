@@ -1,0 +1,56 @@
+{% extends "base_question.html" %}
+<meta charset="utf-8">
+
+{% block extend_js_css %}
+	<link href="/static_resource/css/faqs.css" type="text/css" rel="stylesheet">
+	<link href="/static_resource/css/kindeditor/default.css" rel="stylesheet" type="text/css" />
+	<script type="text/javascript" src="/static_resource/js/kindeditor-min.js"></script>
+	<script type="text/javascript" src="/static_resource/js/zh_CN.js"></script>
+	<script>
+			var editor;
+			KindEditor.ready(function(K) {
+				editor = K.create('textarea[name="content"]', {
+					readonlyMode : false,
+					resizeType : 1,
+					allowPreviewEmoticons : false,
+					allowImageUpload : false,
+					items : [
+						'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline',
+						'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
+						'insertunorderedlist', '|', ]
+				});
+			});
+	</script>
+{% endblock %}
+
+{% block content %}
+	<div class="left">
+    	<div class="info">提一个问题</div>
+        <div class="info_askdv1">
+        	<ul>
+            	<li>· 为快速获得答案，我们推荐您先在本站内搜索相似问题的解答，或参考 开发文档</li>
+                <li>· 如有API调用相关问题，您或许可以先参考 </li>
+                <li>· 如果以上都没有帮助，您可以继续您的提问</li>
+            </ul>
+        </div>
+      <!--提问表格开始-->
+       <form class="info_askdv2" action="/question/ask/" method="post">
+       		{% csrf_token %}
+      		<div class="title"> 用一句简单明了的标题概括下你的问题:</div>
+            <div> <input type="text" id="qs_title" class="titinp" name="qs_title"></div>
+            <div class="types">
+            	<span>分类：</span>
+            	<select id="qs_type" name="qs_type"> 
+				{% for qs_type in quest_types %} 
+					<option value="{{qs_type.id}}">{{qs_type.type_name}}</option>
+				{% endfor %}             	
+                </select>
+            </div>
+            <div style="margin-top:10px;"><textarea id="content" name="content" style=" height: 200px; visibility: hidden;"></textarea></div>
+      		<div class="title">  标签：（多个标签以英文逗号","隔开）</div>
+            <div> <input type="text" id="qs_tags" class="titinp" name="qs_tags"></div>
+            <div class="subdv"><input class="inputs" type="submit" value="提交"> <input class="inputs" type="reset" value="重置"></div>
+       </form>
+      <!--提问表格结束-->
+    </div>
+{% endblock %}

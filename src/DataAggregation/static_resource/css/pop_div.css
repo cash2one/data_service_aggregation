@@ -1,0 +1,17 @@
+@charset "utf-8";
+body,dl,dd,figure,p {margin: 0;padding: 0;}
+body{font-family:"microsoft yahei","Hiragino Sans GB",sans-serif;}
+a{text-decoration: none; outline: 0 none;}
+
+.subNav_v4{position:relative; z-index: 5;}
+#allAssort{width:200px;height: 420px;position: absolute;left: 0; top: 0;background:#3d4b4f; }
+#allAssort .item{height:50px; width: 180px; _width:200px; margin: 0 auto;border-top: 1px solid #475357; position:relative; z-index:4;}
+#allAssort .item p{height:100%; width:180px; font-weight: 700; color: #e5e5e5; line-height: 50px; font-size: 14px; text-indent: 15px;}
+.assortTitle a{color:#e5e5e5;}
+.for-nav{display:none;position:absolute;top:0px;left:200px;width: 360px; padding:0 10px 20px;height:400px;font-size:12px;background:#fff;border:1px solid #03C5FF; box-shadow: 0 0 4px rgba(0,0,0,0.2); z-index:3;line-height:20px; overflow: hidden;}
+.for-nav dl {padding:10px;}
+.for-nav dt{float:left;font-weight:bold; font-size: 14px; text-align:left; padding: 10px 7px 0 10px; color:#555;}
+.for-nav dt a{ color: #555;}
+.for-nav dd {float:left; width: 100%;line-height: 12px;}
+.for-nav dd a{color:#999; font-size: 12px; float:left; padding:0 10px; margin: 5px 0; border-left: 2px solid #ebebeb;}
+.for-nav dd a:hover{text-decoration: none; color: #03C5FF;}

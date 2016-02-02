@@ -1,0 +1,56 @@
+﻿{% extends "person_base.html" %} 
+<meta charset="utf-8">
+
+{% block title %}数据服务平台-财务中心{% endblock %}
+
+{% block content_right %}
+        <!--中间右边开始-->
+		<div class="u-main-right">
+			<div class="ur-title">
+       			<a class="appTitlea">会员中心>>我的充值记录</a>
+        	</div>
+		<div class="clearfix"></div>
+        <div class="linestyle">
+            <table width="98%" border="0" cellspacing="0" cellpadding="0" class="wotable" >
+              <tr class="title" id="czlog_tit">
+                <td width="10%">序号</td>
+                <td width="20%">名称</td>
+                <td width="15%">充值金额</td>
+                <td width="15%">充值前金额</td>
+                <td width="15%">充值后金额</td>
+                <td width="15%">充值时间</td>
+              </tr>
+              {% for log in log_list %}
+              <tr>
+                <td width="10%">{{log.id}}</td>
+                <td width="20%">{{log.charge_type}}</td>
+                <td width="15%">{{log.charge_money}}</td>
+                <td width="15%">{{log.money_before}}</td>
+                <td width="15%">{{log.money_after}}</td>
+                <td width="15%">{{log.create_time | date:"Y-m-d" }}</td>
+              </tr>
+              {% endfor %}
+              <tr>
+                <td colspan="6" class="appPages" id="appPages">
+	                <!--分页开始-->
+	                <a href="/person/chargelogs/page/1/" >首页</a>
+			        {% if log_list.has_previous %}
+			        	<a href="/person/chargelogs/page/{{ question_list.previous_page_number }}/" >上一页</a>
+			        {% else %}
+			        	<a href="/person/chargelogs/page/1/" class="pre">上一页</a>
+			        {% endif %}
+			        
+			        {% if log_list.has_next %}
+			        	<a href="/person/sort/chargelogs/page/{{ question_list.next_page_number }}/" >下一页</a>
+			        {% else %}
+			        	<a href="/person/chargelogs/page/{{log_list.count}}/" class="pre">下一页</a>
+			        {% endif %}
+			        <a href="/person/chargelogs/page/{{log_list.count}}/" >尾页</a>
+			        <!--分页结束--> 
+                </td>
+              </tr>
+             </table>
+        </div>
+		<div class="clearfix"></div>
+        <!--中间右边结束-->
+{% endblock %}

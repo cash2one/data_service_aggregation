@@ -1,0 +1,175 @@
+{% extends "base.html" %}
+<meta charset="utf-8">
+
+{% block extend_js_css %}
+<link href="/static_resource/css/register.css" type="text/css" rel="stylesheet">
+<script type="text/javascript" src="/static_resource/js/js.KinerCode.js"></script>
+{% endblock %}
+
+{% block content %}
+<div class="cb"></div>
+<!--注册开始-->
+ <div class="register_line"></div>
+ 
+    <div class="register_content">
+        <ul class="step_ul step1">
+            <li class="li1">1、填写资料</li>
+            <li class="li2">2、激活邮件</li>
+            <li class="li2">3、完成注册</li>
+        </ul>
+
+         <form name="registerForm" id="registerForm" action="/register/" method="post" style="padding:60px 40px 88px 40px;font-family:Microsoft Yahei">
+            {% csrf_token %}
+            <div class="div_form cb ">
+                <label>注册账号：</label>
+                <div class="input_div input_div1">
+                    <input id="username" name="username" placeholder="格式6-20位数字字母组合,除第一位,后面可以使用.或者_" maxlength="24" type="text">
+                    <span></span>
+                </div>
+            </div>
+            <div class="div_form cb">
+                <label>邮箱地址：</label>
+                <div class="input_div input_div2">
+                    <input id="email" name="email" placeholder="请填写正确的邮箱，以便接收账号激活邮件" maxlength="64" type="text">
+                    <span></span>
+                </div>
+            </div>
+            <div class="div_form cb">
+                <label>输入密码：</label>
+                <div class="input_div input_div3">
+                    <input id="password" name="password" placeholder="最少 8 个字符，区分大小写" maxlength="32" type="password">
+                    <span></span>
+                </div>
+            </div>
+            <div class="div_form cb">
+                <label>确认密码：</label>
+                <div class="input_div input_div4">
+                    <input id="password2" name="password2" placeholder="再次输入密码" maxlength="32" type="password">
+                    <span></span>
+                </div>
+            </div>
+            <div class="div_form cb">
+                <label>验证码：</label>
+                <div class="input_div  input_div5">
+                    <input id="inputCode" name="inputCode" placeholder="填写右侧验证码" maxlength="32" type="text">
+			        <span id="code" class="mycode" ></span>
+			        <span id="v_c_msg" ></span>
+                </div>
+		    </div>
+            <div class="div_form clear input_div6">
+                <label></label>
+                <div data="0" >
+                   <input type="checkbox" name="agreement" id="agreement" value="1"> 我已阅读并接受<a href="#" target="_blank">《数据服务用户服务协议》</a>
+                    <span></span>
+                </div>
+            </div>
+            <div class="div_form cb">
+                <label></label>
+                <div class="input_div">
+                    <input id="btn" class="btn" value="注册" type="button">
+                </div>
+            </div>
+
+        </form>
+
+        <div class="reg_login">
+            <div><a href="#" target="_blank"><img src="/static_resource/images/register1.jpg" border="0"></a></div>
+            <p>已有帐号？</p>
+            <a class="btn2" href="/login/">登录</a>
+        </div>
+    </div>
+<!--注册结束-->
+ <div class="register_line cb"></div>
+ {% endblock %}
+ 
+
+{% block extend_java_script %}
+<script type="text/javascript">
+
+$(function(){
+	 $("#username").blur(function(){ })
+	 $("#email").blur(function(){ })
+	 
+	 $(".btn").click(function(){
+			var userName= $("#username").val();
+			var password= $("#password").val();
+			var password2=$("#password2").val();
+			var userEmail=$("#email").val();
+			password=$.trim(password);
+			password2=$.trim(password2);
+			$(".input_div1 span,.input_div2 span,.input_div3 span,.input_div4 span,.input_div6 span").html("");
+            $(".btn").val('注册中...').attr('disabled','disabled');
+			 	if(!isRegisterUserName(userName)){
+                    $(".input_div1 span").html('<font color=red>*账户名格式不正确!</font>');
+                    $("#username").focus();
+                    $(".btn").val('注册').removeAttr('disabled');
+                    return false;
+                }else if(!isEmail(userEmail)){
+                    $(".input_div2 span").html('<font color=red>*邮箱格式不正确!</font>');
+                    $("#mail").focus();
+                    $(".btn").val('注册').removeAttr('disabled');
+                    return false;
+                }else if(password.length <8){
+                    $(".input_div3 span").html('<font color=red>*密码格式不正确!</font>');
+                    $("#password").focus();
+                    $(".btn").val('注册').removeAttr('disabled');
+                    return false;
+                }else if(password != password2){
+                    $(".input_div4 span").html('<font color=red>*两次输入的密码不一致!</font>');
+                    $("#password2").focus();
+                    $(".btn").val('注册').removeAttr('disabled');
+                    return false;
+                } else if(!(kinerCode.validate)()){
+                	$("#v_c_msg").html('<font color=red>*验证码不正确!</font>');
+                	$(".btn").val('注册').removeAttr('disabled');
+                	return false;
+                } else if($('#agreement').is(':checked')==false){
+                    //$(".agreenment-tips").html('请先同意用户条款!').fadeIn();
+                    $(".input_div6 span").html('<font color=red>*请先同意用户条款!</font>');
+                    $(".btn").val('注册').removeAttr('disabled');
+                    return false;
+                } 
+                else{
+                   $("#registerForm").submit();
+                }
+		 })
+	})
+	
+function isRegisterUserName(s){
+    var patrn=/^[a-zA-Z0-9]{1}([a-zA-Z0-9]|[._]){5,19}$/;
+    if (!patrn.exec(s)) return false
+    return true
+}
+
+function isEmail(email){
+       var myreg = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\-|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
+       if(!myreg.test(email)) return false;
+        return true;
+ }
+ 
+var inp = document.getElementById('inputCode');
+var code = document.getElementById('code');
+
+var kinerCode = new KinerCode({
+    len: 4,//需要产生的验证码长度
+    chars: [
+        1, 2, 3, 4, 5, 6, 7, 8, 9, 0,
+        'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
+        'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'
+    ],//经典模式:指定产生验证码的词典，若不给或数组长度为0则试用默认字典
+    question:false,//若给定词典为算数题，则此项必须选择true,程序将自动计算出结果进行校验【若选择此项，则可不配置len属性】,若选择经典模式，必须选择false
+    copy: false,//是否允许复制产生的验证码
+    bgColor:"",//背景颜色[与背景图任选其一设置]
+    bgImg:"/static_resource/images/bg_verify_code.png",//若选择背景图片，则背景颜色失效
+    randomBg : false,//若选true则采用随机背景颜色，此时设置的bgImg和bgColor将失效
+    inputArea: inp,//输入验证码的input对象绑定【 HTMLInputElement 】
+    codeArea: code,//验证码放置的区域【HTMLDivElement 】
+    click2refresh:true,//是否点击验证码刷新验证码
+    false2refresh:true,//在填错验证码后是否刷新验证码
+    validateEven : "",//触发验证的方法名，如click，blur等
+    validateFn : function(result,code){//验证回调函数
+    }
+});
+
+</script>
+{% endblock %}

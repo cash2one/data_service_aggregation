@@ -1,0 +1,83 @@
+@charset "utf-8";
+.top{ width:1200px; height:32px; background-color:#F5F5F5; margin:0 auto; line-height:32px; color:#877D73}
+.top .leftdv{ margin-left:40px;float:left}
+.top .tinqi{ float:left; margin-top:5px; margin-left:20px}
+.top .rightdv{ float:right; margin-right:40px}
+.top .rightdv .top_collect{cursor:pointer;background:url(../images/ico/collectionico.ico) no-repeat; padding-left:20px}
+.top .rightdv .top_share{ cursor:pointer; background:url(../images/ico/share.ico) no-repeat; padding-left:20px; margin:0 20px}
+.top .rightdv .top_phone{ cursor:pointer; background: url(../images/ico/Mobile.ico) no-repeat; padding-left:20px}
+.top .rightdv .sharedv{position:absolute; width:80px; background-color:#F5F5F5; margin-left:80px; border:1px solid #F5F5F5; display:none; margin-top:-8px}
+.top .rightdv .sharedv td{padding-left:20px; line-height:28px; border-bottom:1px solid #F5F5F5; cursor:pointer}
+.top .rightdv .sharedv td:hover{background-color:#FFF; color:#03C5FF}
+.top .rightdv .sharedv .shareqq{ background:url(../images/ico/qq.ico) no-repeat left center;}
+.top .rightdv .sharedv .shareqq:hover{background:url(../images/ico/qq1.ico) no-repeat left center; }
+.top .rightdv .sharedv .sharebdtie{ background: url(../images/ico/baidu_tieba.ico) no-repeat left center;}
+.top .rightdv .sharedv .sharebdtie:hover{background:url(../images/ico/baidu_tieba1.ico) no-repeat left center; }
+.top .rightdv .sharedv .shareweibo{ background: url(../images/ico/sina_weibo.ico) no-repeat left center;}
+.top .rightdv .sharedv .shareweibo:hover{ background: url(../images/ico/sina_weibo1.ico) no-repeat left center;}
+.top .rightdv .sharedv .shareweixin{ background: url(../images/ico/wechat.ico) no-repeat left center;}
+.top .rightdv .sharedv .shareweixin:hover{ background: url(../images/ico/wechat1.ico) no-repeat left center;}
+.top .rightdv .sharedv .sharerenren{ background: url(../images/ico/renren.jpg) no-repeat left center;}
+.top .rightdv .sharedv .sharerenren:hover{ background: url(../images/ico/renren1.jpg) no-repeat left center;}
+
+/**banner部分**/
+.banner{ width:1200px; height:123px;margin:0 auto; }
+.banner .searchdv{ width:450px; margin-left:40px; margin-top:30px}
+.banner .searchdv .inp{ width:350px; height:35px; border:2px solid #50B4D3; margin-bottom:10px; float:left; background:#FFF url(../images/ico/Search.ico) no-repeat left; padding-left:30px}
+/*.banner .searchdv a{ padding:0 10px}*/
+.banner .searchdv .searchimg{width:60px; height:39px; background-color:#F00; display:block; float:left; cursor:pointer}
+.banner .rightdv .logina{border-right:1px solid; display:block; width:60px; float:left; color:#B0A7A8; text-align:center; color:#03C5FF; font-size:16px; font-weight:bold}
+.banner .rightdv .logina:hover{color:#6CD1F0}
+.banner .rightdv .registera{display:block; width:60px; float:left; text-align:center; color:#FF9445;font-size:16px; font-weight:bold}
+.banner .rightdv .registera:hover{color:#F0AF7E}
+.banner .rightdv{ margin-right:200px; line-height:40px; margin-top:30px}
+
+/**服务介绍部分**/
+.menu{ width:1200px; height:32px; margin:0 auto;}
+.menu ul{ display:block; width:800px; height:32px;}
+.menu ul li{ float:left; line-height:16px; height:16px; padding:0 15px 10px 15px; display:inline; margin:8px 0 10px 10px;}
+.menu ul li:hover{border-bottom:2px solid #51B4D3;color:#51B4D3}
+.menu ul li:hover>a{ color:#51B4D3}
+.menu ul li a{ color:#9EA7B0; font-size:14px; font-weight:bold;}
+.menu .current{ border-bottom:2px solid #51B4D3;}
+.menu .current a{ color:#51B4D3}
+
+
+/**中间部分开始**/
+.centerdv1{width: 100%;background: #F2F2F2 none repeat scroll 0% 0%;padding-bottom: 30px;padding-top: 30px;font-size: 12px;min-height:120px; margin-top:5px}
+.centerdv1 .maindv{width: 960px;margin: 0px auto;}
+.centerdv1 .maindv .m1,.m2,.m3{float: left;width: 33%;line-height: 30px;}
+.centerdv1 .maindv .m1 .sp1{ font-size:24px; font-weight:bold; border-left:5px solid #F00; font-family:'STKaiti'}
+.centerdv1 .maindv .m2 .sp2{ font-size:24px; font-weight:bold; border-left:5px solid #06F; font-family:'STKaiti'}
+.centerdv1 .maindv .m3 .sp3{ font-size:24px; font-weight:bold; border-left:5px solid #090; font-family:'STKaiti'}
+
+.centerdv2{width: 960px;margin: 30px auto;font-family: "Microsoft YaHei";min-height:420px;}
+.centerdv2 .centerdv2_left{width: 500px;float: left;height: 100%;}
+.centerdv2 .centerdv2_left .dv1{font-size:24px; font-weight:bold; border-left:5px solid #F00; font-family:'STKaiti'; margin-bottom:10px}
+.centerdv2 .centerdv2_left .dv2{ width:500px; height:250px; background:url(../images/changshuditu.png); background-size:500px 250px}
+.centerdv2 .centerdv2_left .dv3{ width: 480px; line-height: 25px; margin-top: 10px; font-family:18px; font-weight:700}
+.centerdv2 .centerdv2_right{width: 400px;float: right;height: 100%;}
+.centerdv2 .centerdv2_right .dv1{ font-size:24px; font-weight:bold; border-left:5px solid #06F; font-family:'STKaiti';}
+#message{}
+#message input[type='text']{width: 270px;height: 35px;line-height: 35px;font-size: 14px;font-family: "Microsoft YaHei",Heiti SC,Helvetica,"黑体",Verdana,Arial;color: #999;border: 1px solid #CCC;text-indent: 1em; margin-top:10px}
+#message textarea{width: 380px; height: 150px;border: 1px solid #CCC; text-indent: 1em;font-size: 14px; font-family: "Microsoft YaHei",Heiti SC,Helvetica,"黑体",Verdana,Arial; color: #999; margin-top:10px;}
+#message .message-tips{font-size:12px; color:#C85305; display:none;}
+.centerdv2 .centerdv2_right .dv3{ margin-top:10px; text-align:center}
+.centerdv2 .centerdv2_right .dv3 input{ width:60px; height:35px; border:0; background:#CCC; cursor:pointer}
+.centerdv2 .centerdv2_right .dv3 input:hover{ background:#09F; color:#FFF}
+
+
+
+
+
+
+
+
+
+.footer{ width:1200px; height:auto; margin:40px auto; overflow:hidden;}
+.footer .footer_left{ margin-left:40px; float:left; color:#8A8A8C; width:300px}
+.footer .footer_left p{ line-height:20px}
+.footer .footer_left .kefu{ margin-top:30px}
+.footer .footer_center{ width:650px;float:left;color:#8A8A8C; margin-top:30px}
+.footer .footer_center ul li{ width:60px;float:left; line-height:20px}
+.footer .footer_center .foter_ul2 li{ width:100px;float:left; line-height:20px}

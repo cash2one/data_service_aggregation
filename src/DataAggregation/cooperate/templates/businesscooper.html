@@ -1,0 +1,107 @@
+{% extends "base_index.html" %}
+<meta charset="utf-8">
+
+{% block extend_js_css %}
+	<link href="/static_resource/css/businesscooper.css" type="text/css" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<!--中间开始-->
+<div class="centerdv1">
+	<div class="maindv">
+    	<div class="m1">
+        	<div><span class="sp1">商务合作</span></div>
+            <div>Email:xxx@xxx.com</div>
+            <div>客服qq:11111111</div>
+            <div>商务qq:11111111</div>
+        </div>
+        <div class="m2">
+        <div><span class="sp2">技术支持</span></div>
+            <div>Email:xxx@xxx.com</div>
+            <div>QQ交流群③：xxxxxxxx</div>
+            <div>QQ交流群④：xxxxxxxxx</div>
+        </div>
+        <div class="m3">
+        <div><span class="sp3">微博交流</span></div>
+            <div>新浪微博：xxxxx</div>
+            <div>腾讯微博：xxxxx</div>
+            <div>官方QQ③群：xxxxxxxxxxxxx</div>
+        </div>
+    </div>
+</div>
+<div class="cb"></div>
+
+<div class="centerdv2">
+	<div class="centerdv2_left">
+    	<div class="dv1">联系地址</div>
+        <div class="dv2"></div>
+        <div class="dv3">
+        	<ul>
+            	<li>地址：xxxxxxxxxxxxxxx</li>
+                <li>联系电话：xxxxxxxxxxxxx</li>
+            </ul>
+        </div>
+    </div>
+    <div class="centerdv2_right">
+    	<div class="dv1">留言反馈</div>
+        <form action="/busi_cooper/" method="post" id="message">
+        	{% csrf_token %}
+        	<input type="text" name="name" placeholder="NAME" id="name">*<span id="message-name-tips" class="message-tips">请输入昵称!</span><br>
+            <input type="text" name="email" placeholder="EMAIL" id="email">*<span id="message-email-tips" class="message-tips">请正确的邮箱!</span><br>
+             <input type="text" name="phone" placeholder="PHONE"><br>
+             <textarea class="gbooktxtarea" name="messagecontent" id="messagecontent" placeholder="Message:"></textarea> *
+             <span id="message-content-tips" class="message-tips">请输入留言内容!</span>
+       		<div class="dv3"><input type="submit" value="提交" id="messbtn"> <input type="reset" value="重置"></div>
+        </form>
+    </div>
+</div>
+
+<!--中间结束	-->
+<div class="cb" style="height:1px; background-color:#ddd;"></div>
+{% endblock %}
+
+{% block extend_java_script %}
+<script type="text/javascript">
+    $(document).ready(function(){
+        $("#messbtn").click(function(){
+            var messagename=$.trim($("#name").val());
+            var messageemail=$.trim($("#email").val());
+            var messagecontent=$.trim($("#messagecontent").val());
+            $("#messbtn").val('...').attr("disabled","disabled");
+            $("#message-name-tips").fadeOut();
+            $("#message-email-tips").fadeOut();
+            $("#message-content-tips").fadeOut();
+            if(messagename==''){
+                $("#message-name-tips").html('请输入您的姓名!').fadeIn();
+                $("#messbtn").val('提交').removeAttr("disabled");
+                return false;
+            }else if(messageemail==''){
+                $("#message-email-tips").html('请输入邮箱地址!').fadeIn();
+                $("#messbtn").val('提交').removeAttr("disabled");
+                return false;
+            }else if(!isEmail(messageemail)){
+                $("#message-email-tips").html('邮箱格式错误!').fadeIn();
+                $("#messbtn").val('提交').removeAttr("disabled");
+                return false;
+            }else if(messagecontent==''){
+                $("#message-content-tips").html('说说您的意见!').fadeIn();
+                $("#messbtn").val('提交').removeAttr("disabled");
+                return false;
+            }else{
+                $("#message").submit();
+            }
+        })
+    })
+
+function isEmail(email)
+{
+    //对电子邮件的验证
+    var myreg = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
+    if(!myreg.test(email))
+    {
+        return false;
+    }
+    return true;
+}
+</script>
+{% endblock %}

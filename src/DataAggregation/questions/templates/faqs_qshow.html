@@ -1,0 +1,91 @@
+{% extends "base_question.html" %}
+<meta charset="utf-8">
+
+{% block extend_js_css %}
+	<link href="/static_resource/css/faqs.css" type="text/css" rel="stylesheet">
+	<link href="/static_resource/css/kindeditor/default.css" rel="stylesheet" type="text/css" />
+	<script type="text/javascript" src="/static_resource/js/kindeditor-min.js"></script>
+	<script type="text/javascript" src="/static_resource/js/zh_CN.js"></script>
+	<script>
+			var editor;
+			KindEditor.ready(function(K) {
+				editor = K.create('textarea[name="content"]', {
+					readonlyMode : {% if islogined %} false {% else %} true {% endif %},
+					resizeType : 1,
+					allowPreviewEmoticons : false,
+					allowImageUpload : false,
+					items : [
+						'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline',
+						'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
+						'insertunorderedlist', '|', ]
+				});
+			});
+	</script>
+{% endblock %}
+
+{% block content %}
+	<div class="left">
+    	<div class="info">{{question.title}}</div>       		
+                <p class="pdv1">{{question.description | safe }} </p>			
+                <div class="base">
+                	  &nbsp;&nbsp;<span class="iviews">&nbsp;</span>
+                      <span>{{question.vistis}}次浏览</span>&nbsp;&nbsp;
+                      <span class="itime">&nbsp;</span>
+                      <span>{{question.quest_time}}</span>&nbsp;&nbsp;
+                       <span class="iauthor">&nbsp;</span>
+                      <span>{{question.user}}</span>
+                </div>
+         <!--回复开始-->
+         <div class="info">{{ anwsers.count }}个回答</div> 
+          <ul id="qu_repeat">
+	         {% for anwser in anwsers %}
+	               <li>
+	            	<p>{{ anwser.description | safe }}</p>
+	            	<div class="base">
+	                      &nbsp;&nbsp;<span class="itime">&nbsp;</span>
+	                      <span>{{ anwser.anwser_time }}</span>&nbsp;&nbsp;
+	                       <span class="iauthor">&nbsp;</span>
+	                      <span>{{ anwser.user }}</span>&nbsp;&nbsp;
+	                </div>
+	            </li>
+	         {% endfor %}
+         </ul>
+         <!--回复结束-->
+         <!--你的回答开始-->
+         <div class="info">你的回答</div> 
+         	<div class="tinfo">如果您可以回答这问题，请在下方输入您的解答哦！</div>
+         	 <form class="info_askdv2" action="/question/anwser/" method="post">
+       			{% csrf_token %}
+	            <div style=" height: 200px;">
+	            	<textarea id="content" name="content"style="width: 500px; height: 200px; visibility: hidden;"></textarea>
+	             </div>
+	             <input type="hidden" id="anwser_qs_id" name="anwser_qs_id" value="{{question.id}}" />
+	            	{% if not islogined %}
+	            		<div style="margin-top:-140px; margin-left:200px; font-size:16px">请<a href="/login/">登录</a>后回答</div>
+	            	{% else %}
+	            		<div class="subdv"><input class="inputs" type="submit" value="提交"> <input class="inputs" type="reset" value="重置"></div>
+	            	{% endif %}
+        	 </form>
+         <!--你的回答结束-->
+         
+    	<div class="info">相关问题</div>
+        <div id="relative_q"></div>    
+    </div>
+{% endblock %}
+
+{% block extend_java_script %}
+<script type="text/javascript">
+	$.ajax({ 
+		data : {},
+		type : 'GET',
+		async : true,
+		url : '/question/relative/id/{{question.id}}' ,
+		dataType: 'html',
+		success: function(data){
+			$("#relative_q").html(data);
+		} 
+	})
+</script>
+{% endblock %}
+
+

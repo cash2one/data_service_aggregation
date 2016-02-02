@@ -1,0 +1,91 @@
+﻿{% extends "person_base.html" %} 
+<meta charset="utf-8">
+
+{% block title %}数据服务平台-数据中心{% endblock %}
+
+{% block extend_js_css %}
+<script type="text/javascript" src="/static_resource/js/layer.min.js"></script>
+<link href="/static_resource/css/person_layer.css" type="text/css" rel="stylesheet" />
+{% endblock %}
+
+{% block content_right %}
+<!--中间右边开始-->
+<div class="u-main-right">
+	<div class="ur-title">
+		<a class="appTitlea">会员中心&nbsp;&gt;&gt;&nbsp;</a><a>IP白名单管理</a>
+	</div>
+	<div class="linestyle">
+		<form name="ip_form" id="ip_form" action="/person/ipbind/save/" method="post">
+			{% csrf_token %}
+			<table class="wotable" border="0" cellpadding="0" cellspacing="0" width="100%">
+					<tr class="title"> 
+						<td width="10%">选择数据</td>
+						<td width="15%">服务类别</td>
+						<td width="20%">服务名称</td>
+						<td width="55%">服务描述</td>
+					</tr>
+					{% for serve in serve_list %}
+					<tr>
+						<td width="10%"><input name="service_ids" value="{{serve.id}}" type="checkbox" /></td>
+						<td width="15%">{{serve.serve_type.type_name}}</td>
+						<td width="20%">{{serve.serve_name}}</td>
+						<td width="55%">{{serve.serve_desc}}</td>
+					</tr>
+					{% endfor %}
+			</table>
+			<table>
+				<tr>
+					<td colspan="2">&nbsp;<input value="全选" class="checkAll" type="button">&nbsp;
+					<input value="取消全选" class="uncheckAll" type="button"></td>
+				</tr>
+				<tr class="title" height="40">
+					<td colspan="2">&nbsp;IP白名单：<span style="color: red">（只有IP白名单内的服务器才能成功发起调用,一行填写一个IP，不限制请留空）</span></td>
+				</tr>
+					<tr>
+						<td width="450">&nbsp;<textarea name="ips" cols="55" rows="8" style="margin-top: 10px;"></textarea></td>
+						<td style="line-height: 25px" valign="top">
+							<div>格式说明：</div>
+							<div>一行写一个IP地址,如：</div>
+							<div>100.100.100.100</div>
+							<div>200.200.200.200</div>
+						</td>
+					</tr>
+					<tr class="title">
+						<td colspan="2">&nbsp;<input value="保存设置" class="btn"	id="subBtn" type="button"></td>
+					</tr>
+			</table>
+		</form>
+	</div>
+</div>
+<!--中间右边结束-->
+</div>
+<!--中间结束-->
+</body>
+{% endblock %}
+
+{% block extend_java_script %}
+<script type="text/javascript">
+	$(document).ready(function() {
+		$(".checkAll").click(function() {
+			$("input[name='service_ids']").each(function() {
+				this.checked = true;
+			});
+		})
+		$(".uncheckAll").click(function() {
+			$("input[name='service_ids']").each(function() {
+				this.checked = false;
+			});
+		})
+
+		$("#subBtn").click(function() {
+			$("#ip_form").ajaxSubmit(function(data) {
+				if (data.code == '0') {
+					layer.alert(data.msg, 8);
+				} else {
+					layer.alert(data.msg, 9);
+				}
+			})
+		})
+	})
+</script>
+{% endblock %}

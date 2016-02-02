@@ -1,0 +1,509 @@
+@charset "utf-8";
+/* CSS Document */
+/*头部开始
+/***************************************************************************************************/
+#myInfo_top{
+	width: 100%;
+	height: 38px;
+	margin: 0px auto;
+	background: transparent  url(../images/person/top_bg.gif) repeat-x scroll left top;
+	min-width: 1200px;
+	font-family: "Microsoft YaHei";
+	}
+#myInfo_top .home{
+	width: 65px;
+	height: 100%;
+	float: left;
+	background: transparent  url(../images/person/top_home.gif) no-repeat scroll 0% 0%;
+	margin-right: 20px;
+	}
+#myInfo_top .home a {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: transparent url(../images/person/top_home.gif) no-repeat scroll center -40px;
+	}
+#myInfo_top .title {
+    float: left;
+    font-family: "Microsoft YaHei";
+    line-height: 38px;
+    font-size: 16px;
+    color: #333;
+}
+#myInfo_top .my {
+    float: right;
+}
+#myInfo_top .my ul li {
+    float: left;
+    padding: 0px 20px;
+    line-height: 38px;
+}
+#myInfo_top .my ul li.h:hover{
+	background:#E6F3FD;
+	border-left:1px solid #B2D1DD;
+	border-right:1px solid #B2D1DD;
+	padding:0px 19px 0px 19px;
+}
+#myInfo_top .my ul li#showsub {
+    width: 100px;
+    padding: 0px;
+    text-align: center;
+    height: 100%;
+}
+#myInfo_top .my ul li#showsub:hover{
+	background:#E6F3FD;
+	border-left:1px solid #B2D1DD;
+	border-right:1px solid #B2D1DD;
+	width:98px;
+}
+#myInfo_top .my ul li .s2 {
+    display: none;
+    position: absolute;
+    background: #E6F3FD none repeat scroll 0% 0%;
+    border-left: 1px solid #B2D1DD;
+    border-right: 1px solid #B2D1DD;
+    border-bottom: 1px solid #B2D1DD;
+    width: 98px;
+    margin-left: -1px;
+}
+#myInfo_top .my ul li .s2 a{
+	display:block;
+	width:100%;
+	text-align:center;
+	margin:0;
+	line-height:25px;
+}
+#myInfo_top .my ul li .s2 a:hover{
+	background:#b2d1dd
+}
+
+#myInfo_top .my ul li a{
+	color:#333
+}
+/****头部下面一条开始****/
+.utab {
+    width: 100%;
+    margin: 0px auto 10px;
+    height: 50px;
+    background: #AEC0C4 none repeat scroll 0% 0%;
+    min-width: 1200px;
+}
+.utab {text-indent:0; }
+.utab ul {  padding:0; margin:0; height:100%;margin-left:10px;}
+.utab ul li {
+    float:left; height:35px; line-height:35px; margin-top:15px;
+    margin-right:20px; width:90px; text-align:center;
+    background:#37aad7;
+    color:#FFF;
+    font-size:14px;
+    font-family:"微软雅黑";
+    border-top-left-radius:3px;
+    border-top-right-radius:3px;
+}
+.utab ul li a{ color:#FFF;}
+.utab ul li.sel{
+    background:#FFF;
+    color:#333
+}
+.utab ul li.sel a{ color:#333;}
+.utab .rightdv{float:right; margin-top:-50px;}
+/***************************************************************************************************/
+/*中间块样式
+/***************************************************************************************************/
+.u-main{
+	border-top:1px solid #e1e1e1;
+	overflow:hidden;
+ 	width:100%;
+	background:#FFF;
+ 	margin:0 auto;
+	min-width:1200px;
+
+}
+.u-main .u-main-left{	/* width:22%; float:left; background:#f6f6f6; height:100%; */
+	width:220px;
+	position:absolute;
+	top:101px;
+	left:0;
+	background:#f6f6f6;
+}
+.u-main .u-main-right{	/* width:77%; float:right; */ margin-left:230px; }
+
+.u-main .u-main-left .u-bar{width:202px; float:right;margin-right:10px;margin-top:10px;margin-bottom:10px; _margin-right:5px;}
+.u-main .u-main-left .u-bar .ut{
+	height:30px;
+	width:100%;
+	/* background:url(../images/uc/left_nav_title.gif) center center no-repeat; */
+	background:#37aad7;
+	line-height:30px;
+	color:#FFF;
+	font-size:14px;
+	text-indent:10px;
+	border-radius:3px;
+	cursor:pointer;
+	overflow:hidden;
+	font-family:"Microsoft Yahei";
+	font-weight: lighter;
+}
+.u-main .u-main-left .u-bar .ut a{ color:#fff}
+.u-main .u-main-left .u-bar ul{
+	width:192px;
+	margin-left:8px;
+	margin-bottom:30px;
+	font-family:"Microsoft Yahei";
+	font-size:12px;
+	font-weight: lighter;
+}
+.u-main .u-main-left .u-bar ul li{
+	height:40px;
+	line-height:40px;
+	width:100%;
+	color:#333;
+	text-indent:10px;
+	border-bottom:1px solid #e7e7e7;
+}
+.u-main .u-main-left .u-bar ul li a{
+	text-decoration:none;
+	color:#333
+}
+.u-main .u-main-left .u-bar ul .lsel{
+	/* background:url(../images/uc/list_content.gif) left -103px  no-repeat; */
+	background: url(../images/person/left_nav_content.gif)left center no-repeat;
+	color:#FFF; font-weight:bold
+}
+.u-main .u-main-left .u-bar ul .lsel a{
+	color:#FFF
+}
+
+.u-main .u-main-right .ur-title{
+	width:100%;
+	height:45px;
+	line-height:45px;
+	font-size:14px;
+	font-family:"Microsoft YaHei";
+	font-weight: lighter;
+	border-bottom:1px solid #efefef;
+	margin-bottom:20px;
+	color:#333;
+}
+.u-main .u-main-right .ur-title a{
+	color:#333
+}
+.u-main .u-main-right .ur-title .appTitlea{
+	font-family:"Microsoft Yahei","黑体";
+	color:#333;
+	display:block;
+	float:left;
+}
+.u-main .u-main-right .ur-title .apptitmyinfo{
+	font-size:16px; font-weight:bold; color:#333
+	}
+.u-main .u-main-right .ur-title .applyBtn{
+	display:block;
+	float:right;
+	width:115px;
+	height:35px;
+	/* background:url(../images/uc/list_content.gif) left -32px no-repeat; */
+	background:#D75252;
+	color:#FFF;
+	font-weight:bold;
+	font-size:14px;
+	line-height:35px;
+	text-align:center;
+	margin-top:10px;
+	margin-right:10px;
+	cursor:pointer;
+	border-radius:3px;
+}
+.u-main .u-main-right .ur-title .applyBtn{ color:#FFF}
+.u-main .u-main-right .linestyle{	width:100%;line-height:40px;text-align:left;text-indent:2em;margin-bottom:2px;}
+.u-main .u-main-right .linestyle-tips{	width:100%;line-height:20px;text-align:left;text-indent:2em;margin-bottom:2px; color:#C85305; display:none;}
+
+.noticebox{ width:100%;line-height:35px;  margin-bottom:20px;}
+.noticebox a{ display:block;  margin-left:3%; color:#333; height:30px; line-height:30px; margin-top:5px; padding:0px 10px 0px 10px; border-radius:2px; background:#f6f6f6; font-family: "Microsoft Yahei"; font-weight: lighter;}
+
+
+.indexBox{ width: 100%; margin-top:30px; height:100%;}
+.indexBox ul li { width:30%; float:left; line-height:120px; height:120px;  margin-left:3%; text-align:center; margin-bottom:30px; border-radius:6px}
+
+
+
+.indexBox ul li a{ color:#FFF; text-decoration:none}
+.indexBox ul li .dvssty{width:90px; height:120px; float:left; line-height:190px; font-family:'黑体'; text-indent:8px;background:20px 20px no-repeat; font-size:12px;}
+.indexBox ul li .dvsstybg1{ background-image:url(../images/person/uc1.png)}
+.indexBox ul li .dvsstybg2{ background-image:url(../images/person/uc2.png)}
+.indexBox ul li .dvsstybg3{ background-image:url(../images/person/uc3.png)}
+.indexBox ul li .dvssty2{float:right; padding-right:30px; line-height:120px; font-family:Tahoma, Geneva, sans-serif; font-size:32px; text-align:center}
+.indexBox ul li.mydatabox{ background:#f24143; color: #FFF;}
+.indexBox ul li.accountbox{ background:#f2ae43; color:#FFF;}
+.indexBox ul li.buybox{ background:#28b779; color:#FFF;}
+
+
+
+
+.userbox{ line-height:30px; width:100%; background:#f6f6f6; font-size:14px; color:#666; padding-left:50px; border-radius:6px;font-family: "Microsoft Yahei"; font-weight: lighter; }
+
+.useraccountstatus{line-height:30px; width:100%; background:#f6f6f6; font-size:14px; color:#666; padding-left:50px; border-radius:6px;font-family: "Microsoft Yahei"; font-weight: lighter;}
+.useraccountstatus a{ color:#F60;}
+
+.userappstatus{line-height:30px; width:100%; background:#f6f6f6; font-size:14px; color:#666; padding-left:50px; border-radius:6px;font-family: "Microsoft Yahei"; font-weight: lighter;}
+.userappstatus a{ color:#F60;}
+/***************************************************************************************************/
+/*mydata
+/*****************************************************************************************************/
+
+
+.msgtips{
+    color:#F00;
+}
+.tr_title {
+    font-size: 14px;
+    font-family: "Microsoft YaHei";
+    background: #F2F2F2 none repeat scroll 0% 0%;
+}
+
+/*****************************************************************************************************/
+/*IP白名单设置
+/*****************************************************************************************************/
+ .wotabs{ height:60px;}
+.wotabs a{ display:block; padding:0; border-right:1px solid #CCC; float:left; line-height:25px; height:25px; text-indent:0; padding:0px 20px 0px 20px; color:#666}
+.wotabs a:hover{ color:#09C}
+
+
+.wotable { text-indent:0; color:#999; font-family:Microsoft Yahei}
+.wotable tr td  a.wot { color:#999;}
+.wotable tr td  a.wot:hover{ color:#09C}
+.wotable tr.title{ color:#333; background: url(../images/person/trebg.png); border-bottom:0; font-size:16px;}
+
+.wotable tr td  a{ color:#09C}
+
+.wotable tr td{ border-bottom:1px solid #EEE}
+.idbox li{ float: left; line-height: 30px; margin-top: 0; padding: 0; width: 20%}
+
+.checkAll , .uncheckAll {
+	background: #716d6e;
+	border:0;
+	color:#FFF;
+	height: 30px;
+	line-height: 30px;
+	padding: 0px 10px 0px 10px;
+}
+.btn {
+    background: #2AABE4 none repeat scroll 0% 0%;
+    line-height: 30px;
+    padding: 0px 30px;
+    border: 0px none;
+    color: #FFF;
+    border-radius: 3px;
+    cursor: pointer;
+    font-weight: lighter;
+}
+/*****************************************************************************************************/
+/*申请数据
+/******************************************************************************************************/
+.nowdata {
+    margin: 20px auto 20px 20px;
+    height: 30px;
+    background: #EAFBFE none repeat scroll 0% 0%;
+    border: 1px solid #6DC5DC;
+    line-height: 30px;
+    font-size: 14px;
+    color: #4D4D4D;
+    font-family: "Microsoft YaHei";
+}
+.datatype {
+    list-style: outside none none;
+    background: #FFF none repeat scroll 0% 0%;
+    margin-left: 20px;
+}
+.datatype li {
+    line-height: 25px;
+    height: 25px;
+    cursor: pointer;
+    width: 120px;
+    overflow: hidden;
+    background: #F9F9F9 none repeat scroll 0% 0%;
+    margin-bottom: 10px;
+    font-size: 12px;
+    border: 1px solid #EEE;
+    border-radius: 2px;
+    float: left;
+    margin-right: 10px;
+    text-indent: 0px;
+    text-align: center;
+    color: #666;
+}
+.datatype li:hover{background: #EAFBFE none repeat scroll 0% 0%;}
+.datatype_act{border: 1px solid #6DC5DC !important;background: #EAFBFE none repeat scroll 0% 0% !important;}
+.linesty_title{width:100%;margin-bottom:10px;background:#fafafa;}
+.editmyinput{ height:30px;  margin-right:5px;}
+.appdata_tip{background:#eafbfe; border:1px solid #6dc5dc; border-radius:4px;  margin:0 auto;padding-left:20px; line-height:30px; color:#F30; font-family:Microsoft Yahei; margin-top:20px;margin-left:20px;}
+#seldatatype, #seldata { color: #F30;}
+/******************************************************************************************************/
+/*用户个人信息
+/******************************************************************************************************/
+.bgcolor {
+    background: #F9F9F9 none repeat scroll 0% 0%;
+}
+.api_tb {
+    margin: 0px auto;
+}
+.api_tb td {
+    border-bottom: 1px solid #FFF;
+}
+.vcardspan {
+    color: #F89727;
+    font-weight: bold;
+}
+.api_tb a {
+    text-decoration: none;
+    color: #00B7EE;
+    font-family: "幼圆","微软雅黑","宋体";
+}
+.normal-tips {
+    line-height: 20px;
+    color: #C85305;
+    display: none;
+}
+input[type="text"], input[type="password"], select {
+    background-color: #FFF;
+    border: 1px solid #CCC;
+    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.075) inset;
+    transition: border 0.2s linear 0s, box-shadow 0.2s linear 0s;
+}
+.userinfo-input {
+    line-height: 30px;
+    height: 30px;
+    width: 300px;
+    color: #333;
+    font-weight: lighter;
+}
+input {
+    font-family: "Microsoft Yahei";
+}
+/******************************************************************************************************/
+/*实名认证
+/******************************************************************************************************/
+select{ font-family:Microsoft Yahei; height:30px; line-height:30px; color:#333}
+input[type=text]{ text-indent:5px;}
+.vcardspan{ color:#f89727; font-weight:bold;}
+.tbbgtitle { background:url(/themes/images/person/data/trebg.png); font-size:14px; font-weight:bold;}
+.tbbgtitle {
+    background: transparent  url(../images/person/trebg.png) repeat scroll 0% 0%;
+    font-size: 14px;
+    font-weight: bold;
+}
+select {
+    font-family: Microsoft Yahei;
+    height: 30px;
+    line-height: 30px;
+    color: #333;
+}
+/******************************************************************************************************/
+/*我的账户余额
+/******************************************************************************************************/
+.tab_tit{color: #666; font-size:14px;}
+#bank_tb1,#bank_tb2{ color:#666}
+#bank_tb tr td a {color: #069;}
+.coins {color: #F30;font-family: Tahoma,Geneva,sans-serif;}
+#price{ text-indent:5px; color:#666; width:150px; border-radius:4px;}
+.alibtn {
+    background-color: #F9A206;
+    line-height: 30px;
+    padding: 0px 30px;
+    border: 0px none;
+    color: #FFF;
+    border-radius: 3px;
+}
+/******************************************************************************************************/
+/*充值类服务消费平台
+/******************************************************************************************************/
+#telcz_tb1 tr td,#telcz_tb2 tr td {border-bottom: 1px solid #EEE;line-height: 30px; color:#666}
+select:focus {
+    border-color: rgba(82, 168, 236, 0.8);
+    outline: 0px none;
+    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.075) inset, 0px 0px 8px rgba(82, 168, 236, 0.6);
+}
+select {
+    background-color: #FFF;
+    border: 1px solid #CCC;
+    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.075) inset;
+    transition: border 0.2s linear 0s, box-shadow 0.2s linear 0s;
+	height:25px;
+	cursor:pointer;
+	min-width:150px;
+}
+#basic_example_1,#basic_example_2{background: url(../images/person/b_calendar.png) right center no-repeat #FFF; color:#333; border:1px solid #f2f2f2; cursor:pointer; width:150px; height:25px;}
+.telcz_tb_tit{font-size:14px; font-weight:bold; padding-left:5px}
+#exportForm input[type='text']{height:25px; margin:0 10px} 
+/******************************************************************************************************/
+/*分页
+/******************************************************************************************************/
+.appPages {
+    width: 100%;
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    text-indent: 0px;
+}
+.appPages a {
+    height: 25px;
+    line-height: 25px;
+    background: #37AAD7 none repeat scroll 0% 0%;
+    margin-left: 10px;
+    text-align: center;
+    padding: 0px 10px;
+    display: inline-block;
+    color: #FFF;
+}
+#appPages a{ color: #FFF;}
+/******************************************************************************************************/
+/*充值记录
+/******************************************************************************************************/
+#czlog_tit{ color:#666}
+#czlog_tit td{ padding-left:2px}
+/******************************************************************************************************/
+/*优惠券
+/******************************************************************************************************/
+.wod{ margin-left:20px; padding:0; margin:0; text-indent:0; margin-left:30px; margin-bottom:10px;}
+.lb{ display:block; line-height:30px; font-size:12px; color:#333; font-weight:300}
+.woinput{ height:30px; line-height:30px; width:520px; color:#333; font-size:12px; text-indent:5px; border-radius:2px}
+.woselect{height:30px; line-height:30px;  color:#666; font-size:12px; width:150px; text-align:center; font-family:Microsoft Yahei ; border-radius:2px}
+.wotextarea{ resize:none; width:730px; height:180px; border:1px solid #CCC; border-radius:2px; color:#666; font-family:Microsoft Yahei}
+.subBtn{ height:30px; line-height:30px; background:#09C; border-radius:4px; border:0; padding:0px 30px 0px 30px; color:#FFF; margin-left:150px; cursor:pointer}
+.rptitle{ height:40px; line-height:40px; font-size:14px; margin-bottom:20px; font-weight:bold; color:#666;background: url(../images/trebg.png);}
+/******************************************************************************************************/
+/*我的工单
+/******************************************************************************************************/
+
+#worksub_lb1,#worksub_lb2,#worksub_lb3,#worksub_lb4{ color:#666}
+/******************************************************************************************************/
+/*开票信息管理
+/******************************************************************************************************/
+.fileInputContainer{
+	height:128px;
+	background: url(../images/person/uploadbtn.png) no-repeat;
+	position:relative;
+	width: 128px;
+	
+}
+.fileInput{
+	height:128px;
+	overflow: hidden;
+	font-size: 300px;
+	position:absolute;
+	right:0;
+	top:0;
+	opacity: 0;
+	filter:alpha(opacity=0);
+	cursor:pointer;
+}
+/******************************************************************************************************/
+/*我的消息
+/******************************************************************************************************/
+.msgbox{ margin:0; padding:0;  color:#666!important; font-size:14px;  line-height:45px; background: url(../images/person/imsg_icon.png) 30px -455px no-repeat; text-indent:60px;}
+.msgbox span.time{ color:#CCC; font-family:Arial, Helvetica, sans-serif; margin-right:15px}
+.msgbox a{ cursor:pointer}
+.msgbox span.readtitle{ color:#999}
+.msgcen_titdv{text-indent: 0px; width: 100%; display: none;}
+.msgcen_contdv{padding:10px 10px 10px 10px; line-height:25px;line-height:25px}
+/******************************************************************************************************/

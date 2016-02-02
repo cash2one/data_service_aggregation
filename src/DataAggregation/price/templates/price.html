@@ -1,0 +1,52 @@
+{% extends "base_index.html" %}
+<meta charset="utf-8">
+
+{% block extend_js_css %}
+	<link href="/static_resource/css/price.css" type="text/css" rel="stylesheet">
+	<script type="text/javascript" src="/static_resource/js/uri_source.js"></script>
+	<script type="text/javascript" src="/static_resource/js/app.js"></script>
+{% endblock %}
+
+{% block content %}
+<!--中间开始-->
+<div ng-controller="pricelistController">
+<div class="center">
+	<div class="firstdv">数据服务资费标准</div>
+    <div class="seconddv"><div>提示</div><div>数据服务资费标准于2015年9月3日正式启用，按需购买</div></div>
+    <div class="thirddv">数据服务资费说明</div>
+    <p  class="thirddv_cont">为了用户更灵活选择所需数据，并集合了广大用户反馈的意见，聚合发布了新的资费标准。如有疑问您可以联系我们的客服为您解答。</p>
+	 <div class="thirddv">数据服务资费价格参照</div>
+    <table cellpadding="0"  cellspacing="0" class="forthdv">
+    	<tr>
+        	<td colspan="5" bgcolor="#FF6699" style="color:#FFF" bordercolor="#FF6699" width="70%">数据服务价目表</td>
+            <td colspan="3" bgcolor="#00CC00" bordercolor="#00CC00" style="color:#FFF" width="30%">使用SDK</td>
+        </tr>
+        <tr>
+        	<td rowspan="2"><strong>ID</strong></td>
+            <td rowspan="2"><strong>数据接口</strong></td>
+            <td rowspan="2"><strong>赠送次数</strong></td>
+            <td rowspan="2"><strong>单次价格</strong></td>
+            <td rowspan="2"><strong>套餐价格</strong></td>
+            <td colspan="2"><strong>额外赠送</strong></td>
+        </tr>
+        <tr>
+        	<td>每日赠送（次）</td>
+            <td>单客户端日免费请求上限（次）</td>
+        </tr>
+       	<tr ng-repeat ="serve in service_list">
+		    <td>{[{serve.id}]}</td>
+			<td>{[{serve.serve_name}]}</td>
+			<td>{[{serve.base_price.free_times_per}]}</td>
+			<td class="greencol" ng-if="serve.base_price.is_free==0">免费</td>
+			<td class="redcol" ng-if="serve.base_price.is_free!=0">{[{serve.base_price.cost}]}</td>
+			<td ng-if="serve.base_activepack[0] != null && serve.base_activepack[0] != 'undefined'">
+				（{[{serve.base_activepack[0].pack_name}]}）{[{serve.base_activepack[0].pack_counts}]}次/{[{serve.base_activepack[0].pack_price}]}元</td>
+			<td ng-if="serve.base_activepack[0] == null && serve.base_activepack[0] == 'undefined'"></td>
+			<td class="redcol">{[{serve.base_sdkpack.free_times_per}]}</td>
+			<td>{[{serve.base_sdkpack.single_client_free_times_per}]}</td>
+		</tr>
+    </table>
+</div>
+<!--中间结束-->
+</div>
+{% endblock %}

@@ -1,0 +1,27 @@
+﻿{% extends "person_base.html" %} 
+<meta charset="utf-8">
+
+{% block title %}数据服务平台-开具发票{% endblock %}
+
+{% block content_right %}
+        <!--中间右边开始-->
+		<div class="u-main-right">
+			<div class="ur-title">
+       			<a class="appTitlea">会员中心&nbsp;>>&nbsp;</a><a href="/invoice">我的发票</a>&nbsp;>>&nbsp;发票申请
+
+        	</div>
+        	<div class="linestyle" >
+            	<table width="100%" border="0" cellspacing="0" cellpadding="0" class="wotable">
+                  <tr class="title">
+                    <td colspan="3">&nbsp;开票抬头信息&nbsp;<a href="/person/invoice/title/">【如需修改，请点击这里&gt;】</a></td>
+                  </tr>
+                                    <tr>
+                  	<td colspan="3" align="center">您还未录入开票的基本信息，<a href="/person/invoice/title/">请点击这里填写</a></td>
+                  </tr>
+                                  </table>
+					        </div>
+         </div>
+		<div class="clearfix"></div>
+        <!--中间右边结束-->
+{% endblock %}
+

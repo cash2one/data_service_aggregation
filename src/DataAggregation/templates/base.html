@@ -1,0 +1,97 @@
+{% block doc_type %}
+<!doctype html>
+{% endblock %}
+
+<html ng-app="base_ng_app">
+<head>
+<meta charset="utf-8">
+<title>{% block title %}数据服务平台{% endblock %}</title>
+</head>
+{% block base_js_css %}
+	<link href="/static_resource/css/base.css" type="text/css" rel="stylesheet">
+	<script type="text/javascript" src="/static_resource/js/jquery.js"></script>
+	<script type="text/javascript" src="/static_resource/js/jquery.form.js"></script>
+	<script type="text/javascript" src="/static_resource/js/angular.js"></script>
+	<script type="text/javascript" src="/static_resource/js/angular.min.js"></script>
+	<script type="text/javascript" src="/static_resource/js/angular-resource.js"></script>
+	<script type="text/javascript" src="/static_resource/js/angular_compatible.js"></script>
+{% endblock %}
+{% block extend_js_css %}
+{% endblock %}
+<body>
+{% block header %}
+<!--头部开始-->
+    <div id="header">
+        <div class="header">
+            <h1 class="png_bg">| 注册帐号</h1>
+            <a href="/index/">返回主页</a>
+        </div>
+    </div>
+<!--头部结束-->
+{% endblock %}
+
+{% block main_begin %}{% endblock %}
+{% block content_left %}{% endblock %}
+{% block content %}{% endblock %}
+{% block content_right %}{% endblock %}
+{% block main_end %}{% endblock %}
+
+{% block footer %}
+<!--底部开始-->
+<div class="footer">
+	<div class="footer_left">
+    	<img src="/static_resource/images/footerlogo.png">
+        <p>神州数码信息系统有限公司</p>
+        <p>太湖国际社区-聆湖</p>
+        <p>无锡江南大学</p>
+        <img src="/static_resource/images/ico/footerkf.ico"class="kefu">
+        <span class="clor_blue1">客服电话</span>
+        <span class="f20">400-888-88</span>
+    </div>
+    <div class="footer_center">
+        <div style="border-bottom:1px solid #EEEEEE; height:40px">
+            <ul>
+                <li class="f20" style="display:block; width:120px">首页</li>
+                <li><a href="#">服务中心</a></li>
+                <li><a href="#">你问我答</a></li>
+                <li><a href="#">开发门户</a></li>
+                <li><a href="#">商务合作</a></li>
+                <li><a href="#">今日神码</a></li>
+                <li><a href="#">公告通知</a></li>
+                <li><a href="#">联系我们</a></li>
+                <li><a href="#">法律政策</a></li>
+            </ul>
+        </div>
+        <div class="mt30">
+        	<div class="f20 fl">友情链接</div>
+            <ul class="fl ml30 w500 foter_ul2">
+               <li><a href="#">中国神码</a></li>
+               <li><a href="#">神州数码</a></li>
+               <li><a href="#">神码公交</a></li>
+               <li><a href="#">神码政府</a></li>
+               <li><a href="#">神码公积金中心</a></li>
+               <li><a href="#">中国神码</a></li>
+               <li><a href="#">神州数码</a></li>
+               <li><a href="#">神码公交</a></li>
+               <li><a href="#">神码政府</a></li>
+               <li><a href="#">神码公积金中心</a></li>
+                <li><a href="#">中国神码</a></li>
+               <li><a href="#">神州数码</a></li>
+               <li><a href="#">神码公交</a></li>
+               <li><a href="#">神码政府</a></li>
+               <li><a href="#">神码公积金中心</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="fl">
+    	<img src="/static_resource/images/footer_erweim.png" style="width:200px; margin-top:30px">
+    </div>
+</div>
+<!--底部结束-->
+{% endblock %}
+</body>
+{% block base_java_script %}
+{% endblock %}
+{% block extend_java_script %}
+{% endblock %}
+</html>

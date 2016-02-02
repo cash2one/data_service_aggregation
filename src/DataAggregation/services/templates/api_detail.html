@@ -1,0 +1,103 @@
+{% extends "base_index.html" %}
+<meta charset="utf-8">
+
+{% block extend_js_css %}
+<link href="/static_resource/css/api_detail.css" type="text/css" rel="stylesheet">
+<link href="/static_resource/css/prettify.min.css" type="text/css" rel="stylesheet">
+<script type="text/javascript" src="/static_resource/js/prettify.min.js"></script>
+<script type="text/javascript" src="/static_resource/js/uri_source.js"></script>
+<script type="text/javascript" src="/static_resource/js/app.js"></script>
+{% endblock %}
+
+{% block content %}
+<div class="cb" style="height:1px; background-color:#ddd; margin-top:5px"></div>
+<!--中间开始 -->
+	<!--中间头部数据描述开始-->
+<div class="center_data">
+	<div ng-controller="apiDetailController">
+		<input type="hidden" id="serve_id" value="{{serve_id}}" />
+		<div class="center_data_img" style=" background:url({[{serve.serve_logo}]}) center center no-repeat;"></div>
+	    <div class="center_data_info">
+	    	<h2>{[{serve.serve_name}]}
+	    		<span ng-repeat="tag in serve.serve_tags" class="colsty{[{tag.tag_color}]}">{[{tag.tag_name}]}</span>
+	       	</h2>
+	        <ul>
+	        	<li><div>数据ID：</div><span style="color:#f87e5a"><strong>{[{serve.id}]}</strong></span></li>
+	            <li><div>接口状态：</div><span style="color:green;"><strong>{[{serve.status.status_name}]}</strong></span></li>
+	            <li><div>数据类别：</div><span>{[{serve.serve_type.category.category_name}]}-{[{serve.serve_type.type_name}]}</span></li>
+	            <li><div>连接APP数：</div><span>{[{serve.base_statistics.app_counts|default:"0"}]}</span></li>
+	            <li><div>描述：</div><span>{[{serve.serve_desc}]}</span></li>
+	        </ul>
+	    </div>
+	    <div class="center_data_btndv">
+	    	<a href="#">申请数据</a>
+	    </div>
+    </div>
+</div>
+<!--中间头部数据描述结束-->
+<div class="cb"></div>
+<!--中间切换块开始-->
+<ul class="center_tab">
+	<li class="over" id="api">API</li>
+    <li id="error">错误码参照</li>
+    <li id="pricelimit">价格与请求限制</li>
+    <li id="democode">示例代码</li>
+    <li id="upgradelog">更新记录</li>
+    <li id="others">其他相关</li>
+</ul>
+<!--中间切换块结束-->
+<!--中间切换内容开始-->
+<div id="center_tabdv" class="center_tabdv"></div>
+<!--中间切换内容结束-->
+<div style="height:30px"></div>
+<!--中间结束	-->
+<div class="cb" style="height:1px; background-color:#ddd;"></div>
+{% endblock %}
+
+{% block extend_java_script %}
+<script type="text/javascript">
+$(function(){
+	$.ajax({
+		data : {},
+		type : 'GET',
+		async : true,
+		url : '/API/detail/api/id/{{serve_id}}/' ,
+		dataType: 'html',
+		success: function(html){
+			//通过$compile动态编译html
+			var $scope = angular.element('#center_tabdv').scope();
+			var $compiler = angular.element('#center_tabdv').injector().get('$compile');
+			var bindhtml = angular.element(html);
+			$("#center_tabdv").html(bindhtml); //先嵌入以便操作dom元素
+			$compiler(bindhtml)($scope);
+		}
+	});
+});
+
+$(function(){
+	$("ul.center_tab > li").click(function(){
+		var index = $("ul.center_tab > li").index(this);
+		$(this).addClass("over").siblings().removeClass("over");
+		$.ajax({
+			data : {},
+			type : 'GET',
+			async : true,
+			url : '/API/detail/'+$(this).attr('id')+'/id/{{serve_id}}/' ,
+			dataType: 'html',
+			success: function(html){
+				//通过$compile动态编译html
+				var $scope = angular.element('#center_tabdv').scope();
+				var $compiler = angular.element('#center_tabdv').injector().get('$compile');
+				var bindhtml = angular.element(html);
+				$("#center_tabdv").html(bindhtml); //先嵌入以便操作dom元素
+				$compiler(bindhtml)($scope);
+			}
+		});
+	})
+});
+
+var prettyCode = function(){ prettyPrint(); }
+</script>
+{% endblock %}
+
+

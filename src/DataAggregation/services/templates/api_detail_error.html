@@ -1,0 +1,39 @@
+<meta charset="utf-8">
+<div ng-controller="apiDetailErrorController">
+<ul class="ul2">
+	<input type="hidden" id="serve_id" value="{{serve_id}}" />
+	<div ng-repeat="error_wrap in serve_errors">
+		<div class="line">{[{error_wrap.wrap_name}]}码参照表：</div>
+		<table style="width: 98%; margin-left: 2%">
+			<tr>
+				<th width="40px"></th>
+				<th width="200px">错误码</th>
+				<th width="600px">说明</th>
+			</tr>
+			<tr ng-repeat="serve_error in error_wrap.wrap_errors">
+				<td></td>
+				<td>{[{serve_error.error_code}]}</td>
+				<td>{[{serve_error.error_name}]}</td>
+			</tr>
+		</table>
+	</div>
+</div>
+
+	<div class="line">错误码格式说明（示例：aaabbbccc）：</div>
+	<table style="width: 98%; margin-left: 2%">
+		<tr>
+			<th width="40px"></th>
+			<th width="200px">aaa</th>
+			<th width="200px">bbb</th>
+			<th width="400px">ccc</th>
+		</tr>
+		<tbody>
+			<tr>
+				<td></td>
+				<td>错误类型</td>
+				<td>错误模块</td>
+				<td>具体错误代码</td>
+			</tr>
+		</tbody>
+	</table>
+</ul>

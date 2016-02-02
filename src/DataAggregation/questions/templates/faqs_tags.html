@@ -1,0 +1,17 @@
+{% extends "base_question.html" %}
+<meta charset="utf-8">
+
+{% block extend_js_css %}
+	<link href="/static_resource/css/faqs.css" type="text/css" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<div class="left">
+    <div class="info">热门标签合集</div>
+    <ul class="tags">
+	    {% for question_tag in question_tags %}
+	        <li><a href="/question/tag/id/{{question_tag.id}}/">{{question_tag.tag_name}}</a></li>
+	    {% endfor %}
+    </ul>
+</div>
+{% endblock %}

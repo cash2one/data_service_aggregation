@@ -1,0 +1,94 @@
+﻿{% extends "person_base.html" %} 
+<meta charset="utf-8">
+
+{% block title %}数据服务平台-财务中心{% endblock %}
+
+{% block content_right %}
+        <!--中间右边开始-->
+		<div class="u-main-right">
+			<div class="ur-title">
+       			<a class="appTitlea">会员中心>>我的DM币</a>
+            	
+        	</div>
+		<div class="clearfix"></div>
+
+        <div class="linestyle bgcolor" >
+        &nbsp;免&nbsp;费&nbsp;D&nbsp;M&nbsp;币：<span class="coins">{{dm_account.free_coins}}</span>
+        </div>
+        <div class="linestyle" >
+        &nbsp;付&nbsp;费&nbsp;D&nbsp;M&nbsp;币：<span class="coins">{{dm_account.pay_coins}}</span>&nbsp;&nbsp;
+        </div>
+        <div class="linestyle bgcolor" >
+        &nbsp;开&nbsp;发&nbsp;者&nbsp;奖&nbsp;励：<span class="coins">{{dm_account.coins}}</span>&nbsp;DM币/月
+        </div>
+        <div class="linestyle" style="color:#666">&nbsp;*&nbsp;DM币可以用于兑换奖品、数据等级、数据查询服务消耗等，
+        您可以通过帮助DM纠正数据、提供数据等获得DM币奖励。
+        </div>
+		<div class="clearfix"></div>
+        
+        <div class="ur-title">
+       			<a class="appTitlea">会员中心>>DM币充值&nbsp;（兑换比例：<span class="coins">1</span>&nbsp;元&nbsp;=&nbsp;<span class="coins">10</span>&nbsp;DM币）</a>      	
+        </div>
+        
+        <form name="payForm" id="payForm" action="/person/coins/charge/" method="post" >
+        	{% csrf_token %}
+	        <div class="linestyle" >
+	        &nbsp;账&nbsp;户&nbsp;余&nbsp;额&nbsp;：<span class="coins">{{user_account.money}}</span>&nbsp;&nbsp;<a href="/person/bank/" style="color:#666">[账户充值]</a>
+	        </div>
+	        <input type ="hidden" id="money" name="money" value="{{user_account.money}}" />
+	        <div class="linestyle" >
+	        &nbsp;兑&nbsp;换&nbsp;金&nbsp;额&nbsp;：
+	        <input type="text" id="charge_price" name="charge_price" size="8" value="10"  maxlength="5" 
+	        onkeyup="this.value=this.value.replace(/\D/g,'');calculate_coins(this.value);"  
+	        onafterpaste="this.value=this.value.replace(/\D/g,'');calculate_coins(this.value);"
+	        onblur="this.value=this.value.replace(/\D/g,'');calculate_coins(this.value);"
+	        onchange="this.value=this.value.replace(/\D/g,'');calculate_coins(this.value);" >&nbsp;元&nbsp;
+	        <span id="exresult" style="color:#F00"></span>
+	        </div>
+	        <div class="linestyle" >
+	        &nbsp;获&nbsp;得&nbsp;D&nbsp;M&nbsp;币&nbsp;：<span class="coins" id="amount">{%  widthratio 10 1 coins_price_per_rmb %}</span>&nbsp;
+	        </div>
+	        <div class="linestyle" >  <input type="button" value="兑换DM币" class="alibtn" id="payBtn"></div>
+        </form>
+        <!--中间右边结束-->
+{% endblock %}
+
+{% block extend_java_script %}
+<script type="text/javascript">
+
+	function calculate_coins(money){
+		var coins_price = '{{coins_price_per_rmb}}';
+		var coins = money *　coins_price;
+		$("#amount").text(coins);
+	}
+
+	$(document).ready(function(){
+		$("#payBtn").click(function(){
+			$("#payBtn").val("执行中...").attr("disbaled","disabled");
+			$("#exresult").html("");
+			var money = $("#money").val();
+				money = parseInt(money);
+			
+			var exmoney = $("#charge_price").val();
+				exmoney = parseInt(exmoney);
+			
+			if(exmoney > money){
+				$("#exresult").html("*余额不足，不能完成兑换");
+				$("#payBtn").val("兑换DM币").removeAttr("disbaled");
+				return false;
+			}else{
+				$("#payForm").ajaxSubmit(function(data){
+					if( data.code =='0'){
+						alert(data.msg);
+						window.location.reload();
+					}else{
+						$("#exresult").html(data.msg);
+					}
+					$("#payBtn").val("兑换DM币").removeAttr("disbaled");
+				})
+			}
+		})
+			
+	})
+</script>
+{% endblock %}

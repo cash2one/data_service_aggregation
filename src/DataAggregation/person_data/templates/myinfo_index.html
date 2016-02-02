@@ -1,0 +1,97 @@
+﻿{% extends "person_base.html" %} 
+<meta charset="utf-8">
+
+{% block title %}数据服务平台-数据中心{% endblock %}
+
+{% block content_right %}
+<!--中间右边开始-->
+<div class="u-main-right">
+	<div class="ur-title">
+		<a class="appTitlea apptitmyinfo">数据动态</a>
+	</div>
+	<div class="noticebox">
+		<a class="s0" href="#" title="" target="_blank">1、数据开发者沙龙深圳站回顾：数据的存储、流通与处理</a>
+		<a class="s0" href="#" title="" target="_blank">2、数据中秋擂，上传代码赢话费!!!!!!</a>
+		<a class="s0" href="#" title="" target="_blank">3、数据携手链家网为大家送床伴了！</a>
+		<div class="cb"></div>
+	</div>
+	<div class="clearfix"></div>
+
+	<div class="ur-title">
+		<a class="appTitlea apptitmyinfo">开发者中心</a>
+	</div>
+	<div class="indexBox">
+		<ul>
+			<li class="mydatabox">
+				<a href="/person/mydata/">
+					<div class="dvssty dvsstybg1">我的数据</div>
+					<div class="dvssty2">{{userdatas.count}}</div>
+					<div style="clear: both"></div>
+				</a>
+			</li>
+
+			<li class="accountbox">
+				<a href="/person/bank/">
+					<div class="dvssty dvsstybg2">账户余额</div>
+					<div class="dvssty2">{{user_account.money}}</div>
+					<div style="clear: both"></div>
+				</a>
+			</li>
+	
+			<li class="buybox">
+				<a href="/person/costlogs/">
+					<div class="dvssty dvsstybg3">消费记录</div>
+					<div class="dvssty2">{{usercosts.count}}</div>
+					<div class="cb"></div>
+				</a>
+			</li>
+		</ul>
+		<div class="clearfix"></div>
+	</div>
+
+	<div class="clearfix"></div>
+
+	<div class="ur-title">
+		<a class="appTitlea apptitmyinfo">账号信息</a>
+	</div>
+
+	<div class="userbox">
+		<div>用户账号：{{user.username}}</div>
+		<div>邮箱地址：{{user.email}}</div>
+		<div>手机号码：{{user_info.mobile_no}}</div>
+		<div>账户类型：{{user_info.get_user_type_display}}</div>
+		<div>认证状态：{{user_info.status}}</div>
+		<div>OpenID：{{user_secret.open_id}}</div>
+	</div>
+
+	<div class="ur-title">
+		<a class="appTitlea apptitmyinfo">账户状态</a>
+	</div>
+	<div class="useraccountstatus">
+		<div>
+			账户余额：<a href="#">￥{{user_account.money}}</a>
+		</div>
+		<div>
+			DM币数量：<a href="#">{{dm_account.coins}}</a>
+		</div>
+		<div>
+			赠送次数包(次)：<a href="#">0</a>
+		</div>
+	</div>
+	<div class="clearfix"></div>
+
+	<div class="ur-title">
+		<a class="appTitlea apptitmyinfo">应用状态</a>
+	</div>
+	<div class="userappstatus">
+		<div>
+			已审核：<a>{{userdatas.approved_counts}}</a>&nbsp;个
+		</div>
+		<div>
+			审核中：<a>{{userdatas.approving_counts}}</a>&nbsp;个&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;未审核：<a>{{userdatas.wait_approve_counts}}</a>&nbsp;个
+		</div>
+	</div>
+	<div class="clearfix"></div>
+</div>
+<!--中间右边结束-->
+{% endblock %}

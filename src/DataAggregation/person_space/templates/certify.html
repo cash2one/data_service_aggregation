@@ -1,0 +1,422 @@
+﻿{% extends "person_base.html" %} 
+<meta charset="utf-8">
+
+{% block title %}数据服务平台-个人中心{% endblock %}
+
+{% block extend_js_css %}
+<script type="text/javascript" src="/static_resource/js/layer.min.js"></script>
+<link href="/static_resource/css/person_layer.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="/static_resource/js/uri_source.js"></script>
+<script type="text/javascript" src="/static_resource/js/app_person.js"></script>
+{% endblock %}
+
+{% block content_right %}
+        <!--中间右边开始-->
+	  <div class="u-main-right">
+            <div class="ur-title">
+                <a class="appTitlea">会员中心&gt;&gt;实名认证&nbsp;</a>
+            </div>
+        <div class="linestyle">
+    
+     <form name="infoForm" id="infoForm" enctype="multipart/form-data" action="/person/certify/person_apply/" method="post">
+     		{% csrf_token %}
+            <table class="api_tb" border="0" cellpadding="0" cellspacing="0" width="98%">
+                            <tbody><tr>
+                <td width="150">&nbsp;认证类型：</td>
+                <td>&nbsp;
+                 <input class="type" name="type" value="1" type="radio" {% if person_certi and person_certi != 2 %} checked="checked" {% endif %}>个人认证
+                &nbsp;<input class="type" name="type" value="2" type="radio" {% if org_certi and person_certi != 2 %} checked="checked" {% endif %}>企业认证
+                </td>
+              </tr>
+             </tbody></table>
+
+             <table class="api_tb vertify" id="vertifyTable1" style="display:none" border="0" cellpadding="0" cellspacing="0" width="98%">
+              <tbody><tr>
+                  <td colspan="2" class="tbbgtitle">基本信息填写</td>
+              </tr>
+              <tr>
+                <td width="150">&nbsp;姓名：</td>
+                <td>&nbsp;<input id="realname" name="realname" value="{{person_certi.realname}}"
+                 {% if person_certi and person_certi.certi_status != 2 %} disabled {% endif %} class="userinfo-input" type="text">&nbsp;*
+                </td>
+              </tr>
+              <tr>
+                <td>&nbsp;身份证号码：</td>
+                <td>&nbsp;<input id="id_card_no" name="id_card_no" value="{{person_certi.id_card_no}}"
+                 {% if person_certi and person_certi.certi_status != 2 %} disabled {% endif %} class="userinfo-input" type="text">&nbsp;*
+                </td>
+              </tr>
+              <tr>
+                <td>&nbsp;身份证正面照片：</td>
+                {% if not person_certi or person_certi.certi_status == 2 %}
+                <td>&nbsp;<input name="forward_side_photo" id="forward_side_photo" value="" type="file">
+                <span style="color:#666">&nbsp;*&nbsp;图片大小请不要超过2M，支持png、jpg文件</span></td>
+                {% endif %}
+                 {% if person_certi %}
+              	<td><img src="/static_resource/{{person_certi.forward_side_photo}}" width="400" height="200" border="0"/></td>
+              	{% endif %}
+              </tr>
+              <tr>
+                <td>&nbsp;身份证反面照片：</td>
+                {% if not person_certi or person_certi.certi_status == 2 %}
+                <td>&nbsp;<input name="back_side_photo" id="back_side_photo" value="" type="file">
+                <span style="color:#666">&nbsp;*&nbsp;图片大小请不要超过2M，支持png、jpg文件</span></td>
+                 {% endif %}
+                 {% if person_certi %}
+                <td><img src="/static_resource/{{person_certi.back_side_photo}}" width="400" height="200" border="0"/></td>
+                {% endif %}
+              </tr>
+              <tr>
+                <td height="60">&nbsp;</td>
+                 {% if person_certi and person_certi != 2 %}  
+                 <td>&nbsp;<input value="认证通过" class="btn" id="infoBtn" type="button" disabled ></td>
+                 {% else %}
+                 <td>&nbsp;<input value="提交认证" class="btn" id="infoBtn" type="button"></td>
+                 {% endif %}
+              </tr>
+              <tr>
+                  <td colspan="2" height="20"></td>
+              </tr>
+              {% if not person_certi %}
+              <tr>
+                  <td>&nbsp;示例图片：</td>
+                <td><img src="/static_resource/images/person/idcarddemo.jpg" boder="0"></td>
+              </tr>
+              {% endif %}
+              </tbody></table>
+       </form>
+             
+       <form name="infoForm2" id="infoForm2" enctype="multipart/form-data" action="/person/certify/org_apply/" method="post">
+       		{% csrf_token %}
+              <table class="api_tb vertify" id="vertifyTable2" style="display:none" border="0" cellpadding="0" cellspacing="0" width="98%">
+              <tbody><tr>
+                  <td colspan="2" class="tbbgtitle">基本信息填写</td>
+              </tr>
+              <tr>
+                <td width="150">&nbsp;公司名称：</td>
+                <td>&nbsp;<input id="company_name" name="company_name" value="{{org_certi.company_name}}" 
+                {% if org_certi and org_certi.certi_status != 2 %} disabled {% endif %} class="userinfo-input" type="text">&nbsp;*
+                </td>
+              </tr>
+              <tr>
+                <td width="150">&nbsp;公司地址：</td>
+                <td ng-controller="locationController" style="display:inline-block">
+		   			<select class="select" ng-model="provinceModel" name="province" id="province" 
+		   				{% if org_certi and org_certi.certi_status != 2 %} disabled {% endif %}
+		                ng-change="provinceChange(provinceModel)" ng-options="province.pk as province.fields.ProvinceName for province in provinces">
+		                <option value="">省份</option>
+		             </select>
+		             <select class="select" ng-model="cityModel" name="city" id="city" 
+		             	{% if org_certi and org_certi.certi_status != 2 %} disabled {% endif %}
+		               	ng-change="cityChange(cityModel)" ng-options="city.pk as city.fields.CityName for city in citys" >
+		                <option selected="selected" value="">地级市</option>
+		             </select>
+		             <select class="select" ng-model="districtModel" name="district" id="district" 
+		             	{% if org_certi and org_certi.certi_status != 2 %} disabled {% endif %}
+		               	ng-change="districtChange(districtModel)" ng-options="district.pk as district.fields.DistrictName for district in districts" >
+		                <option selected="selected" value="">县级市、县、区</option>
+		             </select>&nbsp;*
+                </td>
+              </tr>
+              <tr>
+                <td width="150">&nbsp;详细地址：</td>
+                <td>&nbsp;<input id="address" name="address" value="{{org_certi.address}}" 
+                {% if org_certi and org_certi.certi_status != 2 %} disabled {% endif %} class="userinfo-input" type="text">&nbsp;*
+                </td>
+              </tr>
+              <tr>
+                  <td colspan="2">&nbsp;</td>
+              </tr>
+               <tr>
+                  <td colspan="2" class="tbbgtitle">营业执照信息</td>
+              </tr>
+              <tr>
+                <td>&nbsp;营业执照编号：</td>
+                <td>&nbsp;<input id="busi_lisence_no" name="busi_lisence_no" value="{{org_certi.address}}" 
+                	{% if org_certi and org_certi.certi_status != 2 %} disabled {% endif %} class="userinfo-input" type="text">&nbsp;*
+                </td>
+              </tr>
+
+              <tr>
+                <td>&nbsp;营业执照副本：</td>
+                {% if not org_certi or org_certi.certi_status == 2 %}
+                <td>&nbsp;<input id="busi_lisence_photo" name="busi_lisence_photo" class="userinfo-input" type="file">
+                <span style="color:#666">&nbsp;*&nbsp;图片大小请不要超过2M，支持png、jpg文件</span>
+                </td>
+                {% endif %}
+                {% if org_certi.busi_lisence_photo %}
+                <td>
+                <img src="/static_resource/{{org_certi.busi_lisence_photo}}" width="400" height="200" border="0"/>
+                </td>
+                {% endif %}
+              </tr>
+               
+              <tr>
+                  <td colspan="2">&nbsp;</td>
+              </tr>
+               <tr>
+                  <td colspan="2" class="tbbgtitle">税务登记证信息&nbsp;<strong><font color="#FF0000"></font></strong></td>
+              </tr>
+              <tr>
+                <td>&nbsp;税务登记证编号：</td>
+                <td>&nbsp;<input id="tax_reg_no" name="tax_reg_no" value="{{org_certi.tax_reg_no}}" 
+                	{% if org_certi and org_certi.certi_status != 2 %} disabled {% endif %} class="userinfo-input" type="text">&nbsp;*
+                </td>
+              </tr>
+
+              <tr>
+                <td>&nbsp;税务登记证副本：</td>
+                {% if not org_certi or org_certi.certi_status == 2 %}
+                <td>&nbsp;<input id="tax_reg_photo" name="tax_reg_photo" class="userinfo-input" type="file">
+                <span style="color:#666">&nbsp;*&nbsp;图片大小请不要超过2M，支持png、jpg文件</span>
+                </td>
+                 {% endif %}
+                 {% if org_certi.tax_reg_photo %}
+                <td><img src="/static_resource/{{org_certi.tax_reg_photo}}" width="400" height="200" border="0"/></td>
+                {% endif %}
+              </tr>
+              <tr>
+                  <td colspan="2">&nbsp;</td>
+              </tr>
+               <tr>
+                  <td colspan="2" class="tbbgtitle">组织机构证书信息&nbsp;<strong><font color="#FF0000"></font></strong></td>
+              </tr>
+              <tr>
+                <td>&nbsp;组织机构代码：</td>
+                <td>&nbsp;<input id="org_no" name="org_no" value="{{org_certi.org_no}}"
+                {% if org_certi and org_certi.certi_status != 2 %} disabled {% endif %} class="userinfo-input" type="text">&nbsp;*
+                </td>
+              </tr>
+
+              <tr>
+                <td>&nbsp;组织机构代码副本：</td>
+                {% if not org_certi or org_certi.certi_status == 2 %}
+                <td>&nbsp;<input id="org_photo" name="org_photo" class="userinfo-input" type="file">
+                <span style="color:#666">&nbsp;*&nbsp;图片大小请不要超过2M，支持png、jpg文件</span>
+                </td>
+                {% endif %}
+                {% if org_certi.org_photo %}
+                <td><img src="/static_resource/{{org_certi.org_photo}}" width="400" height="200" border="0"/></td>
+                {% endif %}
+              </tr>
+               <tr>
+                  <td colspan="2">&nbsp;</td>
+              </tr>
+              <tr>
+                 <td colspan="2" class="tbbgtitle">联系人信息</td>
+              </tr>
+              <tr>
+                <td>&nbsp;联系人姓名：</td>
+                <td>&nbsp;<input id="contact_name" name="contact_name" value="{{org_certi.contact_name}}"
+                {% if org_certi and org_certi.certi_status != 2 %} disabled {% endif %} class="userinfo-input" type="text">&nbsp;*
+                </td>
+              </tr>
+
+              <tr>
+                <td>&nbsp;联系人电话：</td>
+                <td>&nbsp;<input id="contact_phone" name="contact_phone" value="{{org_certi.contact_phone}}"
+                {% if org_certi and org_certi.certi_status != 2 %} disabled {% endif %} class="userinfo-input" type="text">&nbsp;*
+                </td>
+              </tr>
+
+              <tr>
+                <td height="60">&nbsp;</td>
+                 {% if org_certi and org_certi != 2 %}  
+                 <td>&nbsp;<input value="认证通过" class="btn" id="infoBtn2" type="button" disabled ></td>
+                 {% else %}
+                 <td>&nbsp;<input value="提交认证" class="btn" id="infoBtn2" type="button"></td>
+                 {% endif %}
+              </tr>
+              <tr>
+                  <td colspan="2" height="60"></td>
+              </tr>
+            </tbody></table>
+         </form>
+       </div>
+        	<div class="clearfix"></div>
+        </div>
+        <!--中间右边结束-->
+{% endblock %}
+
+{% block extend_java_script %}
+<script type="text/javascript">
+    $(document).ready(function(){
+    	
+    	//初始化栏目显示
+    	{% if not person_certi and not org_certi %}
+    		$("#vertifyTable1").css({display:"inline"});
+    		$("[name='type']").eq(0).attr("checked","true")
+    		$("#vertifyTable2").css({display:"none"});
+    	{% else %}
+    		$("[name='type']").attr("disabled","true")
+	    	{% if person_certi %}
+				$("#vertifyTable1").css({display:"inline"});
+				$("#vertifyTable2").css({display:"none"});
+			{% else %}
+				{% if org_certi %}
+					$("#vertifyTable2").css({display:"inline"});
+					$("#vertifyTable1").css({display:"none"});
+				{% endif %}
+			{% endif %}
+    	{% endif %}
+    	
+    	
+    	var allowExt =['JPG','PNG'];
+    	
+        $("#infoBtn").click(function(){
+
+                var readname = $("#realname").val();
+                var idcardno = $("#id_card_no").val();
+                var forwardside = $("#forward_side_photo").val();
+                var backside = $("#back_side_photo").val();
+                
+                if(readname == ''){
+                	showtips("姓名不能为空!",$("#realname"));
+                	return false;
+                }else if(idcardno == ''){
+                	showtips("身份证号码不能为空!",$("#id_card_no"));
+                	return false;
+                }else if(forwardside == ''){
+                	showtips("请上传身份证正面图片!",$("#forward_side_photo"));
+                	return false;
+                }else if(backside == ''){
+                	showtips("请上传身份证反面图片!",$("#back_side_photo"));
+                	return false;
+                }
+                
+                var fileExtfront = getFiletype(forwardside);
+                var fileExtback = getFiletype(backside);
+                if ($.inArray(fileExtfront,allowExt) == -1){
+                	showtips("选择的身份证正面文件格式不正确!",$("#forward_side_photo"));
+                    return false;
+                }
+                if ($.inArray(fileExtback,allowExt) == -1){
+                	showtips("选择的身份证反面文件格式不正确!",$("#back_side_photo"));
+                    return false;
+                }
+
+ 	            $("#infoBtn").attr("disabled","disabled").val('提交中...');
+                $("#infoForm").ajaxSubmit(function(data){
+                	$("#infoBtn").removeAttr("disabled").val('提交认证');
+                    alert(data.result);
+ 	                window.location.reload();
+                });
+        })
+
+        $("#infoBtn2").click(function(){
+        	
+            var companyname = $("#company_name").val();
+            var province = $("#province").val();
+            var city = $("#city").val();
+            var district = $("#district").val();
+            var address = $("#address").val(); 
+            var lisenceno = $("#busi_lisence_no").val(); 
+            var lisencephoto = $("#busi_lisence_photo").val(); 
+            var taxregno = $("#tax_reg_no").val(); 
+            var taxregphoto = $("#tax_reg_photo").val(); 
+            var orgno = $("#org_no").val(); 
+            var orgphoto = $("#org_photo").val(); 
+            var contactname = $("#contact_name").val(); 
+            var contactphone = $("#contact_phone").val();
+            
+            if(companyname == ''){
+            	showtips("公司名称不能为空!",$("#company_name"));
+            	return false;
+            }else if(province == '' || province == '0'){
+            	showtips("请选择所在省份!",$("#province"));
+            	return false;
+            }else if(city == '' || city == '0'){
+            	showtips("请选择所在城市!",$("#city"));
+            	return false;
+            }else if(district == '' || district == '0'){
+            	showtips("请选择所在县（区）!",$("#district"));
+            	return false;
+            }else if(address == ''){
+            	showtips("请填写所在详细地址!",$("#address"));
+            	return false;
+            }else if(lisenceno == ''){
+            	showtips("营业执照编号不能为空!",$("#busi_lisence_no"));
+            	return false;
+            }else if(lisencephoto == ''){
+               	showtips("请上传营业执照文件副本!",$("#busi_lisence_photo"));
+            	return false;
+            }
+            else if(taxregno == ''){
+            	showtips("税务登记编号不能为空!",$("#tax_reg_no"));
+            	return false;
+            }else if(taxregphoto == ''){
+               	showtips("请上税务登记证副本!",$("#tax_reg_photo"));
+            	return false;
+            }else if(orgno == ''){
+            	showtips("组织机构代码不能为空!",$("#org_no"));
+            	return false;
+            }else if(orgphoto == ''){
+               	showtips("请上传组织机构文件副本!",$("#org_photo"));
+            	return false;
+            }else if(contactname == ''){
+            	showtips("请填写联系人姓名!",$("#contact_name"));
+            	return false;
+            }else if(contactphone == ''){
+            	showtips("请填写联系人电话!",$("#contact_phone"));
+            	return false;
+            }
+            
+            var fileExtlisence = getFiletype(lisencephoto);
+            var fileExttax = getFiletype(taxregphoto);
+            var fileExtorg = getFiletype(orgphoto);
+            if ($.inArray(fileExtlisence,allowExt) == -1){
+            	showtips("选择的营业执照文件格式不正确!",$("#busi_lisence_photo"));
+                return false;
+            }
+            if ($.inArray(fileExttax,allowExt) == -1){
+            	showtips("选择的税务登记证文件格式不正确!",$("#tax_reg_photo"));
+                return false;
+            }
+            if ($.inArray(fileExtorg,allowExt) == -1){
+            	showtips("选择的组织机构代码文件格式不正确!",$("#org_photo"));
+                return false;
+            }
+            
+            $("#infoBtn2").attr("disabled","disabled").val('提交中...');
+            $("#infoForm2").ajaxSubmit(function(data){
+            	$("#infoBtn2").removeAttr("disabled").val('提交认证');
+                alert(data.result);
+              	window.location.reload();
+            });
+        	
+        });
+    })
+
+    function getFiletype(filename)
+    {
+        var extStart = filename.lastIndexOf(".")+1;
+        return filename.substring(extStart,filename.length).toUpperCase();
+    }
+
+    function isEmail(email)
+    {
+        //对电子邮件的验证
+        var myreg = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\-|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
+        if(!myreg.test(email)){
+            return false;
+        }
+        return true;
+     }
+
+	$(".type").click(function(){
+	            var id = $(this).val();
+	            $(".vertify").css({display:"none"});
+	            $("#vertifyTable"+id).css({display:"inline"});
+	        });
+	        
+	function showtips(msg,o){
+		layer.tips(msg, o, {
+	        guide: 1,
+	        time: 0,
+	        style: ['background-color:#F26C4F; color:#fff', '#F26C4F'],
+	        maxWidth:240
+	    });
+		o.focus();
+	}
+</script>
+{% endblock %}

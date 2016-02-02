@@ -1,0 +1,157 @@
+{% block doc_type %}
+<!doctype html>
+{% endblock %}
+
+<html ng-app="base_person_ng_app">
+<head>
+<meta charset="utf-8">
+<title>{% block title %}数据服务平台-个人中心{% endblock %}</title>
+</head>
+
+{% block base_js_css %}
+	<link href="/static_resource/css/person_base.css" type="text/css" rel="stylesheet">
+	<link href="/static_resource/css/person_myinfo.css" type="text/css"	rel="stylesheet">
+	<script type="text/javascript" src="/static_resource/js/jquery.js"></script>
+	<script type="text/javascript" src="/static_resource/js/jquery.form.js"></script>
+	<script type="text/javascript" src="/static_resource/js/angular.js"></script>
+	<script type="text/javascript" src="/static_resource/js/angular.min.js"></script>
+	<script type="text/javascript" src="/static_resource/js/angular-resource.js"></script>
+	<script type="text/javascript" src="/static_resource/js/angular_compatible-person.js"></script>
+{% endblock %}
+
+{% block extend_js_css %}
+{% endblock %}
+
+<body>
+	{% block header %}
+	<!--头部开始-->
+	<div id="myInfo_top">
+		<div class="home">
+			<a title="返回首页" href="/index/"></a>
+		</div>
+		<!--左边logo结束-->
+		<div class="title">数据服务平台</div>
+		<!--左边标题结束-->
+		<div class="my">
+			<ul>
+				<li id="showsub"><a href="javascript:void(0)">我的平台</a>
+					<div class="s2" class="none">
+						<a href="/person/bank/">账户余额</a> 
+						<a href="/person/mydata/">我的数据</a>
+						<a href="/person/myinfo/">个人信息</a> 
+						<a id="ulogout" href="javascript:logout();">退出</a>
+					</div></li>
+				<li class="h"><a href="/person/msgcenter/" title="站内信">短消息</a><a
+					class="msgtips" style="color: #F00">[5]</a></li>
+				<li class="h"><a href="/question/recent/" target="_blank" title="常见问题">常见问题</a></li>
+				<li class="h" id="contactCenter">
+					<a href="/busi_cooper/" target="_blank" title="联系我们">联系我们</a></li>
+					
+			</ul>
+			<!--右边列表结束-->
+		</div>
+	</div>
+	<!--头部上部结束-->
+	<div class="cb"></div>
+	<!--顶部的选项开始-->
+	<div class="utab">
+		<ul>
+			<li value="person_data"><a href="/person/index/">数据中心</a></li>
+			<li value="person_space"><a href="/person/myinfo/">个人中心</a></li>
+			<li value="person_finance" id="applytab"><a href="/person/bank/">财务中心</a></li>
+			<li value="person_work"><a href="/person/wk/">我的工单</a></li>
+			<li value="person_invoice"><a href="/person/invoice/">开具发票</a></li>
+		</ul>
+		<!--左边选项结束-->
+		<div class="rightdv">
+			<a href="#" target="_blank"><img
+				src="/static_resource/images/person/uc_01.png" border="0"></a>
+		</div>
+		<!--右边选项结束-->
+	</div>
+	<!--顶部的选项结束-->
+	<div class="cb"></div>
+	<!--头部结束-->
+	{% endblock %}
+
+{% block main_begin %}
+<!--中间开始-->
+<div class="u-main">
+{% endblock %}
+
+{% block content_left %}
+		<!--中间左边开始-->
+		<div style="height: 949px;" class="u-main-left">
+			<div class="u-bar" >
+				<div class="ut">数据中心</div>
+				<ul>
+					<li><a href="/person/index/">中心首页</a></li>
+					<li><a href="/person/mydata/">我的数据</a></li>
+					<li><a href="/person/ipbind/">IP白名单设置</a></li>
+					<li id="applylink"><a href="/person/applydata/">申请数据</a></li>
+					<li><a href="#" target="_self">数据服务测试</a></li>
+				</ul>
+				<div class="ut">个人中心</div>
+				<ul>
+					<li><a href="/person/myinfo/">基本资料</a></li>
+					<li><a href="/person/editpwd/">密码修改</a></li>
+					<li id="/person/certify/"><a href="/person/certify/">实名认证</a></li>
+				</ul>
+
+				<div class="ut">财务中心</div>
+				<ul id="fundCenter">
+					<li><a href="/person/bank/" target="">现金余额</a></li>
+					<li><a href="/person/buylogs/" target="">数据服务购买记录</a></li>
+					<li><a href="/person/costlogs/" target="">消费账单检索导出</a></li>
+					<li><a href="/person/chargelogs/" target="">充值记录</a></li>
+					<li><a href="/person/coins/" target="">我的【DM】币</a></li>
+					<li><a href="/person/yhq/" target="">优惠券</a></li>
+				</ul>
+			</div>
+		</div>
+		<!--中间左边结束-->
+		{% endblock %}
+
+{% block content_right %}
+{% endblock %}
+
+{% block main_end %}
+</div>
+<!--中间结束-->
+{% endblock %}
+
+{% block footer %}
+{% endblock %}
+</body>
+
+{% block base_java_script %}
+<script type="text/javascript">
+	$(function() {
+		$("#showsub").mouseover(function() {
+			$(".s2").css({
+				display : "block"
+			});
+		})
+		$("#showsub").mouseout(function() {
+			$(".s2").css({
+				display : "none"
+			});
+		})
+	})
+	$(document).ready(function() {
+		var htmlHeight = $(document).height() - 90;
+		var mainHeight = $(".u-main-left").height();
+		if (htmlHeight > mainHeight) {
+			$(".u-main-left").height(htmlHeight);
+		}
+	})
+	$(function() {
+		$(".utab").find("li[value='{{current_app}}']").eq(0).addClass('sel');
+		$(".u-bar").find("a[href='{{current_tab}}']").eq(0).parent().addClass('lsel');
+	})
+</script>
+{% endblock %}
+
+{% block extend_java_script %}
+{% endblock %}
+</html>

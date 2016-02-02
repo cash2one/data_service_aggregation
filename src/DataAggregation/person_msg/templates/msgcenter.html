@@ -1,0 +1,95 @@
+﻿{% extends "person_base.html" %} 
+<meta charset="utf-8">
+
+{% block title %}数据服务平台-短消息{% endblock %}
+
+{% block extend_js_css %}
+<script type="text/javascript" src="/static_resource/js/layer.min.js"></script>
+<link href="/static_resource/css/person_layer.css" type="text/css" rel="stylesheet"/>
+
+<script language="javascript">
+	$(document).ready(function(e) {
+        $(".msgTitle").click(function(){
+			var msgid = $(this).attr("rel");
+			var msgdata = $(this).attr("data");
+			var id = $(this).attr("id");
+			var title = $(this).html();
+			var i = $.layer({
+				type : 1,
+				//title : false,
+				title:[title,'background:#FFF'],
+				//offset:['150px' , ''],
+				//border : false,
+				border:[4,0.1,'#000'],
+				area : ['503px','295px'],
+				page : {dom : '#content_'+msgid},
+				success: function(layero){
+					if(msgdata == '0'){
+						//未传递过/阅读过
+						$.post("/msgcenter/ireadit?"+Math.random(),{msgid:msgid},function(e){
+							var obj = json_parse(e);
+							if(obj.code =='0'){
+								$("#"+id+" img").remove();
+								$("#"+id).css({color:"#999"});
+							}
+						})
+					}
+				}
+			});
+		})
+    });
+</script>
+{% endblock %}
+
+{% block content_right %}
+        <!--中间右边开始-->
+		<div class="u-main-right">
+			<div class="ur-title">
+       			<a class="appTitlea">会员中心>>我的消息</a>
+        	</div>
+			<div class="clearfix"></div>
+        	<div class="linestyle" style="height:100%">
+               <div class="msgbox">
+               <span class="time">2015.09.16 15:33</span><a class="msgTitle" id="msgtitle_21" rel="21" data="1">
+               <span class="readtitle">【通知】身份证实名认证接口维护时间，期间接口不能使用，尽请谅解</span></a>  
+                <div class="layer_pageContent msgcen_titdv" id="content_21">
+                <div class="msgcen_contdv"><p>身份证实名认证维护通知：全国公民身份证号码查询服务中心将在2015年9月19日20:00至9月20日8:00（周六-周日）进行系统维护和升级，将无法提供身份验证服务，带来不便请谅解！							
+				</p></div></div>  
+                </div>
+               <div class="msgbox">
+                <span class="time">2015.08.28 21:22</span><a class="msgTitle" id="msgtitle_20"  rel="20" data="0">
+                <span>【通知】关于在线支付宝在线充值手续费的说明</span>
+                <img src="/static_resource/images/person/new-ico.png" border="0"></a>
+                <div class="layer_pageContent msgcen_titdv" id="content_20"><div class="msgcen_contdv">
+                <p>即日起通过支付宝在线充值的金额如果用于话费、流量等充值类接口，将收取1%的手续费，通过银行转账或支付宝转账0手续费。推荐大家使用银行转账或支付宝转账的方式进行充值，具体可参考在线充值页面说明。							
+						</p></div></div>
+                </div>
+              <div class="msgbox">
+                	<span class="time">2015.07.07 16:35</span><a class="msgTitle" id="msgtitle_19"  rel="19" data="0">
+                	<span>【通知】验证码类短信模板调整公告</span><img src="/static_resource/images/person/new-ico.png" border="0"></a>
+                     <div class="layer_pageContent msgcen_titdv" id="content_19"><div class="msgcen_contdv">
+                     <p><span style="font-size:12px">尊敬的用户，应运营商要求，即日起凡验证码类短信模板，需添加有效的图片验证码后申请专用通道，才能使用106网关通道发送。未申请专用通道的用户验证码模板会通过跨网通道（手机号）发送。其他模板不受影响。特殊通道运营商审核周期为6工作日内.</span>							
+						</p></div></div>
+                </div>
+              <div class="msgbox">
+                <span class="time">2015.07.07 15:47</span><a class="msgTitle" id="msgtitle_18"  rel="18" data="1">
+                <span class="readtitle">【通知】现金余额预警功能上线了</span></a> 
+          	<div id="content_18" style="display:none; text-indent:0; width:100%;">
+          	<div style="padding:10px 10px 10px 10px; line-height:25px;line-height:25px">
+               		<p>现金余额预警功能上线了，您可以在个人中心－财务中心－现金余额 进行设置。</p><p>余额少于设定时，我们将会发短信提醒，每日最多发送2条，每月不得超过30条。 </p>
+               		</div></div></div>
+              <div class="msgbox">
+                <span class="time">2015.06.25 10:07</span><a class="msgTitle" id="msgtitle_17"  rel="17" data="0">
+                <span>【通知】短信api服务的最新公告</span>
+                <img src="/static_resource/images/person/new-ico.png" border="0"></a>  
+                <div id="content_17" class="msgcen_titdv"><div class="msgcen_contdv"><p>
+                <strong><span style="color:#ff0000">[重要] </span></strong>为积极配合运营商治理垃圾短信，按运营商要求，聚合数据将有投诉记录或回复退订的手机号加入黑名单。如黑名单对您的用户使用有影响，可联系在线客服解除或申请专用通道</p>
+                <p><strong><span style="color:#ff0000">[重要] </span></strong>验证码客户请务必添加图片验证码等防恶意攻击的机制，以防短信轰炸</p><p><br></p></div></div>                 
+                </div>                
+        	</div>
+
+       	 <div class="clearfix"></div>
+	</div>
+        <!--中间右边结束-->
+{% endblock %}
+

@@ -1,0 +1,134 @@
+﻿{% extends "person_base.html" %} 
+<meta charset="utf-8">
+
+{% block title %}数据服务平台-个人中心{% endblock %}
+
+{% block extend_js_css %}
+<script type="text/javascript" src="/static_resource/js/layer.min.js"></script>
+<link href="/static_resource/css/person_layer.css" type="text/css" rel="stylesheet" />
+{% endblock %}
+
+{% block content_right %}
+        <!--中间右边开始-->
+		<div class="u-main-right">
+			<div class="ur-title">
+       			<a class="appTitlea">会员中心>>我的信息</a>
+        	</div>
+        <div class="linestyle" >
+        <form name="infoForm" id="infoForm" action="/person/myinfo/saveinfo/" method="post">
+        	{% csrf_token %}
+	        <table width="98%" border="0" cellspacing="0" cellpadding="0" class="api_tb" style="font-size:14px; font-weight:lighter;">
+	          <tr class="bgcolor">
+	            <td width="120" >&nbsp;用&nbsp;户&nbsp;帐&nbsp;号：</td>
+	            <td>&nbsp;{{user.username}}<input type="hidden" value="398365868" name="uid">&nbsp; （<span class="vcardspan">未认证，<a href="/person/certify/">点击实名认证</a></span>）
+	            <span id="info-uid-tips" class="normal-tips">用户UID验证失败</span>
+	            </td>
+	          </tr>
+              <tr>
+	            <td width="120" >&nbsp;绑&nbsp;定&nbsp;邮&nbsp;箱：</td>
+	            <td>&nbsp;{{user.email}}<span id="info-uid-tips" class="normal-tips"></span>
+	            </td>
+	          </tr>
+              <tr class="bgcolor">
+	            <td width="120" >&nbsp;手&nbsp;机&nbsp;号&nbsp;码：</td>
+	            <td>&nbsp;<input type="text" value="{{user_info.mobile_no}}" id="mobile_no" name="mobile_no" class="userinfo-input">
+	            <span id="info-uid-tips" class="normal-tips"></span>
+	            </td>
+	          </tr>
+
+	          <tr>
+	            <td>&nbsp;用&nbsp;户&nbsp;昵&nbsp;称：</td>
+	            <td>&nbsp;<input type="text" value="{{user_info.nickname}}" id="nickname" name="nickname" class="userinfo-input">
+	            <span id="info-nickname-tips" class="normal-tips">昵称不合法</span>
+	            </td>
+	          </tr>
+	           <tr  class="bgcolor">
+	            <td>&nbsp;帐&nbsp;号&nbsp;类&nbsp;型：</td>
+	            <td>
+	            &nbsp;<input type="radio" name='user_type' {% if user_info.user_type == 1 %} checked {% endif %} value="1">个人
+	            &nbsp;<input type="radio" name='user_type' {% if user_info.user_type == 2 %} checked {% endif %} value="2">企业&nbsp;&nbsp;
+                <span style="color:#F90" id="usertype_prompt">[已通过实名认证或正在审核的不支持修改类型]</span>
+	            </td>
+	          </tr>
+
+	          <tr>
+	            <td >&nbsp;</td>
+	            <td >&nbsp;<input type="button" value="保存" class="btn" id="infoBtn" ></td>
+	          </tr>
+	        </table>
+	        </form>
+	      </div>
+          <div class="ur-title">
+       			<a class="appTitlea">会员中心>>其他信息</a>
+          </div>
+           <div class="linestyle" >
+	        <table width="98%" border="0" cellspacing="0" cellpadding="0" class="api_tb">
+          	  <tr>
+	            <td width="120">&nbsp;<span style="font-family:'Courier New', Courier, monospace">OpenID：</span></td>
+	            <td align="left">&nbsp;<span style="font-family:'Courier New', Courier, monospace; color:#F63; font-weight:bold">{{user_secret.open_id}}</span></td>
+	            <td></td>
+	          </tr>
+	          <tr>
+	          	
+	          </tr>
+	          <tr>
+	            <td width="120">&nbsp;<span style="font-family:'Courier New', Courier, monospace">Access_Key：</span></td>
+	            <td align="left">&nbsp;<span style="font-family:'Courier New', Courier, monospace; color:#F63; font-weight:bold">{{user_secret.access_Key}}</span></td>
+	            <td style="font-family:'Courier New', Courier, monospace; color:#F63; font-weight:bold">（服务调用秘钥，务必妥善保管，不要轻易泄露）</td>
+	          </tr>
+          </table>
+         </div>
+        <!--中间右边结束-->
+{% endblock %}
+
+{% block extend_java_script %}
+<script type="text/javascript">
+$(document).ready(function(e) {
+    $("#infoBtn").click(function(){
+		$(this).attr("disbaled","disabled").val("保存中...");
+		layer.closeAll();
+		var mobile = $("#mobile_no").val();
+		var nickname = $("#nickname").val();
+		var usertype = $('input[name="user_type"]:checked').val();
+		
+		if(mobile == ''){
+			showtips('手机号码不能为空!',$("#mobile_no"));
+			$(this).removeAttr("disbaled").val("保存");
+			return false;
+		}else if(nickname == ''){
+			showtips('用户昵称不能为空!',$("#nickname"));
+			$(this).removeAttr("disbaled").val("保存");
+			return false;
+		}else if(isNick(nickname)){
+			showtips('用户昵称格式不正确!',$("#nickname"));
+			$(this).removeAttr("disbaled").val("保存");
+			return false;
+		}else if( usertype == null || usertype == ''){
+			showtips('请选择账户类型!',$('#usertype_prompt'));
+			$(this).removeAttr("disbaled").val("保存");
+			return false;
+		}else {
+			$("#infoForm").submit();
+		}
+	})
+});
+
+function showtips(msg,o){
+	layer.tips(msg, o, {
+        guide: 1,
+        time: 0,
+        style: ['background-color:#F26C4F; color:#fff', '#F26C4F'],
+        maxWidth:240
+    });
+	o.focus();
+}
+
+function isNick(nickname){
+    var myreg=/^[\w\u4e00-\u9fa5]+$/;
+    if(!myreg.test(nickname)){
+        return false;
+    }
+    return true;
+}
+</script>
+{% endblock %}

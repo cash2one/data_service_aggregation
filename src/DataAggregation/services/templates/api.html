@@ -1,0 +1,148 @@
+{% extends "base_index.html" %}
+<meta charset="utf-8">
+{% block extend_js_css %}
+	<link href="/static_resource/css/api.css" type="text/css" rel="stylesheet">
+	<script type="text/javascript" src="/static_resource/js/uri_source.js"></script>
+	<script type="text/javascript" src="/static_resource/js/app.js"></script>
+{% endblock %}
+
+{% block content %}
+<div class="cb" style="height:1px; background-color:#ddd; margin-top:5px"></div>
+
+<!--中间开始-->
+<div class="center">
+	<!--中间左边部分开始-->
+    <div class="leftdv">
+    	<div ng-controller="apicateController">
+    	 <dl>
+            <dt>功能分类</dt>
+            <dd class="current">
+            <a href="/API/">所有数据<span>({[{ serves_counts }]})</span></a></dd>
+            <div ng-repeat="serve_cate in serve_cates">
+            <dd><a href="javascript:flush_api_list('/API/cate/{[{serve_cate.id}]}/')">{[{serve_cate.category_name}]}<span>({[{serve_cate.serve_count}]})</span></a></dd>
+            </div>
+        </dl>
+        </div>
+        <dl>
+            <dt>推荐分类</dt>
+            <dd><a href="#">最新数据<span>(10)</span></a></dd>
+            <dd><a href="#">第三方数据<span>(65)</span></a></dd>
+            <dd><a href="#">充值服务<span>(9)</span></a></dd>
+            <dd><a href="#">SDK中心<span>(3)</span></a></dd>
+        </dl>
+        <dl>
+            <dt>数据专题</dt>
+            <dd><a href="#">360搜索<span>(12)</span></a></dd>
+            <dd><a href="#">政务数据<span>(2)</span></a></dd>
+            <dd><a href="#">携程旅游<span>(3)</span></a></dd>
+            <dd><a href="#">天翼电信<span>(2)</span></a></dd>
+            <dd><a href="#">通联数据<span>(8)</span></a></dd>
+        </dl>
+    </div>
+    <!--中间左边部分结束-->
+    <div id="api_list"></div>
+    <!--中间右边部分开始-->
+    <div class="rightdv">
+    	 <h2>最新更新</h2>
+         <ul>
+         	<li><a href="#" style="background-image:url(/static_resource/images/aip_r1.png)">&nbsp;1.&nbsp;银行卡实名认证</a></li>
+         	<li><a href="#" style="background-image:url(/static_resource/images/aip_r2.png)">&nbsp;2.&nbsp;作文大全</a></li>
+            <li><a href="#" style="background-image:url(/static_resource/images/aip_r3.png)">&nbsp;3.&nbsp;脑筋急转弯</a></li>
+            <li><a href="#" style="background-image:url(/static_resource/images/aip_r4.png)">&nbsp;4.&nbsp;新三板实时股票信息</a></li>
+            <li><a href="#" style="background-image:url(/static_resource/images/aip_r5.png)">&nbsp;5.&nbsp;驾照题库</a></li>
+            <li><a href="#" style="background-image:url(/static_resource/images/aip_r6.png)">&nbsp;6.&nbsp;尾号限行</a></li>
+            <li><a href="#" style="background-image:url(/static_resource/images/aip_r7.png)">&nbsp;7.&nbsp;违章代缴</a></li>
+            <li><a href="#" style="background-image:url(/static_resource/images/aip_r8.png)">&nbsp;8.&nbsp;漫画书</a></li>
+         </ul>
+         <div style=" height:40px; background-color:#FFF; margin-left:-21px; width:222px; border-top:1px solid #E9E9E9"></div>
+          <div style="height:20px; border-top:1px solid #E9E9E9; margin-left:-21px; width:222px;"></div>
+          <h2>热门数据</h2>
+         <ul>
+         	<li><a href="#" style="background-image:url(/static_resource/images/aip_r21.png)">&nbsp;1.&nbsp;移动联通基站</a></li>
+         	<li><a href="#" style="background-image:url(/static_resource/images/aip_r22.png)">&nbsp;2.&nbsp;全国天气预报</a></li>
+            <li><a href="#" style="background-image:url(/static_resource/images/aip_r23.png)">&nbsp;3.&nbsp;全国车辆违章</a></li>
+            <li><a href="#" style="background-image:url(/static_resource/images/aip_r24.png)">&nbsp;4.&nbsp;电信基站</a></li>
+            <li><a href="#" style="background-image:url(/static_resource/images/aip_r25.png)">&nbsp;5.&nbsp;短信API服务</a></li>
+            <li><a href="#" style="background-image:url(/static_resource/images/aip_r26.png)">&nbsp;6.&nbsp;菜谱大全</a></li>
+            <li><a href="#" style="background-image:url(/static_resource/images/aip_r27.png)">&nbsp;7.&nbsp;12306火车票查询</a></li>
+            <li><a href="#" style="background-image:url(/static_resource/images/aip_r28.png)">&nbsp;8.&nbsp;常用快递</a></li>
+         </ul>
+    </div>
+    <!--中间右边部分结束-->
+</div>
+<!--中间结束	-->
+
+{% csrf_token %} 
+
+<div class="cb" style="height:1px; background-color:#ddd;"></div>
+{% endblock %}
+
+{% block extend_java_script %}
+<script type="text/javascript">
+$(function(){
+	$('dd').live('click',function(){
+		$('dd').removeClass("current");  
+		$(this).addClass("current");
+	}); 
+	var serverFor = '{{serveFor}}';
+	if(serverFor == ""){
+		flush_api_list('/API/cate/0/');
+	}else if (serverFor == "hotservice"){
+		flush_api_list('/API/cate/0/sort/2/');
+	}else if(serverFor == "latestservice"){
+		flush_api_list('/API/cate/0/sort/1/');
+	}
+});
+
+function flush_api_list(reqUrl)
+{
+	$.ajax({ 
+		data : { },
+		type : 'GET',
+		async : true,
+		url : reqUrl ,
+		dataType: 'html',
+		success: function(html){
+			//通过$compile动态编译html
+			var $scope = angular.element('#api_list').scope();
+			var $compiler = angular.element('#api_list').injector().get('$compile');
+			var bindhtml = angular.element(html);
+			$("#api_list").html(bindhtml); //先嵌入以便操作dom元素
+			$compiler(bindhtml)($scope);
+		}
+	});
+}
+
+function getOrder(sort_id){
+	var ordering = ""
+    switch(sort_id)
+    {
+	    case '1':  ordering = '-create_time';	break;
+	    case '2':  ordering = '-base_statistics__app_counts'; break;
+	    case '3':  ordering = '-base_statistics__scores'; break;
+	    default: ordering = 'id';
+    }
+	return ordering;
+}
+
+function apply_service(serve_id){
+	{% if not user.id %}
+		alert("请先登录，登陆后才能申请服务！");
+		window.location.href = "/index/";
+	{% endif %}
+	$.ajax({ 
+		data : { csrfmiddlewaretoken : $("input[name='csrfmiddlewaretoken']").val() },
+		type : 'POST',
+		async : true,
+		url : "/person/apply/service/"+serve_id+"/",
+		dataType: 'json',
+		success: function(data){
+			alert(data.message);
+			window.location.reload();
+		}
+	});
+}
+
+</script>
+{% endblock %}
+

@@ -1,0 +1,29 @@
+﻿{% extends "person_base.html" %} 
+<meta charset="utf-8">
+
+{% block title %}数据服务平台-开具发票{% endblock %}
+
+{% block content_right %}
+        <!--中间右边开始-->
+		<div class="u-main-right">
+			<div class="ur-title">
+       			<a class="appTitlea">会员中心&nbsp;>>&nbsp;</a>我的发票
+                <a class="applyBtn" href="/person/invoice/applyit/">+索取发票</a>
+        	</div>
+        	<div class="linestyle" >
+            	<table width="100%" border="0" cellspacing="0" cellpadding="0" class="wotable">
+                  <tr class="title">
+                    <td>发票金额</td>
+                    <td>发生时间</td>
+                    <td>发票抬头</td>
+                    <td>收取方式</td>
+                    <td>状态</td>
+                    <td>操作</td>
+                  </tr>
+                </table>
+	        </div>
+         </div>   
+		<div class="clearfix"></div>
+        <!--中间右边结束-->
+{% endblock %}
+

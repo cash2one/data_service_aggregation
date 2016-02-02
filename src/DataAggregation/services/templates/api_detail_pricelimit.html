@@ -1,0 +1,67 @@
+<meta charset="utf-8">
+<div ng-controller="apiDetailpricelimitController">
+	<input type="hidden" id="serve_id" value="{{serve_id}}" />
+	<ul>
+		<div class="line">服务资费情况：</div>
+		<table style="width: 98%; margin-left: 2%">
+			<tr>
+				<th width="40"></th>
+				<th>服务名称</th>
+				<th>是否免费</th>
+				<th>试用次数</th>
+				<th>单次调用花费</th>
+			</tr>
+			<tbody>
+				<tr>
+					<td></td>
+					<td>{[{serve.serve_name}]}</td>
+					<td>{[{serve_price.is_free}]}</td>
+					<td>{[{serve_price.free_times_per}]}/{[{serve_price.per_unit| dict:"{'0':'天'}"}]}</td>
+					<td>{[{serve_price.cost}]}</td>
+				</tr>
+			</tbody>
+		</table>
+		<div class="line">
+			常规套餐包<font color="#FF0000">【更多次数、更多优惠，请与商务联系>>】</font>
+		</div>
+		<table style="width: 98%; margin-left: 2%">
+			<tr>
+				<th width="40px"></th>
+				<th>名称</th>
+				<th>价格</th>
+				<th>次数</th>
+				<th>说明</th>
+			</tr>
+				<tr ng-repeat="actpack in serve_actpacks">
+					<td></td>
+					<td>{[{actpack.pack_name}]}</td>
+					<td>￥{[{actpack.pack_price}]}</td>
+					<td>{[{actpack.pack_counts}]}</td>
+					<td>{[{actpack.pack_desc}]}</td>
+				</tr>
+		</table>
+		<div ng-if="serve_sdkpack != null && serve_sdkpack != 'undefined'">
+		<div class="line">
+			使用神码SDK额外每日赠送<a href="#"><font color="#FF0000">【推荐，马上去下载SDK>>】</font></a>
+		</div>
+		<table style="width: 98%; margin-left: 2%;">
+			<tr>
+				<th width="40"></th>
+				<th>名称</th>
+				<th>每日赠送次数(次)</th>
+				<th>单客户端日请求上限(次)</th>
+				<th>备注</th>
+			</tr>
+			<tbody>
+				<tr>
+					<td></td>
+					<td>{[{serve_sdkpack.pack_name}]}</td>
+					<td>{[{serve_sdkpack.free_times_per}]}</td>
+					<td>{[{serve_sdkpack.single_client_free_times_per}]}</td>
+					<td>{[{serve_sdkpack.pack_desc}]}</td>
+				</tr>
+			</tbody>
+		</table>
+		</div>
+	</ul>
+</div>

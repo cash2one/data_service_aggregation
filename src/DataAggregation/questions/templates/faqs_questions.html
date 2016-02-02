@@ -1,0 +1,59 @@
+{% extends "base_question.html" %}
+<meta charset="utf-8">
+
+{% block extend_js_css %}
+	<link href="/static_resource/css/faqs.css" type="text/css" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+	<div class="left">
+    	<div class="info_question">
+        	<ul>
+            	<li class="cur"><a href="/question/quest/sort/0/type/{{type}}/">默认排序</a></li>
+                <li><a href="/question/quest/sort/1/type/{{type}}/">热门问题</a></li>
+                <li><a href="/question/quest/sort/2/type/{{type}}/">查看最多</a></li>
+                <li><a href="/question/quest/sort/3/type/{{type}}/">回复最多</a></li>
+            </ul>
+        </div>
+        {% for question in question_list.object_list %}
+     	<div class="left_box">
+        	<div class="dv1"><div class="recount">{{ question.anwser_counts }}</div></div>
+            <div class="dv2">
+            	<div><a href="/question/show/id/{{ question.id }}">{{ question.title }}</a></div>
+                <div class="base">
+                	  <span class="iviews">&nbsp;</span>
+                      <span>{{ question.visits }}次浏览</span>&nbsp;&nbsp;
+                      <span class="itags">&nbsp;</span>
+                      <span>{{ question.type_name }}</span>&nbsp;&nbsp;
+                      <span class="itime">&nbsp;</span>
+                      <span>{{ question.quest_time }}</span>
+                </div>
+            </div>
+        </div>
+ 	{% endfor %}
+    
+        <!--分页开始-->
+        <div class="pages">
+        {% if question_list.has_previous %}
+        	<a href="/question/quest/sort/{{sort}}/type/{{type}}/page/{{ question_list.previous_page_number }}/" class="pre">上一页</a>
+        {% else %}
+        	<a href="#" class="pre">上一页</a>
+        {% endif %}
+        
+       	{% for page in question_list.paginator.page_range_ext %}
+	    {% if page = question_list.number %}
+	    	<a href="/question/quest/sort/{{sort}}/type/{{type}}/page/{{ page }}/" class="cur" >{{ page }}</a>
+	    {% else %}
+	    	<a href="/question/quest/sort/{{sort}}/type/{{type}}/page/{{ page }}/" >{{ page }}</a>
+	    {% endif %}
+	 	{% endfor %}
+        
+        {% if question_list.has_next %}
+        	<a href='/question/quest/sort/{{sort}}/type/{{type}}/page/{{ question_list.next_page_number }}/' class="pre">下一页</a>
+        {% else %}
+        	<a href="#" class="pre">下一页</a>
+        {% endif %}
+        </div>
+        <!--分页结束-->   
+    </div>
+{% endblock %}

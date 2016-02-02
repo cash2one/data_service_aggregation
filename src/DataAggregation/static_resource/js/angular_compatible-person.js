@@ -1,0 +1,1 @@
+var compatible = angular.module('base_person_ng_app',[]);

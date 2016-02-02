@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+<meta charset="utf-8">
+
+{% block header %}
+<!--头部开始-->
+  <div id="headcontent" ></div>
+  <div class="cb"></div> 
+  <div class="menu">
+  	<ul id="index_ul" class="fl">
+    	<li><a href="/index/">首页</a></li>
+        <li><a href="/API/">API</a></li>
+        <li><a href="/trends/">动态</a></li>
+        <li><a href="/price_list/">价格</a></li>
+        <li><a href="/question/recent/">常见问题</a></li>
+        <li><a href="/busi_cooper/">商务合作</a></li>
+    </ul>
+    <div class="fr clor_blue1">
+    	 <img src="/static_resource/images/ico/footerkf.ico"style="height:20px">
+        <span>客服电话</span>
+        <span class="f20">400-888-88</span>
+    </div>
+  </div>
+<!--头部结束-->
+{% endblock %}
+
+{% block base_java_script %}
+<script>
+	$(function(){
+	    $("#index_ul li").each(function(index){
+	    	var url = window.location.href;
+	    	var href = $(this).children("a").attr("href");
+	    	if(url.indexOf(href) > -1){
+	    		$(this).addClass("current");
+	    	}
+	    })
+	  });
+	
+	$.ajax({ 
+		data : {},
+		type : 'GET',
+		async : true,
+		url : '/head/content/' ,
+		dataType: 'html',
+		success: function(data){
+			$("#headcontent").html(data);
+		} 
+	})
+	
+</script>
+{% endblock %}
+

@@ -1,0 +1,10 @@
+<meta charset="utf-8">
+
+<div class="rdv2">
+	<ul>
+		<li style="color:#0096BB">所有分类问题</li>
+		{% for qs_type in qs_types %}
+			<li><a href="/question/quest/sort/0/type/{{qs_type.id}}/page/1/">{{ qs_type.type_name }}</a></li>
+		{% endfor %}
+	</ul>
+	</div>

@@ -1,0 +1,56 @@
+@charset "utf-8";
+/* CSS Document */
+/*header*/
+#header{width:100%; min-width:1200px; background:#fff;}
+.header{width:1100px; margin:0 auto; height:100px; padding-top:15px; position:relative;}
+.header h1{width:400px; height:80px; background: url(../images/footerlogo.png) 0 0 no-repeat; position:absolute; left:0; top:40px;text-indent:13em;line-height:70px; font-size:16px; font-weight:lighter}
+.header a{ float:right; background:url(../images/ico/index.ico) no-repeat; padding-left:20px; margin-top:60px}
+
+
+.register_line{ width: 100%; margin:0 auto; height: 4px; border-bottom: 1px solid #f2f2f2;}
+
+
+.register_content{width:1200px; margin:0 auto; position:relative;}
+.step_ul{margin-top:32px; height:30px; border-bottom:3px solid #e6e6e6; font-weight: lighter; color:#cccccc;}
+.step_ul li {float: left; height: 100%; margin-left: 60px; width: 320px; text-align: center;}
+.step_ul li.li1{ border-bottom: 3px solid #00a2ca; color:#000;}
+/*
+.step_ul li{float:left; width:540px; height:64px; text-align:center; font:bold 16px/64px '宋体'; color:#fff;}
+.step1 .li1{background:#009fe3;}
+.step1 .li2{background:#d1d1d1; margin-left:40px;}
+.step2 .li1{background:#d1d1d1;}
+.step2 .li2{background:#009fe3; margin-left:40px;}
+*/
+
+#register_form{padding:60px 40px 88px 40px;}
+.div_form{height:48px; margin-bottom:24px;}
+.div_form label{float:left; width:146px; font-size:14px; color:#333; text-align:right; height:48px; line-height:48px;}
+.div_form .input_div{float:left; width:620px;}
+#username,#email,#password,#password2,#inputCode{width:308px; height:26px;line-height:26px;padding:10px 5px; border:1px solid #aeaeae; border-radius:4px; color:#666;}
+.input_div span{ margin-left:0px;}
+#btn, .btn2, .success_login, .login_btn{width:460px; height:60px; text-align:center; font:bold 16px/60px '宋体'; border:0 none; border-radius:4px; color:#fff; cursor:pointer; background:#009fe3;letter-spacing:6px;}
+#btn{width:320px;}
+#btn:hover, .btn2:hover, .success_login:hover,.login_btn:hover{background:#0697d5; color:#FFF}
+.reg_login{width:430px; position:absolute; top:90px; right:0px; }
+.btn2{position:absolute; left:0px; top:300px; width:170px; height:38px; line-height:38px;}
+.reg_login p{text-align:left; margin-top:10px; line-height:38px; font-size:14px;}
+.reg_login p a{ color:#009fe3}
+
+/**邮箱激活**/
+#reg_cont2{height:400px; width:1200px;}
+#reg_cont2 p{line-height:200px; text-align:center}
+#reg_cont2 input[type="button"]{width:120px; height:40px; text-align:center; font:bold 16px/40px '宋体'; border:0 none; border-radius:4px; color:#fff; cursor:pointer; background:#009fe3;letter-spacing:6px; margin-left:800px}
+#reg_cont2 input[type="button"]:hover{background:#0697d5; color:#FFF}
+/**注册完成**/
+#reg_cont3{height:400px; width:1200px;}
+#reg_cont3 p{line-height:100px; text-align:center}
+
+.mycode{ display: inline-block; width: 80px; height: 40px; vertical-align: middle;}
+
+.footer{ width:1200px; height:auto; margin:10px auto; overflow:hidden;}
+.footer .footer_left{ margin-left:40px; float:left; color:#8A8A8C; width:300px}
+.footer .footer_left p{ line-height:20px}
+.footer .footer_left .kefu{ margin-top:30px}
+.footer .footer_center{ width:650px;float:left;color:#8A8A8C; margin-top:30px}
+.footer .footer_center ul li{ width:60px;float:left; line-height:20px}
+.footer .footer_center .foter_ul2 li{ width:100px;float:left; line-height:20px}

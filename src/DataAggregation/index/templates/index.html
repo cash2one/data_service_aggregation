@@ -1,0 +1,297 @@
+{% extends "base_index.html" %}
+<meta charset="utf-8">
+{% block extend_js_css %}
+	<link href="/static_resource/css/index.css" type="text/css" rel="stylesheet">
+	<link href="/static_resource/css/pop_div.css" type="text/css" rel="stylesheet">
+	<script type="text/javascript" src="/static_resource/js/uri_source.js"></script>
+	<script type="text/javascript" src="/static_resource/js/app.js"></script>
+{% endblock %}
+
+{% block content %}
+<div class="wamp">
+    <div class="topdv">
+      <div class="f16 lftdv fl">所有服务分类</div>
+      <div class="fl" style="height:40px">
+      	<span class="span1">最新公告：</span>
+        <marquee scrolldelay="100" direction="left" behavior="alternate" class="marquee">
+        	神州数码-数据聚合平台正在筹建当中...
+        </marquee>
+      </div>
+      <span class="span2">安卓APP</span>
+      <img src="/static_resource/images/erweima.png">
+    </div>
+   
+ <div class="cb"></div> 
+    <div class="chosedv" id="chosedv1">
+    	<input id="bgindexs" class="none" type="hidden" value="1">
+        <!--中间显示块开始-->
+        <a class="changebg" onClick="changebgimg(1)" style="background-image:url(/static_resource/images/baPrev.png);margin-top:200px; margin-left:220px"></a>
+        <a class="changebg" onClick="changebgimg(2)" style="background-image:url(/static_resource/images/baNext.png); margin-top:200px; margin-left:800px"></a>
+        <div class="centerdv">
+          	<div class="width1200_v4 subNav_v4">
+                <div id="allAssort">
+                    <div class="itemAll">
+		            <div ng-controller="catetypebaseController">
+                   		<div ng-repeat="serve_cate in serve_cates">
+	                       <div class="item">
+	                       	 <p><img src="{[{serve_cate.serve_cate_logo}]}">&nbsp;&nbsp;&nbsp;&nbsp;{[{serve_cate.category_name}]}<span class="fr pr10">></span></p>
+	                       </div>
+	                        <div class="for-nav">
+	                        	<dl>
+	                               <div ng-repeat="serve_type in serve_cate.serve_types">
+	                               <dt><a href="#" target="_blank">{[{serve_type.type_name}]}</a></dt>
+	                               <dd>
+	                                	<div ng-repeat="serve_base in serve_type.serve_bases">
+	                                    <a href="/API/detail/id/{[{serve_base.id}]}" target="_blank" title="{[{serve_base.serve_name}]}">{[{serve_base.serve_name}]}</a>
+	                                    </div>
+	                               </dd>
+	                               </div>
+	                            </dl>
+	                        </div>
+                    	</div>
+                    </div>
+               		 </div>
+               	</div>
+			</div>
+       </div>
+        <!--中间显示块结束-->
+        
+		<!--右边颜色块开始-->
+        <div class="rightdv">
+        	<div class="sondv" style="background-color:#E8F2BE; background-image:url(/static_resource/images/center_rightbg1.jpg)"></div>
+           <div class="sondv" style="background-color:#8CD3D5; background-image:url(/static_resource/images/center_rightbg2.jpg)"></div>
+           <div class="sondv" style="background-color:#ADDFBC; background-image:url(/static_resource/images/center_rightbg3.jpg)"></div>
+           <div class="sondv" style="background-color:#F9D246; background-image:url(/static_resource/images/center_rightbg4.jpg)"></div>
+        </div>
+         <!--右边颜色块结束-->
+    </div>
+</div>
+
+<!--热门服务开始-->
+<div class="rmfw">
+	<div class="topsty">
+    	<span class="f16">热门服务/Hot Service</span>
+        <a href="/API/hotservice/" class="fr" style="color:#C6DB64">更多</a>
+    	<span class="span1">+</span>
+    </div>
+    <ul>
+    	<div ng-controller="hotServiceController">
+    		<div ng-repeat="hotServe in hotServes">
+		    	<li><a href="/API/detail/id/{[{hotServe.id}]}/" target="_blank" >
+		    	<img src="{[{hotServe.serve_logo}]}"></a>
+		    	<br>{[{hotServe.serve_name}]}
+		    	<br>{[{hotServe.base_statistics.app_counts}]}</li>
+    		</div>
+    	</div>
+    </ul>
+</div>
+<!--热门服务结束-->
+<div class="cb"></div>
+<!--最新服务开始-->
+<div class="zxfw">
+	<div class="topsty">
+    	<span class="f16">最新服务/New Service</span>
+        <a href="/API/latestservice/" class="fr" style="color:#1DBEEA">更多</a>
+    	<span class="span1">+</span>
+    </div>
+    <ul>
+    	<div ng-controller="latestServesController">
+	    	<div ng-repeat="latestServe in latestServes">
+	    	<li><a href="/API/detail/id/{[{latestServe.id}]}/" target="_blank">
+	    	<img src="{[{latestServe.serve_logo}]}"></a>
+	    	<br>{[{latestServe.serve_name}]}
+	    	<br>{[{latestServe.base_statistics.app_counts}]}</li>
+	    	</div>
+    	</div>
+    </ul>
+</div>
+<!--最新服务结束-->
+
+<div class="cb"></div>
+<!--图片块开始-->
+<div id="imagesdv">
+  <div><a href="#"><img class="png_bg" src="/static_resource/images/spring.png" alt=""></a></div>
+  <ul id="specialData_v4">
+  	<li class="li1_v4">
+    	<a href="#">
+         <h3>SDK</h3>
+           <p style="font-size: 18px; padding: 3px 0 5px;">development tools</p>
+           <p>查看更多</p>
+        </a>
+    </li>
+    <li class="li2_v4 liBorder_v4">
+        <a href="#">
+            <div class="specialImg_v4">
+                <img class="png_bg" src="/static_resource/images/a40.png"alt="通用定位SDK">
+            </div>
+            <p>通用定位SDK</p>
+        </a>
+    </li>
+    <li class="li3_v4">
+        <a href="#">
+            <h4>Thematic data</h4>
+            <p style="font-size: 18px; padding:3px 0 5px;">数据专题</p>
+            <p>查看更多</p>
+        </a>
+    </li>
+    <li class="li4_v4 liBorder_v4">
+        <a href="#">
+            <div class="specialImg_v4">
+                <img src="/static_resource/images/xiecheng.png" alt="携程旅游接口">
+            </div>
+            <p>携程旅游接口</p>
+            <p style="color: #ffa000;"><span>3个接口</span></p>
+        </a>
+    </li>
+    <li class="li5_v4">
+        <a href="#">
+            <div class="juheyellow_v4">
+                <h4>黄页SDK</h4>
+                <p>一个集成聚合数据SDK并带有功能界面的一整套黄页工具解决方案</p>
+            </div>
+        </a>
+    </li>
+    <li class="li6_v4">
+        <a href="#">
+            <div class="juheyellow_v4">
+                <h4>聚合数据SDK</h4>
+                <p>每种数据服务每日最多10000次免费的请求次数</p>
+            </div>
+        </a>
+    </li>
+    <li class="li7_v4 liBorder_v4">
+        <a href="#">
+            <div class="specialImg_v4">
+                <img class="png_bg" src="/static_resource/images/a67.png" alt="短信验证码SDK">
+            </div>
+            <p>短信验证码SDK</p>
+        </a>
+    </li>
+    <li class="li8_v4">
+        <a href="#">
+            <div class="specialImg_v4"></div>
+            <p style="font-size: 16px; padding-top: 5px;">360数据</p>
+            <p style="color: #fff;"><span>12个接口</span></p>
+        </a>
+    </li>
+    <li class="li9_v4">
+        <a href="#">
+            <div class="specialImg_v4"></div>
+            <p style="font-size: 16px; padding-top: 5px;">天翼电信数据</p>
+            <p style="color: #fff;"><span>2个接口</span></p>
+        </a>
+    </li>
+    <li class="li10_v4 liBorder_v4">
+        <a href="#">
+            <div class="specialImg_v4">
+                <img src="/static_resource/images/government.png" alt="政府数据">
+            </div>
+            <p>政府数据</p>
+            <p style="color: #ffa000;"><span>2个接口</span></p>
+        </a>
+    </li>
+  </ul>
+</div>
+<!--图片块结束-->
+<div class="cb"></div>
+<!--三块介绍开始-->
+<div class="threeinfodv">
+	<ul>
+    	<li>
+        	<img src="/static_resource/images/three1.png">
+            <div class="fl">
+            	<p class="lh40 mt30 w200">欢迎加入数据平台！</p>
+                <p class="clor_gray w200">一起提供更多更好的数据服务！</p>
+            </div>
+       </li>
+       <li>
+        	<img src="/static_resource/images/three2.png">
+            <div class="fl">
+            	<p class="lh40 mt30 w200">不知哪里去办事！</p>
+                <p class="clor_gray w200">直接搜索 随时随地 瞬间办事！</p>
+            </div>
+       </li>
+       <li>
+        	<img src="/static_resource/images/three3.png">
+            <div class="fl">
+            	<p class="lh40 mt30 w200">多站登陆怕麻烦，担心不安全？</p>
+                <p class="clor_gray w200">连接子系统，全国通用，真正一站解决多应用！</p>
+            </div>
+       </li>
+       
+    </ul>
+</div>
+<!--三块介绍结束-->
+<div class="cb"></div>
+<!--最新动态，帮助中心开始-->
+<div id="trens_help">
+	<div class="leftsdv">
+    	<h3>最新动态<span>/The News</span><a href="/trends/">更多</a></h3>
+        <ul>
+        {% for info in infomations %}
+        	<li><span>{{info.info_time| date:"Y-m-d" }}</span><a href="#">{{info.title}}</a></li>
+        {% endfor %}
+        </ul>
+    </div>
+    <div class="rightsdv">
+    	<h3>帮助中心<span>/Q&A</span><a href="/question/quest/">更多</a></h3>
+         <ul>
+         {% for quest in questions %}
+         	<li><span>{{quest.quest_time| date:"Y-m-d" }}</span><a href="/question/show/id/{{quest.id}}/">{{quest.title}}</a></li>
+         {% endfor %}
+        </ul>
+    </div>
+</div>	
+<!--最新动态，帮助中心结束-->
+{% endblock %}
+
+{% block extend_java_script %}
+<script type="text/javascript">
+var image=new Array(3);
+var n=2;
+image[0]="/static_resource/images/cent_bg1.jpg";
+image[1]="/static_resource/images/cent_bg2.jpg";
+image[2]="/static_resource/images/cent_bg3.jpg";
+function changebgimg(idx){
+	if(idx==1){
+		n--;
+	}else{
+		n++
+	}
+	if(n<0){
+		n=2;
+	}else if(n>2){
+		n=0;
+	}
+	//$(".chosedv").fadeOut(1000,function(){$(".chosedv").css("background-image","url("+image[n]+")");$(".chosedv").fadeIn(); });
+	$(".chosedv").css("background-image","url("+image[n]+")");
+}
+
+var serviceMenuLazyInit = function() {
+		$(".item").each(function(index) {
+		    $(this).mouseenter(function() {
+		        $(this).next('.for-nav').show();
+		        $(this).css('width','190px');
+		        $(this).find('p').css({background:'#fff',color:'#03C5FF',width:'197px',textIndent:'20px'});
+		    }).mouseleave(function() {
+		        $(".for-nav").hide();
+		        $(this).css('width','180px');
+		        $(this).find('p').css({background:'',color:'#e5e5e5',width:'180px',textIndent:'15px'});
+		    });
+		});
+
+		$(".for-nav").each(function() {
+		    $(this).mouseenter(function() {
+		        $(this).show();
+		        $(this).prev('.item').css('width','190px');
+		        $(this).prev('.item').find('p').css({background:'#fff',color:'#03C5FF',width:'197px',textIndent:'20px'});
+		    }).mouseleave(function() {
+		        $(this).hide();
+		        $(this).prev('.item').css('width','180px');
+		        $(this).prev('.item').find('p').css({background:'',color:'#e5e5e5',width:'180px',textIndent:'15px'});
+
+		    });
+		});
+	}
+</script>
+{% endblock %}
