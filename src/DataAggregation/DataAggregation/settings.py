@@ -32,7 +32,7 @@ DEBUG = False #生产模式下必须设置域名控制
 ALLOWED_HOSTS = ['*']
 
 #设置实际服务基础地址(https?://域名或者IP:端口/)
-REAL_SERVICE_URL = "http://139.196.56.37:8092"
+REAL_SERVICE_URL = "http://127.0.0.1:80"
 
 # Application definition
 INSTALLED_APPS = (
@@ -112,9 +112,9 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'aggregation_db',
-        'USER' : 'root',
-        'PASSWORD' : 'lx870830',
-        'HOST' : '139.196.56.37',
+        'USER' : 'db-user',
+        'PASSWORD' : 'db-password',
+        'HOST' : '127.0.0.1',
         'PORT' : 3306,
         'ATOMIC_REQUESTS': True,
     }
@@ -183,14 +183,14 @@ LOGGING = {
 }
 
 #邮件配置
-EMAIL_HOST = 'smtp.126.com'                   #SMTP地址
+EMAIL_HOST = 'smtp.xxx.com'                   #SMTP地址
 EMAIL_PORT = 25                               #SMTP端口
-EMAIL_HOST_USER = 'zhiaixuexi@126.com'        #我自己的邮箱
-EMAIL_HOST_PASSWORD = 'lx870830'              #我的邮箱密码
+EMAIL_HOST_USER = 'your-email-address'        #我自己的邮箱
+EMAIL_HOST_PASSWORD = 'password'              #我的邮箱密码
 EMAIL_SUBJECT_PREFIX = u'[DC-数据服务聚合平台]'          #为邮件Subject-line前缀,默认是'[django]'
 EMAIL_USE_TLS = True                          #与SMTP服务器通信时，是否启动TLS链接(安全链接)。默认是false
 #管理员站点
-SERVER_EMAIL = 'zhiaixuexi@126.com'           #The email address that error messages come from, such as those sent to ADMINS and MANAGERS.
+SERVER_EMAIL = 'your-email-address'           #The email address that error messages come from, such as those sent to ADMINS and MANAGERS.
 
 TIME_ZONE = 'Asia/Shanghai'
 #USE_TZ = True
